@@ -1,7 +1,14 @@
 import React from 'react';
+import Header from './components/Header';
+import LoginContainer from './containers/login/LoginContainer';
 
 function App() {
-    return <h1>Hello, world!</h1>;
+  return (
+    <>
+      <Header />
+      <LoginContainer />
+    </>
+  );
 }
 
 export default App;
