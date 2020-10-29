@@ -5,8 +5,10 @@ const logger = require('morgan');
 require('dotenv').config();
 
 const indexRouter = require('./routes/index');
+const { sequelize } = require('./models');
 
 const app = express();
+sequelize.sync();
 
 app.use(logger('dev'));
 app.use(express.json());
