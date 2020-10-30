@@ -27,7 +27,7 @@
 │   └── 📁milestones  
 │   └── 📁users  
 ├── 📁services  
-📁server  
+📁frontend  
 ├── 📁src  
 │   ├── App  
 │   └── 📁components  
