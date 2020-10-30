@@ -8,3 +8,30 @@
 
 ## ERD
 ![issue_tracker_ERD](https://user-images.githubusercontent.com/48170519/97652088-f5735d00-1aa0-11eb-86a9-f243f0c22c3a.PNG)
+
+## 디렉토리 구조
+🗃 Project Folder
+📁.github
+📁backend
+├── app
+├── 📁bin
+│   └── www
+├── 📁config
+├── 📁middlewares
+├── 📁models
+├── 📁public
+├── 📁routes
+│   └── 📁issues
+│   └── 📁labels
+│   └── 📁milestones
+│   └── 📁users
+├── 📁services
+📁server
+├── 📁src
+│   ├── App
+│   └── 📁components
+│   ├── 📁containers
+│       ├── 📁login
+│       ├── 📁register
+
+
