@@ -13,12 +13,20 @@ const Input = styled.input`
     font-size: 18px;
 `;
 
+const InputWrapper = styled.div`
+    margin: 10px;
+`;
+
 const LoginForm = () => (
   <>
-    <Label htmlFor="email">이메일</Label>
-    <Input type="email" name="email" id="email"/>
-    <Label htmlFor="email">비밀번호</Label>
-    <Input type="password" name="password" id="password"/>
+    <InputWrapper>
+      <Label htmlFor="email">이메일</Label>
+      <Input type="email" name="email" id="email"/>
+    </InputWrapper>
+    <InputWrapper>
+      <Label htmlFor="email">비밀번호</Label>
+      <Input type="password" name="password" id="password"/>
+    </InputWrapper>
   </>
 );
 

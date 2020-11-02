@@ -9,6 +9,8 @@ const Button = styled.button`
     font-size: 18px;
     border: none;
     border-radius: 3px;
+    padding: 5px;
+    margin: 10px;
 `;
 
 const LoginButton = (props) => {
