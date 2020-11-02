@@ -5,6 +5,7 @@ const Label = styled.label`
     display: block;
     width: 250px;
     font-size: 16px;
+    margin: 5px;
 `;
 
 const Input = styled.input`
@@ -14,7 +15,14 @@ const Input = styled.input`
 `;
 
 const InputWrapper = styled.div`
-    margin: 10px;
+    margin: 10px 0px;
+`;
+
+const FlexContainer = styled.div`
+    width: 100%;
+    margin: 15px;
+    display: flex;
+    justify-content: space-around;
 `;
 
 const LoginForm = () => (
@@ -27,6 +35,10 @@ const LoginForm = () => (
       <Label htmlFor="email">비밀번호</Label>
       <Input type="password" name="password" id="password"/>
     </InputWrapper>
+    <FlexContainer>
+      <div>로그인</div>
+      <div>회원가입</div>
+    </FlexContainer>
   </>
 );
 
