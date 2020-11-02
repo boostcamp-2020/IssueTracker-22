@@ -6,8 +6,16 @@ import FormContaienr from './components/FormContainer';
 
 const LoginContainer = () => {
   const githubLogin = () => {
-    console.log('github login');
+    window.location.href = '/users/github-login';
+    // fetch('/users/github-login', {
+    //   redirect: 'manual',
+    // }).then((res) => {
+    //   window.location.href = res.url;
+    // }).catch((err) => {
+    //   console.log(err);
+    // });
   };
+
   return (
     <>
       <Title>이슈 트래커</Title>
