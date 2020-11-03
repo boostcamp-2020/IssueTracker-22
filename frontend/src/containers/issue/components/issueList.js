@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Label from './label'
+import IssueBox from './issueBox'
 import getRelativeTime from '../../../lib/relativeTime'
 
 class IssueInfo extends Component {
@@ -12,7 +13,7 @@ class IssueInfo extends Component {
         const id = this.props.issue.id
         const opened = `#${id} opened ${getRelativeTime(this.props.issue.updatedAt)}`
         return (
-            <div id={id}>
+            <IssueBox id={id}>
                 <input type="checkbox" name="issue-checkbox"/>
                 <div class="Issue-ContentBox">
                     <div class="Issue-upperbox">
@@ -25,7 +26,7 @@ class IssueInfo extends Component {
                         </span>
                     </div>
                 </div>
-            </div>
+            </IssueBox>
         )
     }
 }
