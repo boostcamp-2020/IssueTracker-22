@@ -1,23 +1,37 @@
-const {Issue, User, IssueLabel, Label, IssueAssignee, Milestone, Comment} = require('../../models');
+const {
+  Issue, 
+  User, 
+  IssueLabel, 
+  Label, 
+  IssueAssignee, 
+  Milestone, 
+  Comment} = require('../../models');
 
-exports.list = async (req, res, next) => {
-  const query = req.query;
-  const user = (query['user'] === undefined) ? {} : {nickname: query['user']};
-  const label = (query['label'] === undefined) ? {} : {name: query['label']};
-  const milestone = (query['milestone'] === undefined) ? {} : {title: query['milestone']};
-  const isopen = (query['isopen'] === undefined) ? {} : {is_open: query['isopen']};
-  const assignee = (query['assignee'] === undefined) ? {} : {nickname: query['assignee']};
-  const mention = (query['mention'] === undefined) ? {} : {author_id: query['mention']};
-
+exports.list = async (req, res) => {
+  const { 
+    user, 
+    label, 
+    milestone, 
+    isopen, 
+    assignee, 
+    mention 
+  } = req.query;
+  const filterUser = (user === undefined) ? {} : {nickname: user};
+  const filterLabel = (label === undefined) ? {} : {name: label};
+  const filterMilestone = (milestone === undefined) ? {} : {title: milestone};
+  const filterIsopen = (isopen === undefined) ? {} : {is_open: isopen};
+  const filterAssignee = (assignee === undefined) ? {} : {nickname: assignee};
+  const filterMention = (mention === undefined) ? {} : {author_id: mention};
+  console.log(isopen);
   try {
     const issues = await Issue.findAll({
       attributes: ['id', 'title', 'description', 'createdAt', 'updatedAt'],
-      where: isopen,
+      where: filterIsopen,
       include: [
         {
           model: User,
           attributes: ['id', 'nickname'],
-          where: user
+          where: filterUser
         },
         {
           model: IssueLabel,
@@ -25,7 +39,7 @@ exports.list = async (req, res, next) => {
           include: [
             {
               model: Label,
-              where: label,
+              where: filterLabel,
               attributes: ['id', 'name', 'color_code']
             }
           ],
@@ -37,14 +51,14 @@ exports.list = async (req, res, next) => {
             {
               model: User,
               attributes: ['profile_url'],
-              where: assignee
+              where: filterAssignee
             }
           ]
         },
         {
           model: Milestone,
           attributes: ['id', 'title'],
-          where: milestone,
+          where: filterMilestone,
           required: false
         },
         {
@@ -53,7 +67,7 @@ exports.list = async (req, res, next) => {
           include: [
             {
               model: User,
-              where: mention,
+              where: filterMention,
               attributes: ['id']
             }
           ],
