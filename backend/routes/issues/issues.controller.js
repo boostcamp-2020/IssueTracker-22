@@ -1,4 +1,4 @@
-const models = require('../../models');
+const {Issue, User, IssueLabel, Label, IssueAssignee, Milestone, Comment} = require('../../models');
 
 exports.list = async (req, res, next) => {
   const query = req.query;
@@ -10,49 +10,49 @@ exports.list = async (req, res, next) => {
   const mention = (query['mention'] === undefined) ? {} : {author_id: query['mention']};
 
   try {
-    const issues = await models.Issue.findAll({
+    const issues = await Issue.findAll({
       attributes: ['id', 'title', 'description', 'createdAt', 'updatedAt'],
       where: isopen,
       include: [
         {
-          model: models.User,
+          model: User,
           attributes: ['id', 'nickname'],
           where: user
         },
         {
-          model: models.IssueLabel,
+          model: IssueLabel,
           attributes: ['id'],
           include: [
             {
-              model: models.Label,
+              model: Label,
               where: label,
               attributes: ['id', 'name', 'color_code']
             }
           ],
         },
         {
-          model: models.IssueAssignee,
+          model: IssueAssignee,
           attributes: ['id'],
           include: [
             {
-              model: models.User,
-              attributes: ['nickname'],
+              model: User,
+              attributes: ['profile_url'],
               where: assignee
             }
           ]
         },
         {
-          model: models.Milestone,
+          model: Milestone,
           attributes: ['id', 'title'],
           where: milestone,
           required: false
         },
         {
-          model: models.Comment,
+          model: Comment,
           attritbutes: ['id', 'issue_id'],
           include: [
             {
-              model: models.User,
+              model: User,
               where: mention,
               attributes: ['id']
             }
