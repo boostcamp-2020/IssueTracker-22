@@ -1,7 +1,5 @@
-export const pathUri = {
+const pathUri = {
   login: '/login',
 };
 
-export const apiUri = {
-  login: '/users/github-login',
-};
+export default pathUri;

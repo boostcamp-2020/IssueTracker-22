@@ -3,7 +3,7 @@ import Title from './components/Title';
 import LoginButton from './components/LoginButton';
 import LoginForm from './components/LoginForm';
 import FormBox from './components/FormBox';
-import { apiUri } from '../../constants/path';
+import apiUri from '../../constants/api';
 
 const LoginContainer = () => {
   const githubLogin = () => {
