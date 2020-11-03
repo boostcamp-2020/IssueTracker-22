@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import IssueHeader from './components/issueHeader'
+import IssueList from './components/issueList'
 
-class Issue extends Component {
+class IssueContainer extends Component {
     render() {
         return (
             <div>
@@ -11,3 +12,5 @@ class Issue extends Component {
         )
     }
 }
+
+export default IssueContainer;

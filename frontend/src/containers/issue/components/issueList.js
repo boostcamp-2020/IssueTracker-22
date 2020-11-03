@@ -1,10 +1,109 @@
 import React, { Component } from 'react';
 
-class IssueList extends Component {
+
+class IssueInfo extends Component {
     render() {
+        const labels = (labels) => {
+            console.log(labels)
+            return labels.map((label, i)=>{
+                return (<a>{label.label.name}</a>);
+            });
+        };
+        return (
+            <div id={this.props.issue.id}>
+                <input type="checkbox"/>
+                <div class="Issue-Title">
+                    <a>{this.props.issue.title}</a>
+                    {labels(this.props.issue.issue_labels)}
+                </div>
+            </div>
+        )
+    }
+}
+
+class IssueList extends Component {
+    constructor(props){
+        super(props);
+        // this.state = getIssues()
+        this.state = {
+            "success": true,
+            "content": {
+              "issues": [
+                {
+                  "id": 1,
+                  "title": "bkyo",
+                  "description": "prac",
+                  "createdAt": "2020-11-02T15:30:00.000Z",
+                  "updatedAt": "2020-11-02T15:30:00.000Z",
+                  "user": {
+                    "id": 1,
+                    "nickname": "bk"
+                  },
+                  "issue_labels": [
+                    {
+                      "id": 1,
+                      "label": {
+                        "id": 1,
+                        "name": "feature",
+                        "color_code": null
+                      }
+                    },
+                    {
+                      "id": 3,
+                      "label": {
+                        "id": 1,
+                        "name": "feature",
+                        "color_code": null
+                      }
+                    }
+                  ],
+                  "issue_assignees": [
+                    {
+                      "id": 1,
+                      "user": {
+                        "nickname": "bk"
+                      }
+                    }
+                  ],
+                  "milestone": null
+                },
+                {
+                  "id": 2,
+                  "title": "bbbk",
+                  "description": "bbbk",
+                  "createdAt": "2020-11-03T11:11:11.000Z",
+                  "updatedAt": "2020-11-03T11:11:11.000Z",
+                  "user": {
+                    "id": 1,
+                    "nickname": "bk"
+                  },
+                  "issue_labels": [
+                    {
+                      "id": 2,
+                      "label": {
+                        "id": 1,
+                        "name": "feature",
+                        "color_code": null
+                      }
+                    }
+                  ],
+                  "issue_assignees": [],
+                  "milestone": null
+                }
+              ]
+            }
+          }
+    }
+    render() {
+        
+        const Issues = (data) =>{
+            return data.map((issue) => {
+                return (<IssueInfo issue={issue}/>);
+            });
+        };
         return (
             <div>
-                <h4>이슈 리스트가 들어갈 공간</h4>
+                {Issues(this.state.content.issues)}
             </div>
         )
     }
