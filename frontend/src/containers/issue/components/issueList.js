@@ -1,20 +1,62 @@
 import React, { Component } from 'react';
+import Label from './label'
 
+const getRelativeTime = (current) =>{
+    var msPerMinute = 60 * 1000;
+    var msPerHour = msPerMinute * 60;
+    var msPerDay = msPerHour * 24;
+    var msPerMonth = msPerDay * 30;
+    var msPerYear = msPerDay * 365;
+
+    var elapsed = new Date(current) - new Date();
+
+    if (elapsed < msPerMinute) {
+         return Math.round(elapsed/1000) + ' seconds ago';   
+    }
+
+    else if (elapsed < msPerHour) {
+         return Math.round(elapsed/msPerMinute) + ' minutes ago';   
+    }
+
+    else if (elapsed < msPerDay ) {
+         return Math.round(elapsed/msPerHour ) + ' hours ago';   
+    }
+
+    else if (elapsed < msPerMonth) {
+        return 'approximately ' + Math.round(elapsed/msPerDay) + ' days ago';   
+    }
+
+    else if (elapsed < msPerYear) {
+        return 'approximately ' + Math.round(elapsed/msPerMonth) + ' months ago';   
+    }
+
+    else {
+        return 'approximately ' + Math.round(elapsed/msPerYear ) + ' years ago';   
+    }
+}
 
 class IssueInfo extends Component {
     render() {
         const labels = (labels) => {
-            console.log(labels)
             return labels.map((label, i)=>{
-                return (<a>{label.label.name}</a>);
+                return (<Label style={{backgroundColor:"lightblue"}}>{label.label.name}</Label>);
             });
         };
+        const id = this.props.issue.id
+        const opened = `#${id} opened ${getRelativeTime(this.props.issue.updatedAt)}`
         return (
-            <div id={this.props.issue.id}>
-                <input type="checkbox"/>
-                <div class="Issue-Title">
-                    <a>{this.props.issue.title}</a>
-                    {labels(this.props.issue.issue_labels)}
+            <div id={id}>
+                <input type="checkbox" name="issue-checkbox"/>
+                <div class="Issue-ContentBox">
+                    <div class="Issue-upperbox">
+                        <a>{this.props.issue.title}</a>
+                        {labels(this.props.issue.issue_labels)}
+                    </div>
+                    <div class="Issue-lowerbox">
+                        <span class="opened-by">
+                            {opened}
+                        </span>
+                    </div>
                 </div>
             </div>
         )
