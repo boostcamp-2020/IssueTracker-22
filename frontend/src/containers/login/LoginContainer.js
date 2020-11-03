@@ -3,17 +3,11 @@ import Title from './components/Title';
 import LoginButton from './components/LoginButton';
 import LoginForm from './components/LoginForm';
 import FormContaienr from './components/FormContainer';
+import { apiUri } from '../../constants/path';
 
 const LoginContainer = () => {
   const githubLogin = () => {
-    window.location.href = '/users/github-login';
-    // fetch('/users/github-login', {
-    //   redirect: 'manual',
-    // }).then((res) => {
-    //   window.location.href = res.url;
-    // }).catch((err) => {
-    //   console.log(err);
-    // });
+    window.location.href = apiUri.login;
   };
 
   return (
