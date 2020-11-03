@@ -2,7 +2,7 @@ import React from 'react';
 import Title from './components/Title';
 import LoginButton from './components/LoginButton';
 import LoginForm from './components/LoginForm';
-import FormContaienr from './components/FormContainer';
+import FormBox from './components/FormBox';
 import { apiUri } from '../../constants/path';
 
 const LoginContainer = () => {
@@ -13,10 +13,10 @@ const LoginContainer = () => {
   return (
     <>
       <Title>이슈 트래커</Title>
-      <FormContaienr>
+      <FormBox>
         <LoginForm/>
         <LoginButton onClick={githubLogin}/>
-      </FormContaienr>
+      </FormBox>
     </>
   );
 };
