@@ -1,37 +1,24 @@
 import React, { Component } from 'react';
-import Label from './label'
 import IssueBox from './issueBox'
-import IssueLowerBox from './issueLowerBox'
-import getRelativeTime from '../../../lib/relativeTime'
-import IssueUpperBox from './issueUpperBox';
-import IssueAssignee from './issueAssignee';
-import IssueMilestone from './issueMilestone';
+import renderIssueLowerBox from './issueLowerBox'
+import renderIssueUpperBox from './issueUpperBox';
+// import IssueAssignee from './issueAssignee';
+// import IssueMilestone from './issueMilestone';
 
 class IssueInfo extends Component {
     render() {
-        const labels = (labels) => {
-            return labels.map((label, i)=>{
-                return (<Label style={{backgroundColor:"lightblue"}}>{label.label.name}</Label>);
-            });
-        };
         const id = this.props.issue.id
-        const opened = `#${id} opened ${getRelativeTime(this.props.issue.updatedAt)}`
         return (
             <IssueBox id={id}>
-                <input type="checkbox" name="issue-checkbox" style={{padding: "8px 0px 8px 16px"}}/>
-                <div class="Issue-ContentBox" style={{padding:"8px"}}>
-                    <IssueUpperBox>
-                        <a>{this.props.issue.title}</a>
-                        {labels(this.props.issue.issue_labels)}
-                    </IssueUpperBox>
-                    <IssueLowerBox>
-                        <span class="opened-by">
-                            {opened}
-                        </span>
-                    </IssueLowerBox>
+                <div style={{padding: "8px 0px 8px 16px"}}>
+                  <input type="checkbox" name="issue-checkbox"/>
                 </div>
-                <IssueMilestone></IssueMilestone>
-                <IssueAssignee></IssueAssignee>
+                <div class="Issue-ContentBox" style={{padding:"8px"}}>
+                    {renderIssueUpperBox(this.props)}
+                    {renderIssueLowerBox(this.props.issue)}
+                </div>
+                {/* <IssueMilestone></IssueMilestone> */}
+                {/* <IssueAssignee></IssueAssignee> */}
             </IssueBox>
         )
     }
@@ -126,3 +113,4 @@ class IssueList extends Component {
 }
 
 export default IssueList
+

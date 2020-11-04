@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import React, { Component } from 'react';
 
 const Label = styled.div`
         display: inline-block;
@@ -11,5 +12,10 @@ const Label = styled.div`
         width:fit-content;
         margin: 2px;
     `;
+const renderLabels = (labels) => {
+    return labels.map((label, i)=>{
+        return (<Label style={{backgroundColor:"lightblue"}}>{label.label.name}</Label>);
+    });
+};
 
-export default Label;
+export default renderLabels;
