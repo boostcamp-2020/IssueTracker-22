@@ -17,7 +17,7 @@ class IssueInfo extends Component {
         return (
             <IssueBox id={id}>
                 <input type="checkbox" name="issue-checkbox"/>
-                <div class="Issue-ContentBox">
+                <div class="Issue-ContentBox" style={{padding:"8px"}}>
                     <IssueUpperBox>
                         <a>{this.props.issue.title}</a>
                         {labels(this.props.issue.issue_labels)}
