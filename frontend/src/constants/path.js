@@ -1,7 +1,7 @@
 const pathUri = {
   home: '/',
-  login: '/login',
   issue: '/issues',
+  createIssue: '/issues/new',
 };
 
 export default pathUri;
