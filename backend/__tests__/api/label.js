@@ -7,6 +7,7 @@ describe('Label API', () => {
     expect(res.statusCode).toBe(200);
     expect(res.body.success).toBe(true);
     expect(res.body.content).toHaveProperty('labels');
+    expect(Array.isArray(res.body.content.labels)).toBe(true);
     done();
   });
 });
