@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Label from './label'
 import IssueBox from './issueBox'
+import IssueLowerBox from './issueLowerBox'
 import getRelativeTime from '../../../lib/relativeTime'
+import IssueUpperBox from './issueUpperBox';
 
 class IssueInfo extends Component {
     render() {
@@ -16,15 +18,15 @@ class IssueInfo extends Component {
             <IssueBox id={id}>
                 <input type="checkbox" name="issue-checkbox"/>
                 <div class="Issue-ContentBox">
-                    <div class="Issue-upperbox">
+                    <IssueUpperBox>
                         <a>{this.props.issue.title}</a>
                         {labels(this.props.issue.issue_labels)}
-                    </div>
-                    <div class="Issue-lowerbox">
+                    </IssueUpperBox>
+                    <IssueLowerBox>
                         <span class="opened-by">
                             {opened}
                         </span>
-                    </div>
+                    </IssueLowerBox>
                 </div>
             </IssueBox>
         )
