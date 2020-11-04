@@ -3,9 +3,11 @@ import styled from 'styled-components';
 const IssueBox = styled.div`
         display: flex;
         flex-direction:row;
-        flex: auto
+        flex: auto;
         position: relative;
         border-top: 1px solid;
+        border-left : 1px solid;
+        border-right : 1px solid;
         border-color: #eaecef;
     `;
 

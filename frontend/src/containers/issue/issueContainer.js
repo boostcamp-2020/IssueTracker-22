@@ -4,10 +4,8 @@ import IssueList from './components/issueList'
 import styled from 'styled-components';
 
 const IssueContainer = styled.div`
-    border-left: 1px solid;
-    border-right: 1px solid;
-    border-bottom: 1px solid;
-    border-color: #eaecef;
+    padding: 0px 32px;
+    max-width: 1280px;
 `;
 
 const dummy = {
@@ -73,7 +71,7 @@ const dummy = {
             }
           ],
           "issue_assignees": [],
-          "milestone": null
+          "milestone": 1
         }
       ]
     }

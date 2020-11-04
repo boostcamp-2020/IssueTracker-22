@@ -6,7 +6,6 @@ const Toolbar = styled.div`
     display: flex;
     flex-direction: row;
     padding: 16px;
-    margin:-1px -1px 0px;
     background-color: #f6f8fa;
     borderRadius: 6px;
     border: 1px solid #eaecef;

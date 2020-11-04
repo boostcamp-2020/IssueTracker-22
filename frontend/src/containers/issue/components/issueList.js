@@ -4,7 +4,7 @@ import renderIssueLowerBox from './issueLowerBox'
 import renderIssueUpperBox from './issueUpperBox';
 import IssueAssignee from './issueAssignee';
 // import IssueMilestone from './issueMilestone';
-import { svgMilestone, svgOpen, svgClose } from '../../../assets/svgPath'
+import { svgOpen } from '../../../assets/svgPath'
 
 class IssueInfo extends Component {
     render() {
@@ -23,7 +23,6 @@ class IssueInfo extends Component {
                     {renderIssueUpperBox(this.props)}
                     {renderIssueLowerBox(this.props.issue)}
                 </div>
-                {/* <IssueMilestone></IssueMilestone> */}
                 <IssueAssignee>
                   <img src="https://user-images.githubusercontent.com/48170519/90837801-0cede580-e38e-11ea-9b72-77c621e0f0fc.PNG"
                   style={{width:"20px", height:"20px", borderRadius:"70%"}}/>
@@ -36,75 +35,7 @@ class IssueInfo extends Component {
 class IssueList extends Component {
     constructor(props){
         super(props);
-        // this.state = getIssues()
-        this.state = {
-            "success": true,
-            "content": {
-              "issues": [
-                {
-                  "id": 1,
-                  "title": "bkyo",
-                  "description": "prac",
-                  "createdAt": "2020-11-02T15:30:00.000Z",
-                  "updatedAt": "2020-11-02T15:30:00.000Z",
-                  "user": {
-                    "id": 1,
-                    "nickname": "bk"
-                  },
-                  "issue_labels": [
-                    {
-                      "id": 1,
-                      "label": {
-                        "id": 1,
-                        "name": "feature",
-                        "color_code": null
-                      }
-                    },
-                    {
-                      "id": 3,
-                      "label": {
-                        "id": 1,
-                        "name": "feature",
-                        "color_code": null
-                      }
-                    }
-                  ],
-                  "issue_assignees": [
-                    {
-                      "id": 1,
-                      "user": {
-                        "nickname": "bk"
-                      }
-                    }
-                  ],
-                  "milestone": null
-                },
-                {
-                  "id": 2,
-                  "title": "bbbk",
-                  "description": "bbbk",
-                  "createdAt": "2020-11-03T11:11:11.000Z",
-                  "updatedAt": "2020-11-03T11:11:11.000Z",
-                  "user": {
-                    "id": 1,
-                    "nickname": "bk"
-                  },
-                  "issue_labels": [
-                    {
-                      "id": 2,
-                      "label": {
-                        "id": 1,
-                        "name": "feature",
-                        "color_code": null
-                      }
-                    }
-                  ],
-                  "issue_assignees": [],
-                  "milestone": null
-                }
-              ]
-            }
-          }
+        this.state = this.props.data
     }
     render() {
         
