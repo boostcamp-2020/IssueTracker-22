@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import IssueBox from './issueBox'
 import renderIssueLowerBox from './issueLowerBox'
 import renderIssueUpperBox from './issueUpperBox';
-// import IssueAssignee from './issueAssignee';
+import IssueAssignee from './issueAssignee';
 // import IssueMilestone from './issueMilestone';
 import { svgMilestone, svgOpen, svgClose } from '../../../assets/svgPath'
 
@@ -24,7 +24,10 @@ class IssueInfo extends Component {
                     {renderIssueLowerBox(this.props.issue)}
                 </div>
                 {/* <IssueMilestone></IssueMilestone> */}
-                {/* <IssueAssignee></IssueAssignee> */}
+                <IssueAssignee>
+                  <img src="https://user-images.githubusercontent.com/48170519/90837801-0cede580-e38e-11ea-9b72-77c621e0f0fc.PNG"
+                  style={{width:"20px", height:"20px", borderRadius:"70%"}}/>
+                </IssueAssignee>
             </IssueBox>
         )
     }
