@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import IssueHeader from './components/issueHeader'
+import IssueToolbar from './components/issueToolbar'
 import IssueList from './components/issueList'
 import styled from 'styled-components';
 
@@ -15,7 +15,7 @@ class Issue extends Component {
     render() {
         return (
             <IssueContainer>
-                <IssueHeader/>
+                <IssueToolbar/>
                 <IssueList/>
             </IssueContainer>
         )

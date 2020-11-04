@@ -5,7 +5,7 @@ const IssueBox = styled.div`
         flex-direction:row;
         flex: auto
         position: relative;
-        border: 1px solid;
+        border-top: 1px solid;
         border-color: #eaecef;
     `;
 

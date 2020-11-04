@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class IssueHeader extends Component {
+class IssueToolbar extends Component {
     render() {
         return (
             <div>
@@ -10,4 +10,4 @@ class IssueHeader extends Component {
     }
 }
 
-export default IssueHeader
+export default IssueToolbar
