@@ -4,8 +4,9 @@ import IssueList from './components/issueList'
 import styled from 'styled-components';
 
 const IssueContainer = styled.div`
-    padding: 0px 32px;
     max-width: 1280px;
+    border: 1px solid #eaecef;
+    border-radius: 6px;
 `;
 
 const dummy = {
