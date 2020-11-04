@@ -4,6 +4,8 @@ import IssueBox from './issueBox'
 import IssueLowerBox from './issueLowerBox'
 import getRelativeTime from '../../../lib/relativeTime'
 import IssueUpperBox from './issueUpperBox';
+import IssueAssignee from './issueAssignee';
+import IssueMilestone from './issueMilestone';
 
 class IssueInfo extends Component {
     render() {
@@ -16,7 +18,7 @@ class IssueInfo extends Component {
         const opened = `#${id} opened ${getRelativeTime(this.props.issue.updatedAt)}`
         return (
             <IssueBox id={id}>
-                <input type="checkbox" name="issue-checkbox"/>
+                <input type="checkbox" name="issue-checkbox" style={{padding: "8px 0px 8px 16px"}}/>
                 <div class="Issue-ContentBox" style={{padding:"8px"}}>
                     <IssueUpperBox>
                         <a>{this.props.issue.title}</a>
@@ -28,6 +30,8 @@ class IssueInfo extends Component {
                         </span>
                     </IssueLowerBox>
                 </div>
+                <IssueMilestone></IssueMilestone>
+                <IssueAssignee></IssueAssignee>
             </IssueBox>
         )
     }
