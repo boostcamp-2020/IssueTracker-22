@@ -86,20 +86,22 @@ exports.create = async (req, res) => {
     title, description, assignee_id, label_id, milestone_id,
   } = req.body;
   const { user } = res.locals;
+
   try {
-    let newIssues;
+    const newIssues = await Issue.create({
+      title, description, author_id: user.id, assignee_id, label_id, milestone_id,
+    });
     if (assignee_id) {
-      newIssues = await Issue.create({
-        title, description, author_id: user.id, assignee_id, label_id, milestone_id,
-      });
       await IssueAssignee.create({
         issue_id: newIssues.id, assignee_id,
       });
-    } else {
-      newIssues = await Issue.create({
-        title, description, author_id: user.id, label_id, milestone_id,
+    }
+    if (label_id) {
+      await IssueLabel.create({
+        issue_id: newIssues.id, label_id,
       });
     }
+
     return res.json({
       success: true,
       content: { id: newIssues.id },
