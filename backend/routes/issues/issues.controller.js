@@ -6,6 +6,7 @@ const {
   IssueAssignee, 
   Milestone, 
   Comment} = require('../../models');
+const milestone = require('../../models/milestone');
 
 exports.list = async (req, res) => {
   const { 
@@ -79,3 +80,47 @@ exports.list = async (req, res) => {
     res.status(400).json({ success: false, message: "Fail: Get Issue-List" });
   }
 };
+
+exports.detail = async (req, res) => {
+  const { issueNumber } = req.params
+  const hasIssueNumber = {id : issueNumber}
+  try {
+    let issues = await Issue.findAll({
+      attributes: ['id', 'title', 'description', 'createdAt', 'updatedAt'],
+      where: hasIssueNumber,
+      include:[{
+        model: User,
+        attributes: ['id', 'nickname', 'profile_url'],
+      },{
+        model: Comment,
+        attributes: ['id', 'description', 'author_id'],
+        include:[{
+          model: User,
+          attributes: ['id', 'nickname', 'profile_url'],
+        }]
+      },{
+        model: Milestone,
+        attributes: ['id', 'title'],
+      },{
+        model: IssueLabel,
+        include:[{
+          model: Label,
+          attributes: ['id', 'name', 'color_code']
+        }]
+      },{
+        model: IssueAssignee,
+        include:[{
+          model: User,
+          attributes: ['id', 'nickname', 'profile_url'],
+        }]
+      }
+      
+    ]
+      
+    })
+    
+    res.json({ success: true, content: { issues } })
+  } catch(err) {
+    res.status(400).json({ success: false, message: "Fail: Get Issue Detail" })
+  }
+}
