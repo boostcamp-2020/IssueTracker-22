@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import IssueToolbar from './components/issueToolbar'
 import IssueList from './components/issueList'
+import renderToolButtons from './components/toolButtons'
 import styled from 'styled-components';
 
 const IssueContainer = styled.div`
@@ -83,7 +84,7 @@ class Issue extends Component {
         // const data = getIssues()
         return (
             <IssueContainer>
-                <ToolButtons/>
+                {renderToolButtons()}
                 <IssueToolbar data={dummy}/>
                 <IssueList data={dummy}/>
             </IssueContainer>
