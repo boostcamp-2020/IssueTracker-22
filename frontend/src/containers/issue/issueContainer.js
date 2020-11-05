@@ -83,6 +83,7 @@ class Issue extends Component {
         // const data = getIssues()
         return (
             <IssueContainer>
+                <ToolButtons/>
                 <IssueToolbar data={dummy}/>
                 <IssueList data={dummy}/>
             </IssueContainer>
