@@ -1,15 +1,12 @@
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const { User } = require('../../models');
+const asyncHandler = require('../../lib/asyncHandler');
 
-exports.getAllUsers = async (req, res, next) => {
-  try {
-    const users = await User.findAll();
-    res.json(users);
-  } catch (err) {
-    res.status(500).json({ success: false, message: 'Error' });
-  }
-};
+exports.getAllUsers = asyncHandler(async (req, res, next) => {
+  const users = await User.findAll();
+  res.json(users);
+});
 
 exports.githubLogin = passport.authenticate('github', { scope: ['user:email'] });
 
