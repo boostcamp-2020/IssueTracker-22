@@ -81,19 +81,25 @@ exports.list = async (req, res) => {
   }
 };
 
-// 이슈 제목, 내용, 담당자, 레이블, 마일스톤 정보를 받아 DB에 새로운 이슈를 추가하는 API 구현
 exports.create = async (req, res) => {
   const {
     title, description, assignee_id, label_id, milestone_id,
   } = req.body;
   const { user } = res.locals;
   try {
-    const newIssues = await Issue.create({
-      title, description, author_id: user.id, assignee_id, label_id, milestone_id,
-    });
-    await IssueAssignee.create({
-      issue_id: newIssues.id, assignee_id,
-    });
+    let newIssues;
+    if (assignee_id) {
+      newIssues = await Issue.create({
+        title, description, author_id: user.id, assignee_id, label_id, milestone_id,
+      });
+      await IssueAssignee.create({
+        issue_id: newIssues.id, assignee_id,
+      });
+    } else {
+      newIssues = await Issue.create({
+        title, description, author_id: user.id, label_id, milestone_id,
+      });
+    }
     return res.json({
       success: true,
       content: { id: newIssues.id },
