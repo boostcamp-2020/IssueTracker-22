@@ -121,6 +121,6 @@ exports.detail = async (req, res) => {
     
     res.json({ success: true, content: { issues } })
   } catch(err) {
-    res.status(400).json({ success: false, message: "Fail: Get Issue Detail" })
+    res.status(500).json({ success: false, message: "Fail: Get Issue Detail" })
   }
 }
