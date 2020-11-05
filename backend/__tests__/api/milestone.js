@@ -17,4 +17,18 @@ describe('Milestone API', () => {
     expect(Array.isArray(body.content.milestones)).toBe(true);
     done();
   });
+
+  test('POST /milestones', async (done) => {
+    agent
+      .post('/milestones')
+      .send({ title: 'test', description: 'test', due_date: new Date() })
+      .expect(200)
+      .end((err, res) => {
+        if (err) return done(err);
+        const { body } = res;
+        expect(body.success).toBe(true);
+        expect(body.content.id).not.toBeUndefined();
+        done();
+      });
+  });
 });
