@@ -2,10 +2,15 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const { User } = require('../../models');
 
-exports.getAllUsers = async (req, res, next) => {
+exports.getAllUsers = async (req, res) => {
   try {
-    const users = await User.findAll();
-    res.json(users);
+    const users = await User.findAll({
+      attributes: ['id', 'nickname', 'profile_url'],
+    });
+    res.json({
+      success: true,
+      content: { users },
+    });
   } catch (err) {
     res.status(500).json({ success: false, message: 'Error' });
   }
