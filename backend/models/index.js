@@ -24,15 +24,21 @@ db.IssueLabel = require('./issue_label')(sequelize, Sequelize);
 db.IssueAssignee = require('./issue_assignee')(sequelize, Sequelize);
 
 db.User.hasMany(db.Issue, { foreignKey: 'author_id', sourceKey: 'id' });
+db.Issue.belongsTo(db.User, {foreignKey: 'author_id'});
+
 db.User.hasMany(db.Comment, { foreignKey: 'author_id', sourceKey: 'id' });
 db.User.hasMany(db.IssueAssignee, { foreignKey: 'assignee_id', sourceKey: 'id' });
+db.IssueAssignee.belongsTo(db.User, {foreignKey: 'assignee_id'});
+db.Comment.belongsTo(db.User, {foreignKey: 'author_id'});
 
 db.Issue.hasMany(db.Comment, { foreignKey: 'issue_id', sourceKey: 'id' });
 db.Issue.hasMany(db.IssueLabel, { foreignKey: 'issue_id', sourceKey: 'id' });
 db.Issue.hasMany(db.IssueAssignee, { foreignKey: 'issue_id', sourceKey: 'id' });
 
 db.Label.hasMany(db.IssueLabel, { foreignKey: 'label_id', sourceKey: 'id' });
+db.IssueLabel.belongsTo(db.Label, {foreignKey: 'label_id'});
 
 db.Milestone.hasMany(db.Issue, { foreignKey: 'milestone_id', sourceKey: 'id' });
+db.Issue.belongsTo(db.Milestone, {foreignKey: 'milestone_id'});
 
 module.exports = db;

@@ -4,6 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "webpack-dev-server",
+    "build": "webpack",
+    "lint:fix": "eslint src --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -13,7 +16,8 @@
     "core-js": "^3.6.5",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "styled-components": "^5.2.1"
+    "react-router-dom": "^5.2.0",
+    "styled-components": "^5.2.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.1",
@@ -23,6 +27,12 @@
     "@babel/preset-react": "^7.12.1",
     "babel-loader": "^8.1.0",
     "css-loader": "^5.0.0",
+    "eslint": "^7.12.1",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "html-webpack-plugin": "^4.5.0",
     "style-loader": "^2.0.0",
     "webpack": "^4.44.2",

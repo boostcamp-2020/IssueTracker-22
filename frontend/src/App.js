@@ -1,14 +1,15 @@
 import React from 'react';
-import IssueContainer from './containers/issue/issueContainer'
+import { HashRouter as Router } from 'react-router-dom';
+// import Header from './components/Header';
+import Routes from './routes';
 
 function App() {
-    return (
-        <>
-            <h1>Hello, world!</h1>
-            <IssueContainer/>
-        </>
-    );
-
+  return (
+    <Router>
+      {/* <Header /> */}
+      <Routes />
+    </Router>
+  );
 }
 
 export default App;
