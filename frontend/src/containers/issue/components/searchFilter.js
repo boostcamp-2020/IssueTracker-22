@@ -35,7 +35,7 @@ const FilterItem = styled.div`
 `;
 
 const FilterModal = {
-        display: "none",
+        // display: "none",
         width: "500px",
         height: "500px",
         position: "absolute",
@@ -68,7 +68,7 @@ const renderSearchFilter = () =>{
                     Filters
                     <span style={dropdownCaret}/>
                 </summary>
-                <div class=".filter-modal" style={FilterModal}>
+                {/* <div class=".filter-modal" style={FilterModal}> */}
                     <FilterItemList>
                         <h3>Filter Issues</h3>
                         <button type="button" data-toggle-for="IssueFilter" onClick={offModal()}>
@@ -78,7 +78,7 @@ const renderSearchFilter = () =>{
                         </button>
                         {filterItems()}
                     </FilterItemList>
-                </div>
+                {/* </div> */}
             </details>
         </SearchFilter>
     )
