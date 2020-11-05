@@ -23,7 +23,7 @@ const Open = styled.div`
   line-height: 20px;
   text-align: center;
   white-space: nowrap;
-  border-radius: 2em;
+  border-radius: 0.7em;
 `;
 
 const UserName = styled.div`
@@ -44,15 +44,18 @@ const Info = styled.div`
 
 const TitleDetail = (data) => {
   const { children } = data;
-  
-  return <>
-  <TitleDetailContainer>
-    <Open>{children.open}</Open>
-    <Info>
-    <UserName>{children.name}</UserName>
-    <div>{children.open}ed this issue {children.time} ago · {children.commit} commit</div>
-    </Info>
-    </TitleDetailContainer>
-  </>;
+  const isOpen = children.is_open === 1 ? 'open' : 'close';
+  const length = children.comments.length;
+  return (
+    <>
+    <TitleDetailContainer>
+      <Open>{isOpen}</Open>
+      <Info>
+      <UserName>{children.user.nickname}</UserName>
+      <div>{isOpen}ed this issue {children.updatedAt} ago · {length} comment</div>
+      </Info>
+      </TitleDetailContainer>
+    </>
+  );
 };
 export default TitleDetail;
