@@ -2,7 +2,10 @@ const { Label } = require('../../models');
 
 exports.list = async (req, res) => {
   try {
-    const labels = await Label.findAll();
+    const labels = await Label.findAll({
+      attributes: ['id', 'name', 'description', 'color_code'],
+      where: { is_open: true },
+    });
     return res.json({
       success: true,
       content: { labels },
