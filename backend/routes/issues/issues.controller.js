@@ -24,7 +24,6 @@ exports.list = async (req, res) => {
   const filterIsopen = (isopen === undefined) ? {} : { is_open: isopen };
   const filterAssignee = (assignee === undefined) ? {} : { nickname: assignee };
   const filterMention = (mention === undefined) ? {} : { author_id: mention };
-  console.log(isopen);
   try {
     const issues = await Issue.findAll({
       attributes: ['id', 'title', 'description', 'createdAt', 'updatedAt'],
@@ -125,5 +124,35 @@ exports.detail = async (req, res) => {
     res.json({ success: true, content: { issues } });
   } catch (err) {
     res.status(500).json({ success: false, message: 'Fail: Get Issue Detail' });
+  }
+}
+    
+exports.create = async (req, res) => {
+  const {
+    title, description, assignee_id, label_id, milestone_id,
+  } = req.body;
+  const { user } = res.locals;
+
+  try {
+    const newIssues = await Issue.create({
+      title, description, author_id: user.id, assignee_id, label_id, milestone_id,
+    });
+    if (assignee_id) {
+      await IssueAssignee.create({
+        issue_id: newIssues.id, assignee_id,
+      });
+    }
+    if (label_id) {
+      await IssueLabel.create({
+        issue_id: newIssues.id, label_id,
+      });
+    }
+
+    return res.json({
+      success: true,
+      content: { id: newIssues.id },
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, message: 'Internel Server Error' });
   }
 };
