@@ -7,6 +7,7 @@ const TitleStyle = styled.div`
   line-height: 1.25;
   font-size: 32px;
   margin: .67em 0;  
+  margin-left: 20px;
   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
 
 `;
@@ -24,10 +25,12 @@ const IdStyle = styled.div`
 
 const Title = (data) => {
   const { children } = data;
-  return <>
-  <TitleStyle>{ children.title }</TitleStyle>
-  <IdStyle>#{ children.id }</IdStyle>
-  </>;
+  return (
+    <>
+    <TitleStyle>{ children.title }</TitleStyle>
+    <IdStyle>#{ children.id }</IdStyle>
+    </>
+  );
 };
 
 export default Title;
