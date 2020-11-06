@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
-import renderSearchFilter from './searchFilter';
+import renderSearchFilter from './SearchFilter';
 import NewIssueButton from './NewIssueButton';
 
 const ToolButtons = styled.div`

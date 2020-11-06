@@ -1,14 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import RelativeTime from '../../../lib/relativeTime';
+
 const IssueDetailContainer = styled.div`
-    width: 100%;
-    display: flex;
-    margin: 10px;
-    font-size: 14px;
-    color: #24292;
-    line-height: 1.5;
-    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+  width: 100%;
+  display: flex;
+  margin: 10px;
+  font-size: 14px;
+  color: #24292;
+  line-height: 1.5;
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
 `;
 
 const IssueDetailStyle = styled.div`
@@ -19,8 +20,10 @@ const IssueDetailStyle = styled.div`
   border-radius: 6px;
   min-width : 100px;
 `;
+
 const UserProfile = styled.div`
 `;
+
 const CommentTitle = styled.div`
   display: flex;
   color: #586069;
@@ -61,40 +64,39 @@ const Description = styled.div`
 `;
 
 const EditButton = styled.div`
-    float: left;
-    margin: auto 0;
-    padding: 3px 12px;
-    font-size: 16px;
-    line-height: 20px;
-    color: #fff;
-    background-color: #2ea44f;
-    border: 1px solid;
-    border-radius: 6px;
-    cursor: pointer;
-    margin-left: auto;
-    height: 20px;
+  float: left;
+  margin: auto 0;
+  padding: 3px 12px;
+  font-size: 16px;
+  line-height: 20px;
+  color: #fff;
+  background-color: #2ea44f;
+  border: 1px solid;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: auto;
+  height: 20px;
 `;
-
 
 const IssueDetail = (data) => {
   const { children } = data;
   const time = RelativeTime(children.updatedAt);
   return (
     <>
-    <IssueDetailContainer>
-      <UserProfile><img src={children.user.profile_url} width="40" height="40" alt="new" /></UserProfile>
-      <IssueDetailStyle>
-        <CommentTitle>
-          <Author>{ children.user.nickname}</Author>
-          <Info>commented { time }</Info>
-          <EditButton>Edit</EditButton>
-        </CommentTitle>
-        <CommentDescription>
-          <Description>{ children.description }</Description>
-        </CommentDescription>
-      </IssueDetailStyle>
-    </IssueDetailContainer>
-    <div>여기는 코멘트 입력하는 공간</div>
+      <IssueDetailContainer>
+        <UserProfile><img src={children.user.profile_url} width="40" height="40" alt="new" /></UserProfile>
+        <IssueDetailStyle>
+          <CommentTitle>
+            <Author>{ children.user.nickname}</Author>
+            <Info>commented { time }</Info>
+            <EditButton>Edit</EditButton>
+          </CommentTitle>
+          <CommentDescription>
+            <Description>{ children.description }</Description>
+          </CommentDescription>
+        </IssueDetailStyle>
+      </IssueDetailContainer>
+      <div>여기는 코멘트 입력하는 공간</div>
     </>
   );
 };

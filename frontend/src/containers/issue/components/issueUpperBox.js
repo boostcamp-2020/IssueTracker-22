@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import renderLabels from './label';
+import renderLabels from './Label';
 
 const IssueUpperBox = styled.div`
     a {

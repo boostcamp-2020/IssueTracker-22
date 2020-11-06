@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React, { Component } from 'react';
+import React from 'react';
 import dropdownCaret from '../../../assets/styles/caret';
 import { svgX } from '../../../assets/svgPath';
 
@@ -34,17 +34,17 @@ const FilterItem = styled.div`
     border-bottom: 1px solid #eaecef;
 `;
 
-const FilterModal = {
-  // display: "none",
-  width: '500px',
-  height: '500px',
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  margin: '-250px 0 0 -250px',
-  background: '#eaecef',
-  zIndex: '2',
-};
+// const FilterModal = {
+//   // display: "none",
+//   width: '500px',
+//   height: '500px',
+//   position: 'absolute',
+//   top: '50%',
+//   left: '50%',
+//   margin: '-250px 0 0 -250px',
+//   background: '#eaecef',
+//   zIndex: '2',
+// };
 
 const renderSearchFilter = () => {
   const items = ['Open issues and pull requests', 'Your issues', 'Your pull issues', 'Everything assinged to you', 'Everything mentioning you'];

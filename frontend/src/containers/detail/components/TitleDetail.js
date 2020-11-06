@@ -2,13 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 
 const TitleDetailContainer = styled.div`
-    display: flex;
-    padding-bottom: 8px;
-    font-size: 14px;
-    color: #586069;
-    border-bottom: 1px solid;
-    flex-wrap: wrap;
-    margin: 10px 20px;
+  display: flex;
+  padding-bottom: 8px;
+  font-size: 14px;
+  color: #586069;
+  border-bottom: 1px solid;
+  flex-wrap: wrap;
+  margin: 10px 20px;
 `;
 
 const Open = styled.div`
@@ -45,17 +45,18 @@ const Info = styled.div`
 const TitleDetail = (data) => {
   const { children } = data;
   const isOpen = children.is_open === 1 ? 'open' : 'close';
-  const length = children.comments.length;
+  const { length } = children.comments;
   return (
     <>
-    <TitleDetailContainer>
-      <Open>{isOpen}</Open>
-      <Info>
-      <UserName>{children.user.nickname}</UserName>
-      <div>{isOpen}ed this issue {children.updatedAt} ago · {length} comment</div>
-      </Info>
+      <TitleDetailContainer>
+        <Open>{isOpen}</Open>
+        <Info>
+          <UserName>{children.user.nickname}</UserName>
+          <div>{isOpen}ed this issue {children.updatedAt} ago · {length} comment</div>
+        </Info>
       </TitleDetailContainer>
     </>
   );
 };
+
 export default TitleDetail;

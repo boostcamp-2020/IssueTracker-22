@@ -27,8 +27,8 @@ const Title = (data) => {
   const { children } = data;
   return (
     <>
-    <TitleStyle>{ children.title }</TitleStyle>
-    <IdStyle>#{ children.id }</IdStyle>
+      <TitleStyle>{ children.title }</TitleStyle>
+      <IdStyle>#{ children.id }</IdStyle>
     </>
   );
 };

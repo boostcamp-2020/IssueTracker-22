@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import RelativeTime from '../../../lib/relativeTime';
 
 const CommentDetailContainer = styled.div`
-    width: 100%;
-    display: flex;
-    margin: 10px;
-    font-size: 14px;
-    color: #24292;
-    line-height: 1.5;
-    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+  width: 100%;
+  display: flex;
+  margin: 10px;
+  font-size: 14px;
+  color: #24292;
+  line-height: 1.5;
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
 `;
 
 const CommentDetailStyle = styled.div`
@@ -20,8 +20,10 @@ const CommentDetailStyle = styled.div`
   border-radius: 6px;
   min-width : 100px;
 `;
+
 const UserProfile = styled.div`
 `;
+
 const CommentTitle = styled.div`
   display: flex;
   color: #586069;
@@ -61,26 +63,27 @@ const Description = styled.div`
   margin: auto 0;
 `;
 
-const Comment = (comments) => {
-  return comments.map((comment)=>{
-    const time = RelativeTime(comment.updatedAt);
-    return (
-      <>
-        <CommentDetailContainer>
-          <UserProfile><img src={comment.user.profile_url} width="40" height="40" alt="new" /></UserProfile>
-          <CommentDetailStyle>
-            <CommentTitle>
-              <Author>{ comment.user.nickname}</Author>
-              <Info>commented { time }</Info>
-            </CommentTitle>
-            <CommentDescription>
-              <Description>{ comment.description }</Description>
-            </CommentDescription>
-          </CommentDetailStyle>
-        </CommentDetailContainer>
-      </>
-    );
-  });
-};
+const Comment = (comments) => comments.map((comment) => {
+  const time = RelativeTime(comment.updatedAt);
+  return (
+    <>
+      <CommentDetailContainer>
+        <UserProfile><img src={comment.user.profile_url} width="40" height="40" alt="new" /></UserProfile>
+        <CommentDetailStyle>
+          <CommentTitle>
+            <Author>{ comment.user.nickname}</Author>
+            <Info>
+              commented
+              { time }
+            </Info>
+          </CommentTitle>
+          <CommentDescription>
+            <Description>{ comment.description }</Description>
+          </CommentDescription>
+        </CommentDetailStyle>
+      </CommentDetailContainer>
+    </>
+  );
+});
 
 export default Comment;
