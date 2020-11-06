@@ -10,6 +10,15 @@ const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
   }
+
+  a {
+    text-decoration:none;
+    // color: black;
+  }
+  // a:hover {
+  //   text-decoration:none;
+  //   color: blue;
+  // }
 `;
 
 export default GlobalStyle;

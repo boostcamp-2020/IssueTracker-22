@@ -5,7 +5,7 @@ import IssueFormContainer from '../containers/issue-form/IssueFormContainer';
 
 const CreateIssue = () => (
   <>
-    <GlobalStyle bg="#f6f8fa"/>
+    <GlobalStyle/>
     <Header/>
     <IssueFormContainer/>
   </>

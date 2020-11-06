@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React, { Component } from 'react';
-import dropdownCaret from '../../../assets/styles/caret'
-import {svgX} from '../../../assets/svgPath'
+import dropdownCaret from '../../../assets/styles/caret';
+import { svgX } from '../../../assets/svgPath';
 
 const SearchFilter = styled.div`
     position: relative;
@@ -35,53 +35,49 @@ const FilterItem = styled.div`
 `;
 
 const FilterModal = {
-        // display: "none",
-        width: "500px",
-        height: "500px",
-        position: "absolute",
-        top:"50%",
-        left: "50%",
-        margin: "-250px 0 0 -250px",
-        background: "#eaecef",
-        zIndex: "2",
-}
+  // display: "none",
+  width: '500px',
+  height: '500px',
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  margin: '-250px 0 0 -250px',
+  background: '#eaecef',
+  zIndex: '2',
+};
 
-const renderSearchFilter = () =>{
-    const items = ["Open issues and pull requests", "Your issues", "Your pull issues", "Everything assinged to you", "Everything mentioning you"]
-    const filterItems = () => {
-        return items.map((item) => {
-            return (<FilterItem>{item}</FilterItem>)
-        })
-    }
+const renderSearchFilter = () => {
+  const items = ['Open issues and pull requests', 'Your issues', 'Your pull issues', 'Everything assinged to you', 'Everything mentioning you'];
+  const filterItems = () => items.map((item) => (<FilterItem>{item}</FilterItem>));
 
-    const onModal = () => {
-        // document.querySelector('.filter-modal').style.display ='block';
-    }
+  const onModal = () => {
+    // document.querySelector('.filter-modal').style.display ='block';
+  };
 
-    const offModal = () => {
-        // document.querySelector('.filter-modal').style.display ='none';
-    }
-    return (
-        <SearchFilter>
-            <details class="IssueFilter">
-                <summary role="button" onClick={onModal()}>
-                    Filters
-                    <span style={dropdownCaret}/>
-                </summary>
-                {/* <div class=".filter-modal" style={FilterModal}> */}
-                    <FilterItemList>
-                        <h3>Filter Issues</h3>
-                        <button type="button" data-toggle-for="IssueFilter" onClick={offModal()}>
-                            <svg aria-label="Close menu" class="octicon octicon-x" viewBox="0 0 16 16" version="1.1" width="16" height="16" role="img">
-                                {svgX}                            
-                            </svg>
-                        </button>
-                        {filterItems()}
-                    </FilterItemList>
-                {/* </div> */}
-            </details>
-        </SearchFilter>
-    )
-}
+  const offModal = () => {
+    // document.querySelector('.filter-modal').style.display ='none';
+  };
+  return (
+    <SearchFilter>
+      <details className="IssueFilter">
+        <summary role="button" onClick={onModal()}>
+          Filters
+          <span style={dropdownCaret}/>
+        </summary>
+        {/* <div class=".filter-modal" style={FilterModal}> */}
+        <FilterItemList>
+          <h3>Filter Issues</h3>
+          <button type="button" data-toggle-for="IssueFilter" onClick={offModal()}>
+            <svg aria-label="Close menu" className="octicon octicon-x" viewBox="0 0 16 16" version="1.1" width="16" height="16" role="img">
+              {svgX}
+            </svg>
+          </button>
+          {filterItems()}
+        </FilterItemList>
+        {/* </div> */}
+      </details>
+    </SearchFilter>
+  );
+};
 
 export default renderSearchFilter;

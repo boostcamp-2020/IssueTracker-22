@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import React, { Component } from 'react';
-import renderSearchFilter from './searchFilter'
+import React from 'react';
+import renderSearchFilter from './searchFilter';
+import NewIssueButton from './NewIssueButton';
 
 const ToolButtons = styled.div`
     display: flex;
@@ -8,16 +9,15 @@ const ToolButtons = styled.div`
 `;
 
 const renderToolButtons = () => {
-    console.log("done?")
-    return (
-        <ToolButtons>
-            {renderSearchFilter()}
-            {/* <SearchBar/> */}
-            {/* <LabelMilestone/> */}
-            {/* <NewIssueButton/> */}
-        </ToolButtons>
-    )
-
-}
+  console.log('done?');
+  return (
+    <ToolButtons>
+      {renderSearchFilter()}
+      {/* <SearchBar/> */}
+      {/* <LabelMilestone/> */}
+      <NewIssueButton />
+    </ToolButtons>
+  );
+};
 
 export default renderToolButtons;

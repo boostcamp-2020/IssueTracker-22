@@ -1,35 +1,33 @@
-const getRelativeTime = (current) =>{
-    var msPerMinute = 60 * 1000;
-    var msPerHour = msPerMinute * 60;
-    var msPerDay = msPerHour * 24;
-    var msPerMonth = msPerDay * 30;
-    var msPerYear = msPerDay * 365;
+const getRelativeTime = (current) => {
+  const msPerMinute = 60 * 1000;
+  const msPerHour = msPerMinute * 60;
+  const msPerDay = msPerHour * 24;
+  const msPerMonth = msPerDay * 30;
+  const msPerYear = msPerDay * 365;
 
-    var elapsed = new Date(current) - new Date();
+  const elapsed = new Date() - new Date(current);
 
-    if (elapsed < msPerMinute) {
-         return Math.round(elapsed/1000) + ' seconds ago';   
-    }
+  if (elapsed < msPerMinute) {
+    return `${Math.round(elapsed / 1000)} seconds ago`;
+  }
 
-    else if (elapsed < msPerHour) {
-         return Math.round(elapsed/msPerMinute) + ' minutes ago';   
-    }
+  if (elapsed < msPerHour) {
+    return `${Math.round(elapsed / msPerMinute)} minutes ago`;
+  }
 
-    else if (elapsed < msPerDay ) {
-         return Math.round(elapsed/msPerHour ) + ' hours ago';   
-    }
+  if (elapsed < msPerDay) {
+    return `${Math.round(elapsed / msPerHour)} hours ago`;
+  }
 
-    else if (elapsed < msPerMonth) {
-        return 'approximately ' + Math.round(elapsed/msPerDay) + ' days ago';   
-    }
+  if (elapsed < msPerMonth) {
+    return `approximately ${Math.round(elapsed / msPerDay)} days ago`;
+  }
 
-    else if (elapsed < msPerYear) {
-        return 'approximately ' + Math.round(elapsed/msPerMonth) + ' months ago';   
-    }
+  if (elapsed < msPerYear) {
+    return `approximately ${Math.round(elapsed / msPerMonth)} months ago`;
+  }
 
-    else {
-        return 'approximately ' + Math.round(elapsed/msPerYear ) + ' years ago';   
-    }
-}
+  return `approximately ${Math.round(elapsed / msPerYear)} years ago`;
+};
 
-export default getRelativeTime
+export default getRelativeTime;
