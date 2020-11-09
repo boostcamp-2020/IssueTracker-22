@@ -4,22 +4,27 @@ import { Link } from 'react-router-dom';
 
 const StyledLink = styled(Link)`
     background-color: white;
-    padding: 5px 16px;
+    padding: 8px 16px;
     border: 1px lightgrey solid;
-    margin: 10px;
+    border-radius: 5px;
 
     &:visited  {
         color: black;
+    }
+
+    &:hover {
+        background-color: rgba(225, 228, 232, 0.5);
     }
 `;
 
 const ContentWrapper = styled.div`
     display: inline-flex;
+    align-items: center;
 `;
 
 const IconWrapper = styled.div`
     display: box;
-    margin: 0px 5px;
+    margin-right: 5px;
 `;
 
 const Counter = styled.div`
@@ -39,9 +44,11 @@ const LinkButton = ({
         <Icon/>
       </IconWrapper>
       {text}
-      <Counter>
-        {count || 0}
-      </Counter>
+      { count && (
+        <Counter>
+            {count}
+        </Counter>
+      )}
     </ContentWrapper>
   </StyledLink>
 );
