@@ -10,11 +10,11 @@ const ToolButtonWrapper = styled.div`
     align-items: center;
 `;
 
-const ToolButtons = ({ labels }) => (
+const ToolButtons = ({ labels, milestones }) => (
   <ToolButtonWrapper>
     {renderSearchFilter()}
     {/* <SearchBar/> */}
-    <NavBar labelCount={labels.length}/>
+    <NavBar labelCount={labels.length} milestoneCount={milestones.length}/>
     <NewIssueButton />
   </ToolButtonWrapper>
 );

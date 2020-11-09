@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import IssueToolbar from './components/IssueToolbar';
 import IssueList from './components/IssueList';
 import ToolButtons from './components/ToolButtons';
 import useLabels from '../../lib/useLabels';
+import useMilestones from '../../lib/useMilestones';
 
 const IssueContainer = styled.div`
     max-width: 1280px;
@@ -82,10 +83,11 @@ const dummy = {
 
 const Issue = (props) => {
   const lables = useLabels();
+  const milestones = useMilestones();
 
   return (
     <IssueContainer>
-      <ToolButtons labels={lables}/>
+      <ToolButtons labels={lables} milestones={milestones}/>
       <IssueToolbar data={dummy}/>
       <IssueList data={dummy}/>
     </IssueContainer>
