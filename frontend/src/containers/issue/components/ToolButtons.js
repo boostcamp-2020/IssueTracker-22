@@ -2,10 +2,12 @@ import styled from 'styled-components';
 import React from 'react';
 import renderSearchFilter from './SearchFilter';
 import NewIssueButton from './NewIssueButton';
+import NavBar from './NavBar';
 
 const ToolButtons = styled.div`
     display: flex;
     flex-direction: row;
+    align-items: center;
 `;
 
 const renderToolButtons = () => {
@@ -14,7 +16,7 @@ const renderToolButtons = () => {
     <ToolButtons>
       {renderSearchFilter()}
       {/* <SearchBar/> */}
-      {/* <LabelMilestone/> */}
+      <NavBar/>
       <NewIssueButton />
     </ToolButtons>
   );
