@@ -37,7 +37,7 @@ const SelectMenuContainer = ({ open, url, label, header }) => {
         <SelectMenuHeader>
           {header}
         </SelectMenuHeader>
-        {/* <SelectMenuList items={items} loading={loading} label={label} /> */}
+        <SelectMenuList items={items} loading={loading} label={label} />
       </SelectMenu>
     );
   }
