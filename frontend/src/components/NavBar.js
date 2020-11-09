@@ -10,7 +10,7 @@ const Nav = styled.nav`
 const NavBar = ({ labelCount, milestoneCount }) => (
   <Nav>
     <LabelLinkButton count={labelCount}/>
-    <MilestoneLinkButton count={2}/>
+    <MilestoneLinkButton count={milestoneCount}/>
   </Nav>
 );
 

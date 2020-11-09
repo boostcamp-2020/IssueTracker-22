@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
+import apiUri from '../constants/api';
 
 function useMilestones() {
   const [milestones, setMilestones] = useState([]);
 
   useEffect(() => {
-    fetch('/milesontes', {
+    fetch(apiUri.milestones, {
       method: 'GET',
       mode: 'cors',
     }).then((res) => res.json())

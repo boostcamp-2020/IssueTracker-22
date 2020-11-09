@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
+import apiUri from '../constants/api';
 
 function useLabels() {
   const [lables, setLabels] = useState([]);
 
   useEffect(() => {
-    fetch('/labels', {
+    fetch(apiUri.labels, {
       method: 'GET',
       mode: 'cors',
     }).then((res) => res.json())
