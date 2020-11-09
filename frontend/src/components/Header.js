@@ -5,9 +5,10 @@ import GitHubIcon from '../assets/icon/GitHubIcon';
 const HeaderWrapper = styled.header`
   color: white;
   background-color: #24292e;
-  height: 80px;
+  height: 75px;
   text-align: center;
   padding: 10px;
+  margin-bottom: 30px;
 `;
 
 const Title = styled.div`
