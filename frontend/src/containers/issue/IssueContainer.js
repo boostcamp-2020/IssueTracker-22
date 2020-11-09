@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import IssueToolbar from './components/IssueToolbar';
 import IssueList from './components/IssueList';
-import renderToolButtons from './components/ToolButtons';
+import ToolButtons from './components/ToolButtons';
+import useLabels from '../../lib/useLabels';
 
 const IssueContainer = styled.div`
     max-width: 1280px;
@@ -79,17 +80,16 @@ const dummy = {
   },
 };
 
-class Issue extends Component {
-  render() {
-    // const data = getIssues()
-    return (
-      <IssueContainer>
-        {renderToolButtons()}
-        <IssueToolbar data={dummy}/>
-        <IssueList data={dummy}/>
-      </IssueContainer>
-    );
-  }
-}
+const Issue = (props) => {
+  const lables = useLabels();
+
+  return (
+    <IssueContainer>
+      <ToolButtons labels={lables}/>
+      <IssueToolbar data={dummy}/>
+      <IssueList data={dummy}/>
+    </IssueContainer>
+  );
+};
 
 export default Issue;
