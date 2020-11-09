@@ -41,7 +41,7 @@ const SidebarFormContainer = ({ mode }) => {
       <SidebarHeader>
         <SidebarTitle>{label}</SidebarTitle>
         <GearButton type="button" onClick={showSelectMenu}>@</GearButton>
-        {/* <SelectMenuContainer open={open} url={url} label={label} header={selectMenuHeader} /> */}
+        <SelectMenuContainer open={open} url={url} label={label} header={selectMenuHeader} />
       </SidebarHeader>
 
       <SelectedItemList>
