@@ -27,7 +27,7 @@ const SelectMenuList = ({ items, loading, label }) => {
       list = labels.map((item) => <LabelItem label={item} />);
     } else if (label === selectMenuMode.Milestone[0]) {
       const { milestones } = content;
-    //   list = milestones.map((item) => <MilestoneItem milestone={item} />);
+      list = milestones.map((item) => <MilestoneItem milestone={item} />);
     }
   }
 
