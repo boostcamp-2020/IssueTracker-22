@@ -125,27 +125,26 @@ exports.detail = async (req, res) => {
   } catch (err) {
     res.status(500).json({ success: false, message: 'Fail: Get Issue Detail' });
   }
-}
-    
+};
+
 exports.create = async (req, res) => {
   const {
-    title, description, assignee_id, label_id, milestone_id,
+    title, description, assignees, labels, milestone_id,
   } = req.body;
   const { user } = res.locals;
 
   try {
     const newIssues = await Issue.create({
-      title, description, author_id: user.id, assignee_id, label_id, milestone_id,
+      title, description, author_id: user.id, milestone_id,
     });
-    if (assignee_id) {
-      await IssueAssignee.create({
-        issue_id: newIssues.id, assignee_id,
-      });
+
+    if (assignees.length > 0) {
+      const assigneeData = assignees.map((id) => ({ issue_id: newIssues.id, assignee_id: id }));
+      await IssueAssignee.bulkCreate(assigneeData);
     }
-    if (label_id) {
-      await IssueLabel.create({
-        issue_id: newIssues.id, label_id,
-      });
+    if (labels.length > 0) {
+      const labelData = labels.map((id) => ({ issue_id: newIssues.id, label_id: id }));
+      await IssueLabel.bulkCreate(labelData);
     }
 
     return res.json({
