@@ -1,10 +1,8 @@
-const fs = require('fs');
-const path = require('path');
 const Sequelize = require('sequelize');
 
-const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
-const config = require(`${__dirname}/../config/config.json`)[env];
+const config = require('../config/db.config')[env];
+
 const db = {};
 
 let sequelize;
@@ -14,21 +12,33 @@ if (config.use_env_variable) {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
-fs
-  .readdirSync(__dirname)
-  .filter((file) => (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js'))
-  .forEach((file) => {
-    const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
-    db[model.name] = model;
-  });
-
-Object.keys(db).forEach((modelName) => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
-  }
-});
-
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+
+db.User = require('./user')(sequelize, Sequelize);
+db.Issue = require('./issue')(sequelize, Sequelize);
+db.Comment = require('./comment')(sequelize, Sequelize);
+db.Milestone = require('./milestone')(sequelize, Sequelize);
+db.Label = require('./label')(sequelize, Sequelize);
+db.IssueLabel = require('./issue_label')(sequelize, Sequelize);
+db.IssueAssignee = require('./issue_assignee')(sequelize, Sequelize);
+
+db.User.hasMany(db.Issue, { foreignKey: 'author_id', sourceKey: 'id' });
+db.Issue.belongsTo(db.User, {foreignKey: 'author_id'});
+
+db.User.hasMany(db.Comment, { foreignKey: 'author_id', sourceKey: 'id' });
+db.User.hasMany(db.IssueAssignee, { foreignKey: 'assignee_id', sourceKey: 'id' });
+db.IssueAssignee.belongsTo(db.User, {foreignKey: 'assignee_id'});
+db.Comment.belongsTo(db.User, {foreignKey: 'author_id'});
+
+db.Issue.hasMany(db.Comment, { foreignKey: 'issue_id', sourceKey: 'id' });
+db.Issue.hasMany(db.IssueLabel, { foreignKey: 'issue_id', sourceKey: 'id' });
+db.Issue.hasMany(db.IssueAssignee, { foreignKey: 'issue_id', sourceKey: 'id' });
+
+db.Label.hasMany(db.IssueLabel, { foreignKey: 'label_id', sourceKey: 'id' });
+db.IssueLabel.belongsTo(db.Label, {foreignKey: 'label_id'});
+
+db.Milestone.hasMany(db.Issue, { foreignKey: 'milestone_id', sourceKey: 'id' });
+db.Issue.belongsTo(db.Milestone, {foreignKey: 'milestone_id'});
 
 module.exports = db;

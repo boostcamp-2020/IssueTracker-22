@@ -37,6 +37,40 @@
 │       ├── 📁register  
 ```
 
+## 브랜치
+master
+
+develop
+
+fix/milestone-list-be
+
+feature/issue-detail-be
+
+feature/issue-layout-buttons
+
+feature/create-issue-fe
+
+refactor/errorHandling-be
+
+feature/issue-detail-fe
+
+feature/issue-create-be
+
+feature/milestone-list-be
+
+feature/label-list-be
+
+feature/issue-layout
+
+feature/react-router-fe
+
+feature/issue-list-lookup-be
+
+feature/github-login-be
+
+feature/login-fe
+
+
 ## 📑 개발 문서
 
 ### [Backlog](https://docs.google.com/spreadsheets/d/1JoNtBpVZUKCupKhUhpHzfvt8pS_82fO8/edit#gid=1936612954)
@@ -45,3 +79,4 @@
 ![issue_tracker_ERD](https://user-images.githubusercontent.com/48170519/97652088-f5735d00-1aa0-11eb-86a9-f243f0c22c3a.PNG)
 
 #### 더 자세한 사항은 [Wiki](https://github.com/boostcamp-2020/IssueTracker-22/wiki)를 참고해주세요
+
