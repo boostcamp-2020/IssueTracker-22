@@ -44,7 +44,7 @@ const LinkButton = ({
         <Icon/>
       </IconWrapper>
       {text}
-      { count && (
+      { (count || count === 0) && (
         <Counter>
             {count}
         </Counter>

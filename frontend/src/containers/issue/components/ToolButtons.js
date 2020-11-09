@@ -2,24 +2,21 @@ import styled from 'styled-components';
 import React from 'react';
 import renderSearchFilter from './SearchFilter';
 import NewIssueButton from './NewIssueButton';
-import NavBar from './NavBar';
+import NavBar from '../../../components/NavBar';
 
-const ToolButtons = styled.div`
+const ToolButtonWrapper = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
 `;
 
-const renderToolButtons = () => {
-  console.log('done?');
-  return (
-    <ToolButtons>
-      {renderSearchFilter()}
-      {/* <SearchBar/> */}
-      <NavBar/>
-      <NewIssueButton />
-    </ToolButtons>
-  );
-};
+const ToolButtons = ({ labels }) => (
+  <ToolButtonWrapper>
+    {renderSearchFilter()}
+    {/* <SearchBar/> */}
+    <NavBar labelCount={labels.length}/>
+    <NewIssueButton />
+  </ToolButtonWrapper>
+);
 
-export default renderToolButtons;
+export default ToolButtons;
