@@ -42,12 +42,24 @@ const ModalInner = styled.div`
 `
 
 
-const Modal = ({className, visible, children}) => {
+const Modal = ({className, onClose, visible, children}) => {
+
+  const onMaskClick = (e) =>{
+    if(e.target === e.currentTarget) {
+      onClose(e)
+    }
+  }
+  const close = (e) => {
+    if (onClose) {
+      onClose(e)
+    }
+  }
     return (
         <>
             <ModalOverlay visible={visible}>
-                <ModalWrapper className={className} tabIndex="-1" visible={visible}>
+                <ModalWrapper className={className} onClick={onMaskClick} tabIndex="-1" visible={visible}>
                     <ModalInner tabIndex="0" className="modal-inner">
+                        <button className="modal-close" onClick={close}/>
                         {children}
                     </ModalInner>
                 </ModalWrapper>
@@ -55,3 +67,5 @@ const Modal = ({className, visible, children}) => {
         </>
     )
 }
+
+export default Modal

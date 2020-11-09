@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import React from 'react';
+import React, {useState} from 'react';
 import dropdownCaret from '../../../assets/styles/caret';
+import Modal from '../../../lib/Modal'
 import { svgX } from '../../../assets/svgPath';
 
 const SearchFilter = styled.div`
@@ -34,38 +35,28 @@ const FilterItem = styled.div`
     border-bottom: 1px solid #eaecef;
 `;
 
-// const FilterModal = {
-//   // display: "none",
-//   width: '500px',
-//   height: '500px',
-//   position: 'absolute',
-//   top: '50%',
-//   left: '50%',
-//   margin: '-250px 0 0 -250px',
-//   background: '#eaecef',
-//   zIndex: '2',
-// };
+
+
 
 const renderSearchFilter = () => {
+  const [modalVisible, setModalVisible] = useState(false)
   const items = ['Open issues and pull requests', 'Your issues', 'Your pull issues', 'Everything assinged to you', 'Everything mentioning you'];
   const filterItems = () => items.map((item) => (<FilterItem>{item}</FilterItem>));
+  const onModal = () => {setModalVisible(true)}
+  const offModal = () => {setModalVisible(false)}
 
-  const onModal = () => {
-    // document.querySelector('.filter-modal').style.display ='block';
-  };
-
-  const offModal = () => {
-    // document.querySelector('.filter-modal').style.display ='none';
-  };
   return (
     <SearchFilter>
       <details className="IssueFilter">
-        <summary role="button" onClick={onModal()}>
+        <summary role="button" onClick={onModal}>
           Filters
           <span style={dropdownCaret}/>
         </summary>
+        {
+          modalVisible&&<Modal onClose={offModal}>Hello</Modal>
+        }
         {/* <div class=".filter-modal" style={FilterModal}> */}
-        <FilterItemList>
+        {/* <FilterItemList>
           <h3>Filter Issues</h3>
           <button type="button" data-toggle-for="IssueFilter" onClick={offModal()}>
             <svg aria-label="Close menu" className="octicon octicon-x" viewBox="0 0 16 16" version="1.1" width="16" height="16" role="img">
@@ -73,7 +64,7 @@ const renderSearchFilter = () => {
             </svg>
           </button>
           {filterItems()}
-        </FilterItemList>
+        </FilterItemList> */}
         {/* </div> */}
       </details>
     </SearchFilter>

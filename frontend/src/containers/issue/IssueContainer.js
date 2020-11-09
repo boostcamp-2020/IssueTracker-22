@@ -79,17 +79,14 @@ const dummy = {
   },
 };
 
-class Issue extends Component {
-  render() {
-    // const data = getIssues()
+const Issue = () =>{
     return (
       <IssueContainer>
         {renderToolButtons()}
-        <IssueToolbar data={dummy}/>
-        <IssueList data={dummy}/>
+        {/* <IssueToolbar data={dummy}/> */}
+        {/* <IssueList data={dummy}/> */}
       </IssueContainer>
     );
-  }
 }
 
 export default Issue;
