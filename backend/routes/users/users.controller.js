@@ -39,6 +39,6 @@ exports.githubLoginCallback = (req, res, next) => {
 
     const options = { httpOnly: true };
     res.cookie('authorization', token, options);
-    return res.redirect('/#/issues');
+    return res.redirect('/');
   })(req, res, next);
 };
