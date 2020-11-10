@@ -5,8 +5,7 @@ import ProfileImage from './ProfileImage';
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
-  padding: 5px 0;
-  font-size: 13px;
+  margin: 8px 0;
   :hover {
     color: #1A60F5;
   }

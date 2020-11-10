@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import selectMenuMode from '../../constants/selectMenuMode';
+import SelectedLabelItem from './components/SelectedLabelItem';
 import SelectedUserItem from './components/SelectedUserItem';
 import SelectMenuContainer from './SelectMenuContainer';
 
@@ -23,6 +24,7 @@ const GearButton = styled.button`
 `;
 
 const SelectedItemList = styled.div`
+  font-size: 13px;
 `;
 
 const SelectedItem = styled.div`
@@ -62,11 +64,11 @@ const SidebarFormContainer = ({ mode, selectedItems, setSelectedItems }) => {
     switch (label) {
       case selectMenuMode.Assignees[0]:
         return selectedItems.map((item) => (
-          <SelectedUserItem key={item.id} user={item}/>
+          <SelectedUserItem key={item.id} user={item} />
         ));
       case selectMenuMode.Labels[0]:
         return selectedItems.map((item) => (
-          <SelectedItem key={item.id}>{item.id}</SelectedItem>
+          <SelectedLabelItem key={item.id} label={item} />
         ));
       case selectMenuMode.Milestone[0]:
         return selectedItems.map((item) => (
