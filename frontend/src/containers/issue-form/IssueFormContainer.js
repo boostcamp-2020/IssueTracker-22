@@ -23,7 +23,7 @@ const Sidebar = styled.div`
   min-width: 200px;
   padding: 0 10px;
   font-size: 14px;
-  font-color: 
+  color: #636363;
 `;
 
 const IssueForm = () => {

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import selectMenuMode from '../../constants/selectMenuMode';
+import SelectedUserItem from './components/SelectedUserItem';
 import SelectMenuContainer from './SelectMenuContainer';
 
 const SidebarHeader = styled.div`
@@ -58,9 +59,21 @@ const SidebarFormContainer = ({ mode, selectedItems, setSelectedItems }) => {
     if (selectedItems.length === 0) {
       return <div>{statusText}</div>;
     }
-    return selectedItems.map((item) => (
-      <SelectedItem key={item.id}>{item.id}</SelectedItem>
-    ));
+    switch (label) {
+      case selectMenuMode.Assignees[0]:
+        return selectedItems.map((item) => (
+          <SelectedUserItem key={item.id} user={item}/>
+        ));
+      case selectMenuMode.Labels[0]:
+        return selectedItems.map((item) => (
+          <SelectedItem key={item.id}>{item.id}</SelectedItem>
+        ));
+      case selectMenuMode.Milestone[0]:
+        return selectedItems.map((item) => (
+          <SelectedItem key={item.id}>{item.id}</SelectedItem>
+        ));
+      default: break;
+    }
   };
 
   return (
