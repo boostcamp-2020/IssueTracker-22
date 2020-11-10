@@ -33,11 +33,15 @@ const getData = () => {
   return [data, loading];
 }
 
-
 const IssueDetailContainer = () => {
   const [data, loading] = getData();
   if(!loading) {
     const issue = data.content.issues[0];
+    
+  const addComment = (description) => {
+    
+    //Todo: comment에 새로운 값 추가
+  } 
     return <>
       <Header />
       <TitleBox>
@@ -49,7 +53,7 @@ const IssueDetailContainer = () => {
         <List>
           <IssueDetail>{ issue }</IssueDetail>
           {CommentList(issue.comments)}
-          <CreateComment data={issue}/>
+          <CreateComment data={issue} callback={addComment}/>
         </List>
         <Side />
       </IssueContent>
