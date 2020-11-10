@@ -7,7 +7,9 @@ const CreateIssue = () => (
   <>
     <GlobalStyle/>
     <Header/>
-    <IssueFormContainer/>
+    <div style={{ padding: '0 3%', backgroundColor: 'white' }}>
+      <IssueFormContainer/>
+    </div>
   </>
 );
 

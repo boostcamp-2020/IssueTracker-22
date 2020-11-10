@@ -27,10 +27,12 @@ const SelectedItem = styled.div`
 `;
 
 const SidebarFormContainer = ({ mode }) => {
+  console.log(`sidebar form ${mode}`);
+
   const [label, statusText, selectMenuHeader, url] = mode;
   const [open, setOpen] = useState(false);
 
-  const showSelectMenu = () => {
+  const toggleSelectMenu = () => {
     setOpen(!open);
   };
 
@@ -40,13 +42,13 @@ const SidebarFormContainer = ({ mode }) => {
 
       <SidebarHeader>
         <SidebarTitle>{label}</SidebarTitle>
-        <GearButton type="button" onClick={showSelectMenu}>@</GearButton>
+        <GearButton type="button" onClick={toggleSelectMenu}>@</GearButton>
         <SelectMenuContainer
           open={open}
           url={url}
           label={label}
           header={selectMenuHeader}
-          onOverlayClick={showSelectMenu}
+          onOverlayClick={toggleSelectMenu}
         />
       </SidebarHeader>
 
