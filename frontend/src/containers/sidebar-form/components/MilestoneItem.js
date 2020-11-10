@@ -29,14 +29,14 @@ const formalizeDateString = (dueDate) => {
   return dueDate ? new Date(dueDate).toLocaleString('en-US', options) : 'No due date';
 };
 
-const MilestoneItem = ({ milestone }) => {
+const MilestoneItem = ({ milestone, onClick }) => {
   const {
     id, title, description, due_date: dueDate, open_issues: openIssues, closed_issues: closedIssues, progress,
   } = milestone;
   const formalizedDueDate = formalizeDateString(dueDate);
 
   return (
-    <Item key={id}>
+    <Item onClick={onClick(milestone)}>
       <div>
         <MilestoneTitle>{title}</MilestoneTitle>
         <MilestoneDueDate>{formalizedDueDate}</MilestoneDueDate>

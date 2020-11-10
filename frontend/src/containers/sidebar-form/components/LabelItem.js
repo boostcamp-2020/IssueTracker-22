@@ -26,13 +26,13 @@ const ColorDot = styled.div`
 const Description = styled.div`
 `;
 
-const LabelItem = ({ label }) => {
+const LabelItem = ({ label, onClick }) => {
   const {
     id, name, description, color_code: colorCode,
   } = label;
 
   return (
-    <Item key={id}>
+    <Item onClick={onClick(label)}>
       <div>
         <ColorDot color={colorCode} />
         <span>{name}</span>

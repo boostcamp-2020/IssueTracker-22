@@ -24,11 +24,11 @@ const UserNickname = styled.div`
   font-weight: bold;
 `;
 
-const UserItem = ({ user }) => {
+const UserItem = ({ user, onClick }) => {
   const { id, nickname, profile_url: profileUrl } = user;
 
   return (
-    <Item key={id}>
+    <Item onClick={onClick(user)}>
       <UserWrapper>
         <ProfileImage profileUrl={profileUrl} nickname={nickname} />
         <UserNickname>{nickname}</UserNickname>

@@ -14,20 +14,43 @@ const List = styled.ul`
   overflow-y: auto;
 `;
 
-const SelectMenuList = ({ items, loading, label }) => {
+const SelectMenuList = ({ items, loading, label, onItemClick }) => {
   let list = <div>loading...</div>;
 
   const { success, content } = items;
   if (!loading && success) {
-    if (label === selectMenuMode.Assignees[0]) {
-      const { users } = content;
-      list = users.map((item) => <UserItem user={item} />);
-    } else if (label === selectMenuMode.Labels[0]) {
-      const { labels } = content;
-      list = labels.map((item) => <LabelItem label={item} />);
-    } else if (label === selectMenuMode.Milestone[0]) {
-      const { milestones } = content;
-      list = milestones.map((item) => <MilestoneItem milestone={item} />);
+    switch (label) {
+      case selectMenuMode.Assignees[0]:
+        const { users } = content;
+        list = users.map((item) => (
+          <UserItem
+            user={item}
+            key={item.id}
+            onClick={onItemClick}
+          />
+        ));
+        break;
+      case selectMenuMode.Labels[0]:
+        const { labels } = content;
+        list = labels.map((item) => (
+          <LabelItem
+            label={item}
+            key={item.id}
+            onClick={onItemClick}
+          />
+        ));
+        break;
+      case selectMenuMode.Milestone[0]:
+        const { milestones } = content;
+        list = milestones.map((item) => (
+          <MilestoneItem
+            milestone={item}
+            key={item.id}
+            onClick={onItemClick}
+          />
+        ));
+        break;
+      default: break;
     }
   }
 
