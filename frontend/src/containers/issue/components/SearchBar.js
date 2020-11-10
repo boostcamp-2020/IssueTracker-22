@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import React, {useState} from 'react';
 import { withRouter } from 'react-router-dom';
 import {svg돋보기} from '../../../assets/svgPath'
+import pathUri from '../../../constants/path'
 
 const SearchBarWrapper = styled.div`
     display : flex;
