@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import selectMenuMode from '../../constants/selectMenuMode';
 import SelectedLabelItem from './components/SelectedLabelItem';
 import SelectedUserItem from './components/SelectedUserItem';
+import SelectedMilestoneItem from './SelectedMilestoneItem';
 import SelectMenuContainer from './SelectMenuContainer';
 
 const SidebarHeader = styled.div`
@@ -72,7 +73,7 @@ const SidebarFormContainer = ({ mode, selectedItems, setSelectedItems }) => {
         ));
       case selectMenuMode.Milestone[0]:
         return selectedItems.map((item) => (
-          <SelectedItem key={item.id}>{item.id}</SelectedItem>
+          <SelectedMilestoneItem key={item.id} milestone={item} />
         ));
       default: break;
     }
