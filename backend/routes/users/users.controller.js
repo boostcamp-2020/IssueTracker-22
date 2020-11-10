@@ -3,6 +3,21 @@ const jwt = require('jsonwebtoken');
 const { User } = require('../../models');
 const asyncHandler = require('../../lib/asyncHandler');
 
+exports.getLoggedInUser = asyncHandler(async (req, res, next) => {
+  const {
+    id, email, nickname, profile_url,
+  } = res.locals.user;
+
+  res.json({
+    success: true,
+    content: {
+      user: {
+        id, email, nickname, profile_url,
+      },
+    },
+  });
+});
+
 exports.getAllUsers = asyncHandler(async (req, res, next) => {
   const users = await User.findAll({
     attributes: ['id', 'nickname', 'profile_url'],
