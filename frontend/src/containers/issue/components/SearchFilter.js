@@ -3,24 +3,37 @@ import React, {useState} from 'react';
 import dropdownCaret from '../../../assets/styles/caret';
 import { svgX } from '../../../assets/svgPath';
 
-const SearchFilter = styled.div`
+const SearchFilterWrapper = styled.div`
     position: relative;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    white-space: nowrap;
+    background-color : #fafbfc;
+    border: 1px solid #c5c8cc;
+    border-radius: 6px 0px 0px 6px;
+    vertical-align: middle;
+    padding: 5px 16px;
     summary::-webkit-details-marker {
         display: none
+    }
+    *:focus{
+      outline:none;
     }
 `;
 
 const FilterItemList = styled.div`
-    width: 300px;
-    height: auto;
-    position: absolute;
-    max-height: 480px;
-    margin: 8px 0 16px;
-    font-size: 12px;
-    top: 100%;
-    border-color: #eaecef;
-    border-radius: 6px;
-    box-shadow: #eaecef;
+width: 300px;
+height: auto;
+position: absolute;
+max-height: 480px;
+margin: 8px 0 16px;
+font-size: 12px;
+top: 78%;
+left: 0%;
+border-color: #eaecef;
+border-radius: 6px;
+border: 1px solid #eaecef;
 `;
 
 const FirstEl = styled.div`
@@ -33,7 +46,7 @@ const FilterItem = styled.div`
     display: flex;
     align-items: center;
     width: 100%;
-    padding: 16px;
+    padding: 7px 16px;
     overflow: hidden;
     color: black;
     text-align: left;
@@ -75,9 +88,9 @@ const Modal = ({className, onClose, visible, children}) => {
   }
     return (
         <>
-                <FilterItemList className={className} onClick={onMaskClick} tabIndex="-1" visible={visible}>
-                  {children}
-                </FilterItemList>
+          <FilterItemList className={className} onClick={onMaskClick} tabIndex="-1" visible={visible}>
+            {children}
+          </FilterItemList>
         </>
     )
   }
@@ -86,7 +99,7 @@ const Modal = ({className, onClose, visible, children}) => {
 
 
 
-const renderSearchFilter = () => {
+const SearchFilter = () => {
   const [modalVisible, setModalVisible] = useState(false)
   const items = ['Open issues and pull requests', 'Your issues', 'Your pull issues', 'Everything assinged to you', 'Everything mentioning you'];
   const hrefs = ['']
@@ -94,7 +107,7 @@ const renderSearchFilter = () => {
   const offModal = () => {setModalVisible(false)}
 
   return (
-    <SearchFilter>
+    <SearchFilterWrapper>
       <details className="IssueFilter">
         <summary role="button" onClick={onModal} >
           Filters
@@ -104,8 +117,8 @@ const renderSearchFilter = () => {
           modalVisible&&<Modal children={filterItems(offModal, items)}></Modal>
         }
       </details>
-    </SearchFilter>
+    </SearchFilterWrapper>
   );
 };
 
-export default renderSearchFilter;
+export default SearchFilter;
