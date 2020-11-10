@@ -28,10 +28,6 @@ const SelectedItemList = styled.div`
   font-size: 13px;
 `;
 
-const SelectedItem = styled.div`
-  border: 1px solid skyblue;
-`;
-
 const SidebarFormContainer = ({ mode, selectedItems, setSelectedItems }) => {
   // console.log(`sidebar form ${mode}`);
 
@@ -75,7 +71,8 @@ const SidebarFormContainer = ({ mode, selectedItems, setSelectedItems }) => {
         return selectedItems.map((item) => (
           <SelectedMilestoneItem key={item.id} milestone={item} />
         ));
-      default: break;
+      default:
+        return <div />;
     }
   };
 

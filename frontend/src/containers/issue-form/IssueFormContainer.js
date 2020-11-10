@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-// import CookieHandler from 'js-cookie';
-// import { Base64 } from 'js-base64';
 import apiUri from '../../constants/api';
 import IssueMainForm from './IssueMainForm';
-// import Sidebar from '../sidebar-form/Sidebar';
-import selectMenuMode from '../../constants/selectMenuMode';
 import SidebarFormContainer from '../sidebar-form/SidebarFormContainer';
+import selectMenuMode from '../../constants/selectMenuMode';
 
 const FlexRowBetween = styled.div`
   display: flex;
@@ -32,19 +29,32 @@ const IssueForm = () => {
   const [labels, setLabels] = useState([]);
   const [milestone, setMilestone] = useState([]);
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     const [milestoneId] = milestone.map((val) => val.id);
     const newIssue = {
       ...issue,
       assignees: assignees.map((val) => val.id),
       labels: labels.map((val) => val.id),
-      milestoneId,
+      milestone_id: milestoneId,
     };
 
-    // TODO 1 : validation 체크 후 -> POST apiUri.issues fetch 요청
-    console.log(`Handle Submit => POST ${apiUri.issues} :: ${JSON.stringify(newIssue)} \n}`);
-    // TODO 2 : submit 완료 후 issue 상세 화면으로 이동
+    const response = await fetch(apiUri.issues, {
+      mode: 'cors',
+      credentials: 'include',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newIssue),
+    });
+
+    const { success, content, message } = await response.json();
+    if (!success) {
+      alert(message);
+      return;
+    }
+    window.location.href = `/#${apiUri.issues}/${content.id}`;
   };
 
   const onChange = (e) => {
