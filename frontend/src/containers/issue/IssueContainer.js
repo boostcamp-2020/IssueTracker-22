@@ -81,11 +81,13 @@ const dummy = {
 
 const Issue = () =>{
     return (
+      <>
+      {renderToolButtons()}
       <IssueContainer>
-        {renderToolButtons()}
-        {/* <IssueToolbar data={dummy}/> */}
-        {/* <IssueList data={dummy}/> */}
+        <IssueToolbar data={dummy}/>
+        <IssueList data={dummy}/>
       </IssueContainer>
+      </>
     );
 }
 
