@@ -5,6 +5,8 @@ import IssueList from './components/IssueList';
 import renderToolButtons from './components/ToolButtons';
 
 const IssueContainer = styled.div`
+    display: flex;
+    flex-direction : column;
     max-width: 1280px;
     border: 1px solid #eaecef;
     border-radius: 6px;
