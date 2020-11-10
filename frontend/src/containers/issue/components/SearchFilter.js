@@ -9,6 +9,7 @@ const SearchFilterWrapper = styled.div`
     font-weight: 500;
     line-height: 20px;
     white-space: nowrap;
+    max-width: 75px;
     background-color : #fafbfc;
     border: 1px solid #c5c8cc;
     border-radius: 6px 0px 0px 6px;
@@ -102,7 +103,7 @@ const Modal = ({className, onClose, visible, children}) => {
 const SearchFilter = () => {
   const [modalVisible, setModalVisible] = useState(false)
   const items = ['Open issues and pull requests', 'Your issues', 'Your pull issues', 'Everything assinged to you', 'Everything mentioning you'];
-  const hrefs = ['']
+  const hrefs = ['/issues?isopen=true', '/issues']
   const onModal = () => {setModalVisible(true)}
   const offModal = () => {setModalVisible(false)}
 
