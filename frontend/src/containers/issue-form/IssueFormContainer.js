@@ -24,7 +24,7 @@ const Sidebar = styled.div`
   color: #636363;
 `;
 
-const IssueForm = () => {
+const IssueForm = ({ user }) => {
   const [issue, setIssue] = useState({ title: '', description: '' });
   const [assignees, setAssignees] = useState([]);
   const [labels, setLabels] = useState([]);
@@ -89,6 +89,7 @@ const IssueForm = () => {
       <FlexRowBetween>
 
         <IssueMainForm
+          user={user}
           onChange={onChange}
           onFileUpload={onFileUpload}
           onSubmit={onSubmit}

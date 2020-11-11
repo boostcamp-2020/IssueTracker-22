@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import selectMenuMode from '../../constants/selectMenuMode';
 import SelectedLabelItem from './components/SelectedLabelItem';
 import SelectedUserItem from './components/SelectedUserItem';
-import SelectedMilestoneItem from './SelectedMilestoneItem';
+import SelectedMilestoneItem from './components/SelectedMilestoneItem';
 import SelectMenuContainer from './SelectMenuContainer';
 
 const SidebarHeader = styled.div`

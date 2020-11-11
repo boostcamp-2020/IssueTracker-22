@@ -43,11 +43,11 @@ const Wrapper = styled.div`
   padding: 0 10px;
 `;
 
-const IssueMainForm = ({ onChange, onFileUpload, onSubmit, issue }) => {
+const IssueMainForm = ({ user, onChange, onFileUpload, onSubmit, issue }) => {
   const { title, description } = issue;
   return (
     <Wrapper>
-      <UserProfileContainer/>
+      <UserProfileContainer user={user} />
 
       <IssueFormBox>
         <Input type="text" name="title" placeholder="Title" onChange={onChange} />

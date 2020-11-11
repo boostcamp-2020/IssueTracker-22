@@ -1,6 +1,6 @@
 import config from '../config/config';
 
-const imageUploadHandler = (file) => new Promise((resolve) => {
+const imageUploadHandler = (file) => new Promise((resolve, reject) => {
   const reader = new FileReader();
 
   reader.onload = async () => {
@@ -21,7 +21,7 @@ const imageUploadHandler = (file) => new Promise((resolve) => {
       const { data: { link } } = returnData;
       resolve(link);
     } catch (error) {
-      throw new Error(error);
+      reject(error);
     }
   };
 
