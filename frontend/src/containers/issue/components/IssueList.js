@@ -25,7 +25,7 @@ class IssueInfo extends Component {
         </div>
         <IssueAssignee>
           <img
-            src="https://user-images.githubusercontent.com/48170519/90837801-0cede580-e38e-11ea-9b72-77c621e0f0fc.PNG"
+            src={this.props.issue.user.profile_url}
             style={{ width: '20px', height: '20px', borderRadius: '70%' }}
           />
         </IssueAssignee>
@@ -35,12 +35,7 @@ class IssueInfo extends Component {
 }
 
 const IssueList = ({issues}) => {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = this.props.data;
-  // }
   const Issues = (data) => data.map((issue) => (<IssueInfo issue={issue}/>));
-  console.log(issues)
   return (
       <div>
         {Issues(issues)}
