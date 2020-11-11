@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import selectMenuMode from '../../../constants/selectMenuMode';
+import UserItem from './UserItem';
 import LabelItem from './LabelItem';
 import MilestoneItem from './MilestoneItem';
-import UserItem from './UserItem';
 
 const List = styled.ul`
   all: unset;
@@ -24,9 +24,10 @@ const SelectMenuList = ({ items, loading, label, onItemClick }) => {
         const { users } = content;
         list = users.map((item) => (
           <UserItem
-            user={item}
             key={item.id}
-            onClick={onItemClick}
+            user={item}
+            onItemClick={onItemClick}
+            selected={false}
           />
         ));
         break;
@@ -34,9 +35,10 @@ const SelectMenuList = ({ items, loading, label, onItemClick }) => {
         const { labels } = content;
         list = labels.map((item) => (
           <LabelItem
-            label={item}
             key={item.id}
+            label={item}
             onClick={onItemClick}
+            selected={false}
           />
         ));
         break;
@@ -44,9 +46,10 @@ const SelectMenuList = ({ items, loading, label, onItemClick }) => {
         const { milestones } = content;
         list = milestones.map((item) => (
           <MilestoneItem
-            milestone={item}
             key={item.id}
+            milestone={item}
             onClick={onItemClick}
+            selected={false}
           />
         ));
         break;
