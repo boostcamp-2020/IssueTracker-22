@@ -25,12 +25,12 @@ exports.list = asyncHandler(async (req, res, next) => {
   const filterAssignee = (assignee === undefined) ? {} : { nickname: assignee };
   const filterMention = (mention === undefined) ? {} : { author_id: mention };
   const issues = await Issue.findAll({
-    attributes: ['id', 'title', 'description', 'createdAt', 'updatedAt'],
+    attributes: ['id', 'title', 'description', 'createdAt', 'updatedAt', 'is_open'],
     where: filterIsopen,
     include: [
       {
         model: User,
-        attributes: ['id', 'nickname'],
+        attributes: ['id', 'nickname', 'profile_url'],
         where: filterUser,
       },
       {
