@@ -2,25 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import IssueLabel from '@components/IssueLabel';
 import NewButton from '@components/NewButton';
-
-const InputForm = styled.form`
-    background-color: #f6f8fa;
-    border: 1px solid #e1e4e8;
-    padding: 16px;
-`;
-
-const Label = styled.label`
-    display: block;
-    margin: 16px 0px;
-    padding-right: 16px;
-    font-size: 14px;
-    font-weight: bolder;
-`;
-
-const Input = styled.input`
-    display: block;
-    margin-top: 5px;
-`;
+import { Label, Input, InputForm } from './Form';
+import ColorPicker from './ColorPicker';
 
 const ButtonWrapper = styled.div`
     margin: 16px 0px;
@@ -37,16 +20,13 @@ const LabelInput = () => (
     <FlexContainer>
       <Label htmlFor="name">
         Label name
-        <Input type="text" id="name" />
+        <Input type="text" id="name" placeholder="Label name" autoComplete="off"/>
       </Label>
       <Label htmlFor="description">
         Description
-        <Input type="text" id="description" />
+        <Input type="text" id="description" placeholder="Description (optional)" />
       </Label>
-      <Label htmlFor="color">
-        Color
-        <Input type="text" id="color" />
-      </Label>
+      <ColorPicker/>
       <ButtonWrapper>
         <NewButton>Create label</NewButton>
       </ButtonWrapper>
