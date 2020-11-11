@@ -26,11 +26,6 @@ const Input = styled.div`
   background-color: white;
 `;
 
-const setIssueDesc = (e) => {
-  setIssue({ ...issue, description: e.target.value });
-};
-
-
 const uploadFile = (e) => {
   const { files } = e.target;
   // TODO : 파일 업로드 구현
@@ -45,14 +40,17 @@ const FlexRowBetween = styled.div`
 
 const CreateComment = ({ data, callback }) => {
   // url: 현재 로그인한 유저의 이미지 url
-  const url = "https://avatars1.githubusercontent.com/u/57661699?s=80&amp;v=4"
-  const [issue, setIssue] = useState({ description: '' });
+  const url = "https://avatars2.githubusercontent.com/u/39620410?v=4"
+  const name = "rlaqudrnr810"
+  const [issue, setIssue] = useState({ description: '', });
+  const { description } = issue;
+
   const setIssueDesc = (e) => {
     setIssue({ ...issue, description: e.target.value });
   };
+
   const submitHandler = async (e) => {
-    e.preventDefault();
-    callback(issue.description);
+      e.preventDefault();
     
     await fetch(apiUri.comments, {
       mode: 'cors',
@@ -66,15 +64,16 @@ const CreateComment = ({ data, callback }) => {
         description: issue.description,
       }),
     }).then(res => {
-      alert(res);
+      callback(issue.description);
+      setIssue({description: '' });
     });
     
   };
   return <>
     <CreateCommentContainer>
-      <Image><UserProfileContainer>{ url }</UserProfileContainer></Image>
+      <Image><UserProfileContainer url={url} name={name} /></Image>
       <Input>
-        <CommentEditor onChange={setIssueDesc} onFileUpload={uploadFile}/>
+        <CommentEditor onChange={setIssueDesc} value={description} onFileUpload={uploadFile}/>
         <FlexRowBetween>
           <ChangeStatusButton issue={data} />
           <CommentButton onClick={submitHandler} target={issue} />

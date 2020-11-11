@@ -12,48 +12,59 @@ import Side from './components/Side';
 import CreateComment from './components/CreateComment';
 import apiUri from '../../constants/api';
 
-const getData = () => {
-  const url = apiUri.detail + document.location.href.split("/")[5];
-  const option = {
-    mode: 'cors',
-    credentials: 'include',
-    method: 'GET',
-  }
+const IssueDetailContainer = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  async function fetchUrl() {
-    const response = await fetch(url, option);
-    const json = await response.json();
-    setData(json);
-    setLoading(false);
-  }
-  useEffect(() => {
-    fetchUrl();
-  }, []);
-  return [data, loading];
-}
 
-const IssueDetailContainer = () => {
-  const [data, loading] = getData();
-  if(!loading) {
-    const issue = data.content.issues[0];
-    
+  const getData = () => {
+    const url = apiUri.detail + document.location.href.split("/")[5];
+    const option = {
+      mode: 'cors',
+      credentials: 'include',
+      method: 'GET',
+    }
+    async function fetchUrl() {
+      const response = await fetch(url, option);
+      const json = await response.json();
+      setData({...json.content.issues[0]});
+      setLoading(false);
+    }
+    useEffect(() => {
+      fetchUrl();
+    }, []);
+  }
+
   const addComment = (description) => {
-    
-    //Todo: comment에 새로운 값 추가
-  } 
+    const comment = {
+      id:7,
+      author_id: 4,
+      createdAt: new Date(),
+      description: description,
+      user:{
+        id:4,
+        nickname:"rlaqudrnr810",
+        profile_url:"https://avatars2.githubusercontent.com/u/39620410?v=4",
+      }
+    };
+    const comments = data.comments.concat(comment);
+    setData({ ...data, comments: comments });
+  }
+  
+  getData();
+
+  if(!loading) {
     return <>
       <Header />
       <TitleBox>
-        <Title>{ issue }</Title>
+        <Title>{ data }</Title>
         <TitleEditButton />
       </TitleBox>
-      <TitleDetail>{ issue }</TitleDetail>
+      <TitleDetail>{ data }</TitleDetail>
       <IssueContent>
         <List>
-          <IssueDetail>{ issue }</IssueDetail>
-          {CommentList(issue.comments)}
-          <CreateComment data={issue} callback={addComment}/>
+          <IssueDetail>{ data }</IssueDetail>
+          {CommentList(data.comments)}
+          <CreateComment data={data} callback={addComment}/>
         </List>
         <Side />
       </IssueContent>
