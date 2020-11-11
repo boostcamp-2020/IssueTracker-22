@@ -43,9 +43,9 @@ const SearchBar = ({ history }) => {
       const type = v.split(':')[0];
       const option = v.split(':')[1];
       if (v === 'is:open') {
-        return `${pre}${i === 0 ? '' : '&'}isopen=true`;
+        return `${pre}${i === 0 ? '' : '&'}isopen=1`;
       } if (v === 'is:close') {
-        return `${pre}${i === 0 ? '' : '&'}isopen=false`;
+        return `${pre}${i === 0 ? '' : '&'}isopen=0`;
       } if (type === 'user') {
         return `${pre}${i === 0 ? '' : '&'}user=${option}`;
       } if (type === 'label') {
