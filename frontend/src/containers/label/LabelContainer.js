@@ -1,8 +1,8 @@
 import React from 'react';
+import NavBar from '@components/NavBar';
+import NewButton from '@components/NewButton';
+import useLabels from '@lib/useLabels';
 import LabelList from './components/LabelList';
-import useLabels from '../../lib/useLabels';
-import NavBar from '../../components/NavBar';
-import NewButton from '../../components/NewButton';
 
 const LabelContainer = () => {
   const labels = useLabels();
