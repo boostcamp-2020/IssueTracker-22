@@ -1,14 +1,15 @@
 import React from 'react';
 import { HashRouter as Router } from 'react-router-dom';
-// import Header from './components/Header';
 import Routes from './routes';
+import UserProvider from './lib/userProvider';
 
 function App() {
   return (
-    <Router>
-      {/* <Header /> */}
-      <Routes />
-    </Router>
+    <UserProvider>
+      <Router>
+        <Routes/>
+      </Router>
+    </UserProvider>
   );
 }
 
