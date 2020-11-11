@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import dropdownCaret from '../../../assets/styles/caret';
 import { svgX } from '../../../assets/svgPath';
 
@@ -57,55 +57,51 @@ const FilterItem = styled.div`
 `;
 
 const closeButton = {
-  padding: "16px",
-  margin: "-16px",
-  lineHeight: "1",
-  backgroundColor: "transparent",
-  border: "0"
+  padding: '16px',
+  margin: '-16px',
+  lineHeight: '1',
+  backgroundColor: 'transparent',
+  border: '0',
 
-}
-
-const filterItems = (closeFunc, items) => {
-  return(
-    <>
-      <FirstEl>
-        <FilterItem>Filter Issues</FilterItem>
-        <button style={closeButton} type="button" data-toggle-for="IssueFilter" onClick={closeFunc}>
-          <svg aria-label="Close menu" className="octicon octicon-x" viewBox="0 0 16 16" version="1.1" width="16" height="16" role="img">
-            {svgX}
-          </svg>
-        </button>
-      </FirstEl>
-      {items.map((item) => (<FilterItem>{item}</FilterItem>))}
-    </>
-  )
 };
 
-const Modal = ({className, onClose, visible, children}) => {
-  const onMaskClick = (e) =>{
-    if(e.target === e.currentTarget) {
-      onClose(e)
+const filterItems = (closeFunc, items) => (
+  <>
+    <FirstEl>
+      <FilterItem>Filter Issues</FilterItem>
+      <button style={closeButton} type="button" data-toggle-for="IssueFilter" onClick={closeFunc}>
+        <svg aria-label="Close menu" className="octicon octicon-x" viewBox="0 0 16 16" version="1.1" width="16" height="16" role="img">
+          {svgX}
+        </svg>
+      </button>
+    </FirstEl>
+    {items.map((item) => (<FilterItem>{item}</FilterItem>))}
+  </>
+);
+
+const Modal = ({
+  className, onClose, visible, children,
+}) => {
+  const onMaskClick = (e) => {
+    if (e.target === e.currentTarget) {
+      onClose(e);
     }
-  }
-    return (
-        <>
-          <FilterItemList className={className} onClick={onMaskClick} tabIndex="-1" visible={visible}>
-            {children}
-          </FilterItemList>
-        </>
-    )
-  }
-
-
-
-
+  };
+  return (
+    <>
+      <FilterItemList className={className} onClick={onMaskClick} tabIndex="-1" visible={visible}>
+        {children}
+      </FilterItemList>
+    </>
+  );
+};
 
 const SearchFilter = () => {
-  const [modalVisible, setModalVisible] = useState(false)
+  const [modalVisible, setModalVisible] = useState(false);
   const items = ['Open issues and pull requests', 'Your issues', 'Your pull issues', 'Everything assinged to you', 'Everything mentioning you'];
-  const hrefs = ['/issues?isopen=true', '/issues']
-  const onModal = () => {setModalVisible(true)}
-  const offModal = () => {setModalVisible(false)}
+  const hrefs = ['/issues?isopen=true', '/issues'];
+  const onModal = () => { setModalVisible(true); };
+  const offModal = () => { setModalVisible(false); };
 
   return (
     <SearchFilterWrapper>
@@ -115,7 +111,7 @@ const SearchFilter = () => {
           <span style={dropdownCaret}/>
         </summary>
         {
-          modalVisible&&<Modal children={filterItems(offModal, items)}></Modal>
+          modalVisible && <Modal children={filterItems(offModal, items)} />
         }
       </details>
     </SearchFilterWrapper>

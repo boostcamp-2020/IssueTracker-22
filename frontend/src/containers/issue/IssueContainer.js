@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import IssueToolbar from './components/IssueToolbar';
 import IssueList from './components/IssueList';
-import renderToolButtons from './components/ToolButtons';
+import ToolButtons from './components/ToolButtons';
 
 const IssueContainer = styled.div`
     display: flex;
@@ -82,15 +82,18 @@ const dummy = {
 };
 
 const Issue = () =>{
-    return (
-      <>
-      {renderToolButtons()}
-      <IssueContainer>
-        <IssueToolbar data={dummy}/>
-        <IssueList data={dummy}/>
-      </IssueContainer>
-      </>
-    );
+  
+  const 
+
+  return (
+    <>
+    <ToolButtons/>
+    <IssueContainer>
+      <IssueToolbar data={dummy}/>
+      <IssueList data={dummy}/>
+    </IssueContainer>
+    </>
+  );
 }
 
 export default Issue;
