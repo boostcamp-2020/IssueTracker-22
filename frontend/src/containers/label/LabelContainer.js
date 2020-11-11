@@ -4,6 +4,7 @@ import NavBar from '@components/NavBar';
 import NewButton from '@components/NewButton';
 import useLabels from '@lib/useLabels';
 import LabelList from './components/LabelList';
+import LabelInput from './components/LabelInput';
 
 const NavBarBox = styled.div`
     display: flex;
@@ -20,6 +21,7 @@ const LabelContainer = () => {
   const labels = useLabels();
   return (
     <ContentBox>
+      <LabelInput/>
       <NavBarBox>
         <NavBar/>
         <NewButton>New label</NewButton>
