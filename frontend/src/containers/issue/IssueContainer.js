@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import IssueToolbar from './components/IssueToolbar';
 import IssueList from './components/IssueList';
 import ToolButtons from './components/ToolButtons';
+import useLabels from '../../lib/useLabels';
+import useMilestones from '../../lib/useMilestones';
 
 const IssueContainer = styled.div`
     display: flex;
@@ -81,19 +83,16 @@ const dummy = {
   },
 };
 
-const Issue = () =>{
-  
-  const 
+const Issue = (props) => {
+  const lables = useLabels();
+  const milestones = useMilestones();
 
   return (
-    <>
-    <ToolButtons/>
+    <ToolButtons labels={lables} milestones={milestones}/>
     <IssueContainer>
       <IssueToolbar data={dummy}/>
       <IssueList data={dummy}/>
     </IssueContainer>
-    </>
   );
-}
-
+};
 export default Issue;

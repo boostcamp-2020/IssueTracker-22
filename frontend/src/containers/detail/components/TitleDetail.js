@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import RelativeTime from '../../../lib/relativeTime';
 
 const TitleDetailContainer = styled.div`
   display: flex;
@@ -46,13 +47,15 @@ const TitleDetail = (data) => {
   const { children } = data;
   const isOpen = children.is_open === 1 ? 'open' : 'close';
   const { length } = children.comments;
+  const time = RelativeTime(children.updatedAt);
+
   return (
     <>
       <TitleDetailContainer>
         <Open>{isOpen}</Open>
         <Info>
           <UserName>{children.user.nickname}</UserName>
-          <div>{isOpen}ed this issue {children.updatedAt} ago · {length} comment</div>
+          <div>{isOpen}ed this issue {time} · {length} comment</div>
         </Info>
       </TitleDetailContainer>
     </>
