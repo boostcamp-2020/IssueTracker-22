@@ -34,20 +34,19 @@ class IssueInfo extends Component {
   }
 }
 
-class IssueList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = this.props.data;
-  }
-
-  render() {
-    const Issues = (data) => data.map((issue) => (<IssueInfo issue={issue}/>));
-    return (
+const IssueList = ({issues}) => {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = this.props.data;
+  // }
+  const Issues = (data) => data.map((issue) => (<IssueInfo issue={issue}/>));
+  console.log(issues)
+  return (
       <div>
-        {Issues(this.state.content.issues)}
+        {Issues(issues)}
       </div>
-    );
-  }
+  );
+  
 }
 
 export default IssueList;
