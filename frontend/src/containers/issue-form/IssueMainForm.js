@@ -43,19 +43,22 @@ const Wrapper = styled.div`
   padding: 0 10px;
 `;
 
-const IssueMainForm = ({ onChange, onFileUpload, onSubmit, issue }) => (
-  <Wrapper>
-    <UserProfileContainer/>
+const IssueMainForm = ({ onChange, onFileUpload, onSubmit, issue }) => {
+  const { title, description } = issue;
+  return (
+    <Wrapper>
+      <UserProfileContainer/>
 
-    <IssueFormBox>
-      <Input type="text" name="title" placeholder="Title" onChange={onChange} />
-      <CommentEditor name="description" onChange={onChange} onFileUpload={onFileUpload} />
-      <FlexRowBetween>
-        <CancelButton path="/#/issues" />
-        <SubmitButton onClick={onSubmit} target={issue} />
-      </FlexRowBetween>
-    </IssueFormBox>
-  </Wrapper>
-);
+      <IssueFormBox>
+        <Input type="text" name="title" placeholder="Title" onChange={onChange} />
+        <CommentEditor name="description" onChange={onChange} onFileUpload={onFileUpload} value={description} />
+        <FlexRowBetween>
+          <CancelButton path="/#/issues" />
+          <SubmitButton onClick={onSubmit} target={issue} />
+        </FlexRowBetween>
+      </IssueFormBox>
+    </Wrapper>
+  );
+};
 
 export default IssueMainForm;

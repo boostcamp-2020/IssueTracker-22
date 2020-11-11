@@ -4,6 +4,7 @@ import apiUri from '../../constants/api';
 import IssueMainForm from './IssueMainForm';
 import SidebarFormContainer from '../sidebar-form/SidebarFormContainer';
 import selectMenuMode from '../../constants/selectMenuMode';
+import imageUploadHandler from '../../lib/imageUploadHandler';
 
 const FlexRowBetween = styled.div`
   display: flex;
@@ -61,10 +62,26 @@ const IssueForm = () => {
     setIssue({ ...issue, [e.target.name]: e.target.value });
   };
 
+  const renderImageTag = async (file) => {
+    const { name: imageAlt } = file;
+    // const uploadingImageText = `\n\n![Uploading ${imageAlt}...]()\n\n`;
+    // const uploadingDescription = issue.description + uploadingImageText;
+    // setIssue({ ...issue, description: uploadingDescription });
+
+    try {
+      const imageUrl = await imageUploadHandler(file);
+      const imageTag = `\n\n<img alt="${imageAlt}" src="${imageUrl}">\n\n`;
+
+      const newDescription = issue.description + imageTag;
+      setIssue({ ...issue, description: newDescription });
+    } catch (error) {
+      alert('failed to upload image');
+    }
+  };
+
   const onFileUpload = (e) => {
     const { files } = e.target;
-    // TODO : 파일 업로드 구현
-    console.log(files);
+    files.forEach((file) => renderImageTag(file));
   };
 
   return (
