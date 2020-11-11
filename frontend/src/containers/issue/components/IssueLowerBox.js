@@ -20,7 +20,7 @@ const renderIssueLowerBox = (issue) => {
         <svg style={{ marginLeft: '4px' }} viewBox="0 0 16 16" version="1.1" width="16" height="16" role="img">
           {svgMilestone}
         </svg>
-        <a>milestone</a>
+        <a>{issue.milestone.title}</a>
       </>
     );
   };
