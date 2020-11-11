@@ -78,10 +78,10 @@ const EditButton = styled.button`
   width: auto;
   outline:none;
 `;
-
 const IssueDetail = (data) => {
   const { children } = data;
   const time = RelativeTime(children.updatedAt);
+
   return (
     <>
       <IssueDetailContainer>
