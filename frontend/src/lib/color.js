@@ -17,4 +17,4 @@ function contrastColor(hex) {
   return `#${d.repeat(6)}`;
 }
 
-export default contrastColor;
+export { contrastColor };

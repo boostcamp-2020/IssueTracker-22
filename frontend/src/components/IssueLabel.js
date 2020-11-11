@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import constrastColor from '@lib/color';
+import { contrastColor } from '@lib/color';
 
 const Label = styled.div`
     background-color: ${(props) => props.color};
-    color: ${(props) => constrastColor(props.color)};
+    color: ${(props) => contrastColor(props.color)};
     display: inline-block;
     padding: 0 7px;
     font-size: 15px;
