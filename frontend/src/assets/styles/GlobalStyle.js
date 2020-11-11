@@ -13,12 +13,7 @@ const GlobalStyle = createGlobalStyle`
 
   a {
     text-decoration:none;
-    // color: black;
   }
-  // a:hover {
-  //   text-decoration:none;
-  //   color: blue;
-  // }
 `;
 
 export default GlobalStyle;

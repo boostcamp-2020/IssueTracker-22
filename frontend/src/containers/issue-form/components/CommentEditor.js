@@ -77,21 +77,24 @@ const WriteBox = styled.div`
   border-radius: 5px;
 `;
 
-const CommentEditor = ({ name, onChange, onFileUpload }) => (
-  <CommentEditorWrapper>
-    <Tabs>
-      <Tab type="button">Write</Tab>
-      <Tab type="button">Preview</Tab>
-    </Tabs>
+// eslint-disable-next-line arrow-body-style
+const CommentEditor = ({ onChange, onFileUpload, value }) => {
+  return (
+    <CommentEditorWrapper>
+      <Tabs>
+        <Tab type="button">Write</Tab>
+        <Tab type="button">Preview</Tab>
+      </Tabs>
 
-    <WriteBox>
-      <Textarea name={name} placeholder="Leave a comment" onChange={onChange} />
-      <FileChooserBox>
-        <FileChooser accept=".gif,.jpeg,.jpg,.png,.docx,.gz,.log,.pdf,.pptx,.txt,.xlsx,.zip" type="file" multiple="" onChange={onFileUpload} />
-        <FileChooserLabel>Attach files by selecting here</FileChooserLabel>
-      </FileChooserBox>
-    </WriteBox>
-  </CommentEditorWrapper>
-);
+      <WriteBox>
+        <Textarea placeholder="Leave a comment" name="description" onChange={onChange} value={value} />
+        <FileChooserBox>
+          <FileChooser accept=".gif,.jpeg,.jpg,.png,.docx,.gz,.log,.pdf,.pptx,.txt,.xlsx,.zip" type="file" multiple="" onChange={onFileUpload} />
+          <FileChooserLabel>Attach files by selecting here</FileChooserLabel>
+        </FileChooserBox>
+      </WriteBox>
+    </CommentEditorWrapper>
+  );
+};
 
 export default CommentEditor;

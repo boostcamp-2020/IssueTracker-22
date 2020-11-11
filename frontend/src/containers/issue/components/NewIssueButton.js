@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import pathUri from '../../../constants/path';
 
@@ -17,9 +17,11 @@ const Button = styled.button`
 `;
 
 // eslint-disable-next-line arrow-body-style
-const NewIssueButton = () => {
-  const href = pathUri.createIssue;
-  return <Button type="button"><Link to={href}>New Issue</Link></Button>;
+const NewIssueButton = ({ history }) => {
+  const handleClick = () => {
+    history.push(pathUri.createIssue);
+  };
+  return <Button type="button" onClick={handleClick}>New issue</Button>;
 };
 
-export default NewIssueButton;
+export default withRouter(NewIssueButton);

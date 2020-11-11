@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import RelativeTime from '../../../lib/relativeTime';
+import UserProfileContainer from '../../user-profile/UserProfileContainer';
 
 const IssueDetailContainer = styled.div`
   width: 100%;
@@ -19,9 +20,6 @@ const IssueDetailStyle = styled.div`
   border: 1px solid;
   border-radius: 6px;
   min-width : 100px;
-`;
-
-const UserProfile = styled.div`
 `;
 
 const CommentTitle = styled.div`
@@ -55,36 +53,39 @@ const Author = styled.div`
   background-color: initial;
   font-weight: 600;
 `;
+
 const Info = styled.div`
   margin: auto 0;
   margin-left: 10px;
 `;
+
 const Description = styled.div`
   margin: auto 0;
 `;
 
-const EditButton = styled.div`
+const EditButton = styled.button`
+  display: flex;
   float: left;
-  margin: auto 0;
   padding: 3px 12px;
   font-size: 16px;
   line-height: 20px;
-  color: #fff;
-  background-color: #2ea44f;
-  border: 1px solid;
-  border-radius: 6px;
+  color: black;
+  background: none;
+  border: none;
   cursor: pointer;
+  margin: auto 0;
   margin-left: auto;
-  height: 20px;
+  width: auto;
+  outline:none;
 `;
-
 const IssueDetail = (data) => {
   const { children } = data;
   const time = RelativeTime(children.updatedAt);
+
   return (
     <>
       <IssueDetailContainer>
-        <UserProfile><img src={children.user.profile_url} width="40" height="40" alt="new" /></UserProfile>
+        <UserProfileContainer url={children.user.profile_url} name={children.user.nickname} />
         <IssueDetailStyle>
           <CommentTitle>
             <Author>{ children.user.nickname}</Author>
@@ -96,7 +97,6 @@ const IssueDetail = (data) => {
           </CommentDescription>
         </IssueDetailStyle>
       </IssueDetailContainer>
-      <div>여기는 코멘트 입력하는 공간</div>
     </>
   );
 };
