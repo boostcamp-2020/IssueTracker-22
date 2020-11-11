@@ -37,7 +37,7 @@ const SelectMenuList = ({ items, loading, label, onItemClick }) => {
           <LabelItem
             key={item.id}
             label={item}
-            onClick={onItemClick}
+            onItemClick={onItemClick}
             selected={false}
           />
         ));

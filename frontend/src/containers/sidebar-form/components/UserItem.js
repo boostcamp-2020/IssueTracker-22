@@ -27,7 +27,7 @@ const UserNickname = styled.div`
 const CheckIconWrapper = styled.div`
   position: absolute;
   right: 92%;
-  visibility: ${(props) => props.visible ? 'visible' : 'hidden'};
+  visibility: ${(props) => (props.visible ? 'visible' : 'hidden')};
 `;
 
 const UserItem = ({ user, onItemClick, selected }) => {
