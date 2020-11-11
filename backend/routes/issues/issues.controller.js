@@ -81,14 +81,14 @@ exports.detail = asyncHandler(async (req, res, next) => {
   const { issueNumber } = req.params;
   const hasIssueNumber = { id: issueNumber };
   const issues = await Issue.findAll({
-    attributes: ['id', 'title', 'description', 'createdAt', 'updatedAt'],
+    attributes: ['id', 'title', 'description', 'is_open', 'createdAt', 'updatedAt'],
     where: hasIssueNumber,
     include: [{
       model: User,
       attributes: ['id', 'nickname', 'profile_url'],
     }, {
       model: Comment,
-      attributes: ['id', 'description', 'author_id'],
+      attributes: ['id', 'description', 'author_id', 'createdAt'],
       include: [{
         model: User,
         attributes: ['id', 'nickname', 'profile_url'],

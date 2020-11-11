@@ -3,6 +3,8 @@ const apiUri = {
   issues: '/issues',
   labels: '/labels',
   milestones: '/milestones',
+  detail: '/issues/',
+  comments: '/comments',
 };
 
 export default apiUri;
