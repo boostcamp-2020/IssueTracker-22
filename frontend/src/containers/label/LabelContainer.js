@@ -18,10 +18,11 @@ const ContentBox = styled.div`
 `;
 
 const LabelContainer = () => {
-  const labels = useLabels();
+  const [labels, setLabels] = useLabels();
   const handleSubmit = (formData) => {
-    console.log('submit');
+    console.log(formData);
   };
+  const addNewLabel = () => {};
 
   return (
     <ContentBox>
@@ -29,7 +30,7 @@ const LabelContainer = () => {
         <NavBar/>
         <NewButton>New label</NewButton>
       </NavBarBox>
-      <LabelForm onSubmit={handleSubmit}/>
+      <LabelForm handleSubmit={handleSubmit}/>
       <LabelList labels={labels}/>
     </ContentBox>
   );

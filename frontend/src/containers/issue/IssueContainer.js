@@ -82,12 +82,12 @@ const dummy = {
 };
 
 const Issue = (props) => {
-  const lables = useLabels();
+  const [labels] = useLabels();
   const milestones = useMilestones();
 
   return (
     <IssueContainer>
-      <ToolButtons labels={lables} milestones={milestones}/>
+      <ToolButtons labels={labels} milestones={milestones}/>
       <IssueToolbar data={dummy}/>
       <IssueList data={dummy}/>
     </IssueContainer>

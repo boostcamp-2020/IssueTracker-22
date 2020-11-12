@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import apiUri from '@constants/api';
 
 function useLabels() {
-  const [lables, setLabels] = useState([]);
+  const [labels, setLabels] = useState([]);
 
   useEffect(() => {
     fetch(apiUri.labels, {
@@ -17,7 +17,7 @@ function useLabels() {
       });
   }, []);
 
-  return lables;
+  return [labels, setLabels];
 }
 
 export default useLabels;
