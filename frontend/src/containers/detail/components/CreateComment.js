@@ -50,6 +50,7 @@ const CreateComment = ({ data, callback, user }) => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+
     if(user !== null) {
       await fetch(apiUri.comments, {
         mode: 'cors',
@@ -70,19 +71,21 @@ const CreateComment = ({ data, callback, user }) => {
       alert('로그인 후 이용 가능합니다.');
     }
   };
-
-  return <>
-    <CreateCommentContainer>
-      <Image><UserProfileContainer url={profile_url} name={nickname} /></Image>
-      <Input>
-        <CommentEditor onChange={setIssueDesc} value={description} onFileUpload={uploadFile}/>
-        <FlexRowBetween>
-          <ChangeStatusButton issue={data} />
-          <CommentButton onClick={submitHandler} target={issue} />
-        </FlexRowBetween>
-      </Input>
-    </CreateCommentContainer>
-  </>;
+  
+  return (
+    <>
+      <CreateCommentContainer>
+        <Image><UserProfileContainer user={user} /></Image>
+        <Input>
+          <CommentEditor onChange={setIssueDesc} value={description} onFileUpload={uploadFile}/>
+          <FlexRowBetween>
+            <ChangeStatusButton issue={data} />
+            <CommentButton onClick={submitHandler} target={issue} />
+          </FlexRowBetween>
+        </Input>
+      </CreateCommentContainer>
+    </>
+  );
 };
 
 export default CreateComment;

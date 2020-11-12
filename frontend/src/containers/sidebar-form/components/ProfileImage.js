@@ -5,7 +5,7 @@ const Image = styled.img`
   width: 20px;
   height: 20px;
   border-radius: 50px;
-  margin-right: 10px;
+  margin-right: 8px;
 `;
 
 const ProfileImage = ({ profileUrl, nickname }) => (

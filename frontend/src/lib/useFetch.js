@@ -3,10 +3,10 @@ import { useState, useEffect } from 'react';
 const useFetch = (callback, url) => {
   const [loading, setLoading] = useState(true);
 
-  console.log(`use fetch - ${url}`);
+  // console.log(`use fetch - ${url}`);
 
   const fetchInitialData = async () => {
-    console.log(`fetch initial data - ${url}`);
+    // console.log(`fetch initial data - ${url}`);
 
     setLoading(true);
     const response = await fetch(url);
