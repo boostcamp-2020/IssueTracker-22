@@ -48,7 +48,7 @@ const SelectMenuList = ({ items, loading, label, onItemClick }) => {
           <MilestoneItem
             key={item.id}
             milestone={item}
-            onClick={onItemClick}
+            onItemClick={onItemClick}
             selected={false}
           />
         ));

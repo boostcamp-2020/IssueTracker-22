@@ -66,11 +66,13 @@ const Description = styled.div`
 
 const Comment = (comments) => comments.map((comment) => {
   const time = RelativeTime(comment.createdAt);
-  const user = comment.user;
+  const { user } = comment;
+  console.log(user);
+
   return (
     <>
       <CommentDetailContainer>
-        <UserProfileContainer url={user.profile_url} name={user.nickname} />
+        <UserProfileContainer user={user} />
         <CommentDetailStyle>
           <CommentTitle>
             <Author>{ user.nickname }</Author>

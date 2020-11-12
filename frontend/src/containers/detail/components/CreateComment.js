@@ -39,10 +39,7 @@ const FlexRowBetween = styled.div`
 `;
 
 const CreateComment = ({ data, callback }) => {
-  // url: 현재 로그인한 유저의 이미지 url
-  const url = "https://avatars2.githubusercontent.com/u/39620410?v=4"
-  const name = "rlaqudrnr810"
-  const [issue, setIssue] = useState({ description: '', });
+  const [issue, setIssue] = useState({ description: '' });
   const { description } = issue;
 
   const setIssueDesc = (e) => {
@@ -50,37 +47,43 @@ const CreateComment = ({ data, callback }) => {
   };
 
   const submitHandler = async (e) => {
-      e.preventDefault();
-    
+    e.preventDefault();
+
     await fetch(apiUri.comments, {
       mode: 'cors',
       credentials: 'include',
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         issue_id: data.id,
         description: issue.description,
       }),
-    }).then(res => {
+    }).then((res) => {
       callback(issue.description);
-      setIssue({description: '' });
+      setIssue({ description: '' });
     });
-    
   };
-  return <>
-    <CreateCommentContainer>
-      <Image><UserProfileContainer url={url} name={name} /></Image>
-      <Input>
-        <CommentEditor onChange={setIssueDesc} value={description} onFileUpload={uploadFile}/>
-        <FlexRowBetween>
-          <ChangeStatusButton issue={data} />
-          <CommentButton onClick={submitHandler} target={issue} />
-        </FlexRowBetween>
-      </Input>
-    </CreateCommentContainer>
-  </>;
+
+  const url = 'https://avatars2.githubusercontent.com/u/39620410?v=4';
+  const name = 'rlaqudrnr810';
+  const user = { nickname: name, profile_url: url };
+
+  return (
+    <>
+      <CreateCommentContainer>
+        <Image><UserProfileContainer user={user} /></Image>
+        <Input>
+          <CommentEditor onChange={setIssueDesc} value={description} onFileUpload={uploadFile}/>
+          <FlexRowBetween>
+            <ChangeStatusButton issue={data} />
+            <CommentButton onClick={submitHandler} target={issue} />
+          </FlexRowBetween>
+        </Input>
+      </CreateCommentContainer>
+    </>
+  );
 };
 
 export default CreateComment;

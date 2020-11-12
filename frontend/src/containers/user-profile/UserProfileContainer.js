@@ -12,8 +12,10 @@ const ProfileImage = styled.img`
 // TODO: user data를 받아 src 및 alt 설정
 // eslint-disable-next-line arrow-body-style
 const UserProfileContainer = ({ user }) => {
+  console.log('----------');
+  console.log(user);
   const {
-    id, email, nickname, profile_url,
+    nickname, profile_url,
   } = user;
   return (
     <>
