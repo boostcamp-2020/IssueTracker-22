@@ -18,8 +18,8 @@ const construct = (queryObject) => {
 }
 
 const changeIsopen = (str, state) => {
-    if(state === "open") return str.replace("close", "open")
-    else return str.replace("open", "close")
+    if(state === "open") return str.replace("isopen=0", "isopen=1")
+    else return str.replace("isopen=1", "isopen=0")
 }
 
 export {parse, construct, changeIsopen}
