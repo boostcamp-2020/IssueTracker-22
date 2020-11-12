@@ -28,7 +28,7 @@ const IssueDetailStyle = styled.div`
   width: 100%;
   margin-bottom: 10px;
   margin-left : 10px;
-  border: 1px solid;
+  border: 1px solid rgba(3, 102, 214, 0.2);
   border-radius: 6px;
   min-width : 100px;
 `;
@@ -40,7 +40,7 @@ const CommentTitle = styled.div`
   min-height: 50px;
   padding-right: 16px;
   padding-left: 16px;
-  border-bottom: 1px solid;
+  border-bottom: 1px solid rgba(3, 102, 214, 0.2);
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
   font-size: 14px;
@@ -130,14 +130,13 @@ const IssueDetail = (data) => {
   const [basicDesc, setBasicDesc] = useState(children.description);
   const renderImageTag = async (file) => {
     const { name: imageAlt } = file;
-      
+
     try {
       const imageUrl = await imageUploadHandler(file);
       const imageTag = `\n\n<img alt="${imageAlt}" src="${imageUrl}">\n\n`;
-      
+
       const newDescription = description + imageTag;
       setDescription(newDescription);
-      
     } catch (error) {
       alert('failed to upload image');
     }
@@ -148,17 +147,17 @@ const IssueDetail = (data) => {
   };
   const changeMode = () => {
     setMode(!mode);
-  }
+  };
   const cancelEditDesc = () => {
     setMode(!mode);
     setDescription(basicDesc);
-  }
+  };
   const saveEditDesc = async () => {
-    //fetch -> description update...
+    // fetch -> description update...
     const body = {
       issue_id: children.id,
-      description: description
-    }
+      description,
+    };
 
     const response = await fetch(apiUri.issueUpdate, {
       mode: 'cors',
@@ -176,20 +175,19 @@ const IssueDetail = (data) => {
       return;
     }
 
-
     setBasicDesc(description);
     setMode(!mode);
-
-  }
+  };
 
   const setIssueDesc = (e) => {
     setDescription(e.target.value);
   };
 
-  if(mode) {
-    return <>
-      <IssueDetailContainer>
-        <UserProfileContainer user={user} />
+  if (mode) {
+    return (
+      <>
+        <IssueDetailContainer>
+          <UserProfileContainer user={user} />
           <Input>
             <CommentEditor onChange={setIssueDesc} value={description} onFileUpload={uploadFile}/>
             <FlexRowBetween>
@@ -197,16 +195,21 @@ const IssueDetail = (data) => {
               <SaveButton type="submit" value="Submit" onClick={saveEditDesc}>save</SaveButton>
             </FlexRowBetween>
           </Input>
-      </IssueDetailContainer>
-    </>;
+        </IssueDetailContainer>
+      </>
+    );
   }
-  return <>
+  return (
+    <>
       <IssueDetailContainer>
         <UserProfileContainer user={user} />
         <IssueDetailStyle>
           <CommentTitle>
             <Author>{ children.user.nickname}</Author>
-            <Info>commented { time }</Info>
+            <Info>
+              commented
+              { time }
+            </Info>
             <EditButton onClick={changeMode}>Edit</EditButton>
           </CommentTitle>
           <CommentDescription>
@@ -214,7 +217,8 @@ const IssueDetail = (data) => {
           </CommentDescription>
         </IssueDetailStyle>
       </IssueDetailContainer>
-    </>;
+    </>
+  );
 };
 
 export default IssueDetail;

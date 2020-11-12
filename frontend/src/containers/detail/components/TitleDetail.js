@@ -7,7 +7,7 @@ const TitleDetailContainer = styled.div`
   padding-bottom: 8px;
   font-size: 14px;
   color: #586069;
-  border-bottom: 1px solid;
+  border-bottom: 1px solid rgb(225, 228, 232);
   flex-wrap: wrap;
   margin: 10px 20px;
 `;
@@ -55,7 +55,18 @@ const TitleDetail = (data) => {
         <Open>{isOpen}</Open>
         <Info>
           <UserName>{children.user.nickname}</UserName>
-          <div>{isOpen}ed this issue {time} · {length} comment</div>
+          <div>
+            {isOpen}
+            ed this issue
+            {' '}
+            {time}
+            {' '}
+            ·
+            {' '}
+            {length}
+            {' '}
+            comment
+          </div>
         </Info>
       </TitleDetailContainer>
     </>
