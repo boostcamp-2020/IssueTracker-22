@@ -7,6 +7,8 @@ import useLabels from '../../lib/useLabels';
 import useMilestones from '../../lib/useMilestones';
 
 const IssueContainer = styled.div`
+    display: flex;
+    flex-direction : column;
     max-width: 1280px;
     border: 1px solid #eaecef;
     border-radius: 6px;
@@ -93,5 +95,4 @@ const Issue = (props) => {
     </IssueContainer>
   );
 };
-
 export default Issue;

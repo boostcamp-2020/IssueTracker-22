@@ -5,6 +5,8 @@ import CommentEditor from './components/CommentEditor';
 import SubmitButton from './components/SubmitButton';
 import CancelButton from './components/CancelButton';
 import UserProfileContainer from '../user-profile/UserProfileContainer';
+import SidebarFormContainer from '../sidebar-form/SidebarFormContainer';
+import selectMenuMode from '../../constants/selectMenuMode';
 
 const IssueFormBox = styled.div`
   border: 1px solid lightgray;
@@ -51,7 +53,6 @@ const IssueOptionalFormWrapper = styled.div`
   align-items: stretch;
   min-width: 200px;
   padding: 0 10px;
-  border: 1px solid red;
 `;
 
 const IssueForm = () => {
@@ -102,11 +103,9 @@ const IssueForm = () => {
           </CommentFormWrapper>
 
           <IssueOptionalFormWrapper>
-
-            <div>Assignees</div>
-            <div>Labels</div>
-            <div>Milestone</div>
-
+            <SidebarFormContainer mode={selectMenuMode.Assignees} />
+            <SidebarFormContainer mode={selectMenuMode.Labels} />
+            <SidebarFormContainer mode={selectMenuMode.Milestone} />
           </IssueOptionalFormWrapper>
 
         </FlexRowBetween>
