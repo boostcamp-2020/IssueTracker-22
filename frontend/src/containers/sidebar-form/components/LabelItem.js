@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import CheckIcon from '../../../assets/icon/CheckIcon';
+import apiUri from '../../../constants/api';
 
 const Item = styled.li`
   all: unset;
@@ -33,14 +34,39 @@ const CheckIconWrapper = styled.div`
   visibility: ${(props) => (props.visible ? 'visible' : 'hidden')};
 `;
 
-const LabelItem = ({ label, onItemClick, selected }) => {
+const LabelItem = ({ label, onItemClick, selected, issueId }) => {
   const {
     id, name, description, color_code: colorCode,
   } = label;
 
   const [visible, setVisible] = useState(selected);
 
-  const onClick = () => {
+  const onClick = async () => {
+    if(issueId) {
+      const mode = visible ? 0 : 1;
+      const body = {
+        issue_id: issueId,
+        label_id: id,
+        mode: mode,
+      }
+      const response = await fetch(apiUri.issueUpdate, {
+        mode: 'cors',
+        credentials: 'include',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      });
+      const { success, message } = await response.json();
+      
+      if (!success) {
+        alert(message);
+        return;
+      }
+
+    }
+
     setVisible(!visible);
     onItemClick(label)();
   };
