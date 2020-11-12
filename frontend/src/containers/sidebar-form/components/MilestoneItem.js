@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import CheckIcon from '../../../assets/icon/CheckIcon';
+import apiUri from '../../../constants/api';
 
 const Item = styled.li`
   all: unset;
@@ -36,7 +37,7 @@ const formalizeDateString = (dueDate) => {
   return dueDate ? new Date(dueDate).toLocaleString('en-US', options) : 'No due date';
 };
 
-const MilestoneItem = ({ milestone, onItemClick, selected }) => {
+const MilestoneItem = ({ milestone, onItemClick, selected, issueId }) => {
   const {
     id, title, description, due_date: dueDate, open_issues: openIssues, closed_issues: closedIssues, progress,
   } = milestone;
@@ -45,7 +46,33 @@ const MilestoneItem = ({ milestone, onItemClick, selected }) => {
 
   const [visible, setVisible] = useState(selected);
 
-  const onClick = () => {
+  const onClick = async () => {
+    if(issueId) {
+      const mode = visible ? 0 : 1;
+      const body = {
+        issue_id: issueId,
+        milestone_id: id,
+        mode: mode,
+      }
+      const response = await fetch(apiUri.issueUpdate, {
+        mode: 'cors',
+        credentials: 'include',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      });
+      const { success, message } = await response.json();
+      
+      if (!success) {
+        alert(message);
+        return;
+      }
+
+    }
+
+
     setVisible(!visible);
     onItemClick(milestone)();
   };

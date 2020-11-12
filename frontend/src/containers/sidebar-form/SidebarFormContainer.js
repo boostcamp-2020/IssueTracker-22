@@ -28,7 +28,7 @@ const SelectedItemList = styled.div`
   font-size: 13px;
 `;
 
-const SidebarFormContainer = ({ mode, selectedItems, setSelectedItems }) => {
+const SidebarFormContainer = ({ mode, selectedItems, setSelectedItems, issueId }) => {
   // console.log(`sidebar form ${mode}`);
 
   const [label, statusText, selectMenuHeader, url] = mode;
@@ -89,6 +89,7 @@ const SidebarFormContainer = ({ mode, selectedItems, setSelectedItems }) => {
           onOverlayClick={toggleSelectMenu}
           onItemClick={onItemClick}
           selectedItems={selectedItems}
+          id={issueId}
         />
       </SidebarHeader>
 

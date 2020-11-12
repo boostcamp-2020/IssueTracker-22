@@ -15,10 +15,11 @@ const FlexContainer = styled.div`
 `;
 
 const SideInfo = ({ data }) => {
-  const init_assignees = data.issue_assignees.map(item => item.user);
-  const init_labels = data.issue_labels.map(item => item.label);
-  const init_milestone = data.milestone === null ? [] : [].concat(data.milestone);
+  const { id, issue_assignees, issue_labels, milestone: issue_milestone} = data;
 
+  const init_assignees = issue_assignees.map(item => item.user);
+  const init_labels = issue_labels.map(item => item.label);
+  const init_milestone = issue_milestone === null ? [] : [].concat(issue_milestone);
 
   const [assignees, setAssignees] = useState(init_assignees);
   const [labels, setLabels] = useState(init_labels);
@@ -29,16 +30,19 @@ const SideInfo = ({ data }) => {
         mode={selectMenuMode.Assignees}
         selectedItems={assignees}
         setSelectedItems={setAssignees}
+        issueId={id}
       />
       <SidebarFormContainer
         mode={selectMenuMode.Labels}
         selectedItems={labels}
         setSelectedItems={setLabels}
+        issueId={id}
       />
       <SidebarFormContainer
         mode={selectMenuMode.Milestone}
         selectedItems={milestone}
         setSelectedItems={setMilestone}
+        issueId={id}
       />
     </FlexContainer>
   </>
