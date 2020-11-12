@@ -4,7 +4,7 @@ import NavBar from '@components/NavBar';
 import NewButton from '@components/NewButton';
 import useLabels from '@lib/useLabels';
 import LabelList from './components/LabelList';
-import LabelInput from './components/LabelInput';
+import LabelForm from './components/LabelForm';
 
 const NavBarBox = styled.div`
     display: flex;
@@ -19,13 +19,17 @@ const ContentBox = styled.div`
 
 const LabelContainer = () => {
   const labels = useLabels();
+  const handleSubmit = (formData) => {
+    console.log('submit');
+  };
+
   return (
     <ContentBox>
       <NavBarBox>
         <NavBar/>
         <NewButton>New label</NewButton>
       </NavBarBox>
-      <LabelInput/>
+      <LabelForm onSubmit={handleSubmit}/>
       <LabelList labels={labels}/>
     </ContentBox>
   );

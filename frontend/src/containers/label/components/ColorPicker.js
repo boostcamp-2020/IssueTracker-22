@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import RefreshIcon from '@assets/icon/RefreshIcon';
 import { contrastColor } from '@lib/color';
@@ -17,20 +17,16 @@ const FlexContainer = styled.div`
     display: flex;
 `;
 
-const ColorPicker = ({ color }) => {
-  const [newColor, setNewColor] = useState(color);
-
-  return (
-    <Label htmlFor="color">
-      Color
-      <FlexContainer>
-        <ColorChangingButton type="button" color={newColor}>
-          <RefreshIcon color={contrastColor(newColor)}/>
-        </ColorChangingButton>
-        <Input type="text" id="color" />
-      </FlexContainer>
-    </Label>
-  );
-};
+const ColorPicker = ({ color, changeRandomColor }) => (
+  <Label htmlFor="color">
+    Color
+    <FlexContainer>
+      <ColorChangingButton type="button" color={color} onClick={changeRandomColor}>
+        <RefreshIcon color={contrastColor(color)}/>
+      </ColorChangingButton>
+      <Input type="text" name="color" value={color}/>
+    </FlexContainer>
+  </Label>
+);
 
 export default ColorPicker;
