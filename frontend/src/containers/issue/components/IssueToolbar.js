@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { svgOpen, svgCheck } from '../../../assets/svgPath';
 import pathUri from '../../../constants/path'
 import { parse, construct, changeIsopen} from '../../../lib/query'
+import ToolbarModal from '../../../components/ToolbarModal'
+import FilterAuthor from '../../../components/FilterAuthor'
 
 const Toolbar = styled.div`
     display: flex;
@@ -35,7 +37,8 @@ const ToolbarFilter = styled.div`
 `;
 
 const FilterEL = styled.div`
-    padding: 0px 16px
+    padding: 0px 16px;
+    position : relative;
 `;
 
 const dropdownCaret = {
@@ -67,16 +70,21 @@ const IssueToolbar = ({issues}) => {
     } else return [0, 0]
   }
   const FilterELList = (items) => { return items.map(item => {
+    const [modalVisible, setModalVisible] = useState(false)
+    const onModal = () => {setModalVisible(true);console.log(modalVisible)};
+    const offModal = () => { setModalVisible(false); };
     return (
-      <FilterEL>
+      <FilterEL onClick={onModal}>
         {item}
         <span style={dropdownCaret}/>
+        {
+          modalVisible && <ToolbarModal onClose={offModa1l} children={<a>hi</a>}/>
+        }
       </FilterEL>
     )
   })
   }
   const clickHandler = (type) => {
-    
     let queryString = construct(query)
     history.push({
       pathname: pathUri.issue,
