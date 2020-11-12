@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import apiUri from '../constants/api';
 
-const useIssues = (query) => {
+const useIssues = () => {
   const [issues, setIssues] = useState([]);
-  const URL = apiUri.issues + (query ? query : '')
-  console.log('URL', URL)
+  const URL = apiUri.issues + useLocation().search
   useEffect(() => {
     fetch(URL, {
       method: 'GET',
@@ -17,7 +17,6 @@ const useIssues = (query) => {
         }
       });
   }, []);
-
   return issues;
 }
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {withRouter} from 'react-router-dom'
+import {withRouter, useLocation} from 'react-router-dom'
 import styled from 'styled-components';
 import IssueToolbar from './components/IssueToolbar';
 import IssueList from './components/IssueList';
@@ -8,6 +8,7 @@ import useLabels from '../../lib/useLabels';
 import useMilestones from '../../lib/useMilestones';
 import useIssues from '../../lib/useIssues';
 import {parse} from '../../lib/query';
+import apiUri from '../../constants/api';
 
 const IssueContainer = styled.div`
     display: flex;
@@ -18,12 +19,25 @@ const IssueContainer = styled.div`
 `;
 
 const Issue = ({location}) => {
-
-  const [queryString, setQueryString] = useState(location.search)
-  let query = parse(queryString)
   const lables = useLabels();
   const milestones = useMilestones();
-  const issues = useIssues(queryString);
+  const [issues, setIssues] = useState([]);
+
+  useEffect(() => {
+    const URL = apiUri.issues + location.search
+    console.log(URL)
+    fetch(URL, {
+      method: 'GET',
+      mode: 'cors',
+    }).then(res => res.json())
+    .then((res) => {
+      console.log(res)
+      if (res.success) {
+        const newIssues = [...res.content.issues];
+        setIssues(newIssues);
+      }
+    })
+  }, [location])
   
   return (
     <>
