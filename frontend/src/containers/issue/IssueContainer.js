@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import {withRouter} from 'react-router-dom'
 import styled from 'styled-components';
 import IssueToolbar from './components/IssueToolbar';
 import IssueList from './components/IssueList';
 import ToolButtons from './components/ToolButtons';
 import useLabels from '../../lib/useLabels';
 import useMilestones from '../../lib/useMilestones';
+import useIssues from '../../lib/useIssues';
 
 const IssueContainer = styled.div`
     display: flex;
@@ -14,87 +16,30 @@ const IssueContainer = styled.div`
     border-radius: 6px;
 `;
 
-const dummy = {
-  success: true,
-  content: {
-    issues: [
-      {
-        id: 1,
-        title: 'bkyo',
-        description: 'prac',
-        createdAt: '2020-11-02T15:30:00.000Z',
-        updatedAt: '2020-11-02T15:30:00.000Z',
-        user: {
-          id: 1,
-          nickname: 'bk',
-        },
-        issue_labels: [
-          {
-            id: 1,
-            label: {
-              id: 1,
-              name: 'feature',
-              color_code: null,
-            },
-          },
-          {
-            id: 3,
-            label: {
-              id: 1,
-              name: 'feature',
-              color_code: null,
-            },
-          },
-        ],
-        issue_assignees: [
-          {
-            id: 1,
-            user: {
-              nickname: 'bk',
-            },
-          },
-        ],
-        milestone: null,
-      },
-      {
-        id: 2,
-        title: 'bbbk',
-        description: 'bbbk',
-        createdAt: '2020-11-03T11:11:11.000Z',
-        updatedAt: '2020-11-03T11:11:11.000Z',
-        user: {
-          id: 1,
-          nickname: 'bk',
-        },
-        issue_labels: [
-          {
-            id: 2,
-            label: {
-              id: 1,
-              name: 'feature',
-              color_code: null,
-            },
-          },
-        ],
-        issue_assignees: [],
-        milestone: 1,
-      },
-    ],
-  },
-};
+const Issue = ({location}) => {
 
-const Issue = (props) => {
+  const parse = ( str ) => {
+    let splited = str.replace("?", "").split("&")
+    let res = splited.reduce((total, cur, i) => {
+      let [key, value] = cur.split("=")
+      return total + `${i === 0 ? '' : ','}"${key}":"${value}"`
+    }, "")
+    return JSON.parse(`{${res}}`)
+  }
+  const queryString = location.search
+  const query = parse(queryString)
   const lables = useLabels();
   const milestones = useMilestones();
-
+  const issues = useIssues(queryString)
+  
   return (
     <>
       <ToolButtons labels={lables} milestones={milestones}/>
       <IssueContainer>
-        <IssueToolbar data={dummy}/>
-        <IssueList data={dummy}/>
+        <IssueToolbar issues={issues} query={query}/>
+        <IssueList issues={issues}/>
       </IssueContainer>
     </>
   );
 };
-export default Issue;
+export default withRouter(Issue);

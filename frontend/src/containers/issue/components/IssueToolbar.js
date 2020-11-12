@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import useIssues from '../../../lib/useIssues';
 import { svgOpen, svgCheck } from '../../../assets/svgPath';
 
 const Toolbar = styled.div`
@@ -41,52 +42,51 @@ const dropdownCaret = {
   borderLeft: '4px solid transparent',
 };
 
-class IssueToolbar extends Component {
-  render() {
-    return (
-      <Toolbar>
-        <div style={{ padding: '0px 16px 0px 0px' }}>
-          <input type="checkbox" name="issue-checkbox"/>
-        </div>
-        <ToolbarState>
-          <svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true" style={{ paddingRight: '8px' }}>
-            {svgOpen}
-          </svg>
-          <a> 2 Open</a>
-          <svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true" style={{ paddingRight: '8px', paddingLeft: '8px' }}>
-            {svgCheck}
-          </svg>
-          <a> 0 Close</a>
-        </ToolbarState>
-        <ToolbarFilter>
-          <FilterEL>
-            Author
-            <span style={dropdownCaret}/>
-          </FilterEL>
-          <FilterEL>
-            Label
-            <span style={dropdownCaret}/>
-          </FilterEL>
-          <FilterEL>
-            Projects
-            <span style={dropdownCaret}/>
-          </FilterEL>
-          <FilterEL>
-            MileStones
-            <span style={dropdownCaret}/>
-          </FilterEL>
-          <FilterEL>
-            Assignees
-            <span style={dropdownCaret}/>
-          </FilterEL>
-          <FilterEL>
-            Sort
-            <span style={dropdownCaret}/>
-          </FilterEL>
-        </ToolbarFilter>
-      </Toolbar>
-    );
+const IssueToolbar = ({issues, query}) => {
+  console.log(query)
+  const countOpenIssue = () => {
+    if(issues.length > 0) {
+      let open = 0
+      let close = 0
+      issues.forEach( issue => {
+        if(issue.is_open > 0) open++;
+        else close++;
+      })
+      return [open, close]
+    } else return [0, 0]
   }
+  const FilterELList = (items) => { return items.map(item => {
+    return (
+      <FilterEL>
+        {item}
+        <span style={dropdownCaret}/>
+      </FilterEL>
+    )
+  })
+  }
+  const filterItems = ['Author', 'Label', 'Projects', 'MileStones', 'Assignees', 'Sort']
+  const [opened, closed] = countOpenIssue()
+  return (
+    <Toolbar>
+      <div style={{ padding: '0px 16px 0px 0px' }}>
+        <input type="checkbox" name="issue-checkbox"/>
+      </div>
+      <ToolbarState>
+        <svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true" style={{ margin: '2px 4px 2px 4px' }}>
+          {svgOpen}
+        </svg>
+        <a> {opened} Open</a>
+        <svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true" style={{ margin : '2px 4px 2px 4px' }}>
+          {svgCheck}
+        </svg>
+        <a> {closed} Close</a>
+      </ToolbarState>
+      <ToolbarFilter>
+        {FilterELList(filterItems)}
+      </ToolbarFilter>
+    </Toolbar>
+  );
+
 }
 
 export default IssueToolbar;
