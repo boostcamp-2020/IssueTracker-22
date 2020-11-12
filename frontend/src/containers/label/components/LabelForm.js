@@ -18,12 +18,15 @@ const FlexContainer = styled.div`
     align-items: flex-end;
 `;
 
-const LabelForm = ({ handleSubmit, close }) => {
-  const [formData, setFormData] = useState({
-    name: '',
-    description: '',
-  });
-  const [color, setColor] = useState(getRandomColor());
+const LabelForm = ({ data, handleSubmit, close }) => {
+  const initialData = {
+    name: data ? data.name : '',
+    description: data ? data.description : '',
+  };
+  const initialColor = data ? data.color : getRandomColor();
+
+  const [formData, setFormData] = useState(initialData);
+  const [color, setColor] = useState(initialColor);
 
   const changeRandomColor = () => {
     const randomColor = getRandomColor();
