@@ -9,5 +9,4 @@ issue.get('/:issueNumber', issuesController.detail);
 issue.post('/', authMiddleware, issuesController.create);
 issue.post('/update', authMiddleware, issuesController.update);
 
-
 module.exports = issue;
