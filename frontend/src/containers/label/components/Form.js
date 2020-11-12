@@ -2,8 +2,9 @@ import styled from 'styled-components';
 
 const InputForm = styled.form`
     background-color: #f6f8fa;
-    border: 1px solid #e1e4e8;
+    border: 1px solid #d1d5da;
     padding: 16px;
+    border-radius: 6px;
 `;
 
 const Label = styled.label`

@@ -21,11 +21,11 @@ const LabelContainer = () => {
   const labels = useLabels();
   return (
     <ContentBox>
-      <LabelInput/>
       <NavBarBox>
         <NavBar/>
         <NewButton>New label</NewButton>
       </NavBarBox>
+      <LabelInput/>
       <LabelList labels={labels}/>
     </ContentBox>
   );

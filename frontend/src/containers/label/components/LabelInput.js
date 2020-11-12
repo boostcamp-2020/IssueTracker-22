@@ -26,7 +26,7 @@ const LabelInput = () => (
         Description
         <Input type="text" id="description" placeholder="Description (optional)" />
       </Label>
-      <ColorPicker/>
+      <ColorPicker color="#c9deff"/>
       <ButtonWrapper>
         <NewButton>Create label</NewButton>
       </ButtonWrapper>
