@@ -18,35 +18,37 @@ const construct = (queryObject) => {
 };
 
 const updateValue = (str, key, value) => {
-  let queryObject = parse(str)
-  for (let i in queryObject) {
-    if(i === key) {
-      queryObject[i] = value
-      return construct(queryObject)
+  const queryObject = parse(str);
+  for (const i in queryObject) {
+    if (i === key) {
+      queryObject[i] = value;
+      return construct(queryObject);
     }
   }
-  return construct(queryObject) + `&${key}=${value}`
-}
+  return `${construct(queryObject)}&${key}=${value}`;
+};
 
 const getValue = (str, key) => {
-  let queryObject = parse(str)
-  for (let i in queryObject) {
-    if(i === key) return queryObject[i]
+  const queryObject = parse(str);
+  for (const i in queryObject) {
+    if (i === key) return queryObject[i];
   }
-  return -1
-}
+  return -1;
+};
 
 const removeQuery = (str, key, value) => {
-  let queryObject = parse(str)
-  for (let i in queryObject) {
-    if(i === key && queryObject[i] === value) delete queryObject[i]
+  const queryObject = parse(str);
+  for (const i in queryObject) {
+    if (i === key && queryObject[i] === value) delete queryObject[i];
   }
-  return construct(queryObject)
-}
+  return construct(queryObject);
+};
 
 const changeIsopen = (str, state) => {
   if (state === 'open') return str.replace('isopen=0', 'isopen=1');
   return str.replace('isopen=1', 'isopen=0');
 };
 
-export { parse, construct, updateValue, changeIsopen, getValue, removeQuery };
+export {
+  parse, construct, updateValue, changeIsopen, getValue, removeQuery,
+};

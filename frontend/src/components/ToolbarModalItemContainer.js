@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import useFetch from '../lib/useFetch'
-import ToolbarModalItemList from './ToolbarModalItemList'
+import useFetch from '../lib/useFetch';
+import ToolbarModalItemList from './ToolbarModalItemList';
 
 const ContainerWrapper = styled.div`
     background-color: white;
@@ -16,7 +16,7 @@ const ContainerWrapper = styled.div`
     right: 0;
 `;
 
-const ContainerHeader =  styled.div`
+const ContainerHeader = styled.div`
 background-color: #FAFAFA;
 border-bottom: 1px solid lightgray;
 font-weight: 600;
@@ -34,24 +34,27 @@ const Overlay = styled.div`
   right: 0;
 `;
 
-const ToolbarModalItemContainer = ({open, identifier, url, label, header, onOverlayClick, switchModal}) => {
-    const [items, setItems] = useState({});
-    const loading = useFetch(setItems, url);
-    // console.log(open, identifier, url, label)
-    return (
-        <>
-            <Overlay open={open} onClick={onOverlayClick}/>
-            <ContainerWrapper open={open}>
-                <ContainerHeader>{header}</ContainerHeader>
-                <ToolbarModalItemList
-                    items={items}
-                    identifier={identifier}
-                    loading={loading}
-                    label={label}
-                    switchModal={switchModal}/>
-            </ContainerWrapper>
-        </>
-    )
-}
+const ToolbarModalItemContainer = ({
+  open, identifier, url, label, header, onOverlayClick, switchModal,
+}) => {
+  const [items, setItems] = useState({});
+  const loading = useFetch(setItems, url);
+  // console.log(open, identifier, url, label)
+  return (
+    <>
+      <Overlay open={open} onClick={onOverlayClick}/>
+      <ContainerWrapper open={open}>
+        <ContainerHeader>{header}</ContainerHeader>
+        <ToolbarModalItemList
+          items={items}
+          identifier={identifier}
+          loading={loading}
+          label={label}
+          switchModal={switchModal}
+        />
+      </ContainerWrapper>
+    </>
+  );
+};
 
-export default ToolbarModalItemContainer
+export default ToolbarModalItemContainer;

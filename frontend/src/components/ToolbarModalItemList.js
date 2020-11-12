@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import ToolbarModalItem from './ToolbarModalItem'
+import ToolbarModalItem from './ToolbarModalItem';
 
 const List = styled.ul`
   all: unset;
@@ -11,35 +11,35 @@ const List = styled.ul`
   overflow-y: auto;
 `;
 
-const ToolbarModalItemList = ({ items, identifier, loading, label, switchModal}) => {
-    let list = <div>loading...</div>
-    let index;
-    console.log("label:", label, index)
-    const {success, content} = items
-    if(!loading && success) {
-        switch (label) {
-            case 'author': index = 'users'; break;
-            case 'label' : index = 'labels'; break;
-            case 'milestone' : index = 'milestones'; break;
-            case 'assignee' : index = 'users'; break;
-        }
-        console.log("index:", index)
-        list = content[index].map((item) => {
-            return (
-                <ToolbarModalItem
-                type={label}
-                identifier={identifier}
-                item={item}
-                switchModal={switchModal}
-                />
-            )
-        })
+const ToolbarModalItemList = ({
+  items, identifier, loading, label, switchModal,
+}) => {
+  let list = <div>loading...</div>;
+  let index;
+  console.log('label:', label, index);
+  const { success, content } = items;
+  if (!loading && success) {
+    switch (label) {
+      case 'author': index = 'users'; break;
+      case 'label': index = 'labels'; break;
+      case 'milestone': index = 'milestones'; break;
+      case 'assignee': index = 'users'; break;
     }
-    return (
-        <List>
-            {list}
-        </List>
-    )
-}
+    console.log('index:', index);
+    list = content[index].map((item) => (
+      <ToolbarModalItem
+        type={label}
+        identifier={identifier}
+        item={item}
+        switchModal={switchModal}
+      />
+    ));
+  }
+  return (
+    <List>
+      {list}
+    </List>
+  );
+};
 
-export default ToolbarModalItemList
+export default ToolbarModalItemList;
