@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import React from 'react';
 import NavBar from '@components/NavBar';
-import renderSearchFilter from './SearchFilter';
+import SearchFilter from './SearchFilter';
+import SearchBar from './SearchBar';
 import NewIssueButton from './NewIssueButton';
 
 const ToolButtonWrapper = styled.div`
@@ -12,8 +13,8 @@ const ToolButtonWrapper = styled.div`
 
 const ToolButtons = ({ labels, milestones }) => (
   <ToolButtonWrapper>
-    {renderSearchFilter()}
-    {/* <SearchBar/> */}
+    <SearchFilter/>
+    <SearchBar/>
     <NavBar labelCount={labels.length} milestoneCount={milestones.length}/>
     <NewIssueButton />
   </ToolButtonWrapper>

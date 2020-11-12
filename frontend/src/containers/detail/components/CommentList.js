@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import RelativeTime from '../../../lib/relativeTime';
+import UserProfileContainer from '../../user-profile/UserProfileContainer';
 
 const CommentDetailContainer = styled.div`
   width: 100%;
@@ -19,9 +20,6 @@ const CommentDetailStyle = styled.div`
   border: 1px solid;
   border-radius: 6px;
   min-width : 100px;
-`;
-
-const UserProfile = styled.div`
 `;
 
 const CommentTitle = styled.div`
@@ -43,6 +41,7 @@ const CommentDescription = styled.div`
   padding: 10px;
 `;
 
+
 const Author = styled.div`
   margin: auto 0;
   display: inline-block;
@@ -55,27 +54,27 @@ const Author = styled.div`
   background-color: initial;
   font-weight: 600;
 `;
+
 const Info = styled.div`
   margin: auto 0;
   margin-left: 10px;
 `;
+
 const Description = styled.div`
   margin: auto 0;
 `;
 
 const Comment = (comments) => comments.map((comment) => {
-  const time = RelativeTime(comment.updatedAt);
+  const time = RelativeTime(comment.createdAt);
+  const user = comment.user;
   return (
     <>
       <CommentDetailContainer>
-        <UserProfile><img src={comment.user.profile_url} width="40" height="40" alt="new" /></UserProfile>
+        <UserProfileContainer url={user.profile_url} name={user.nickname} />
         <CommentDetailStyle>
           <CommentTitle>
-            <Author>{ comment.user.nickname}</Author>
-            <Info>
-              commented
-              { time }
-            </Info>
+            <Author>{ user.nickname }</Author>
+            <Info> commented { time }</Info>
           </CommentTitle>
           <CommentDescription>
             <Description>{ comment.description }</Description>
