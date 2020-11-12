@@ -82,7 +82,6 @@ const IssueDetail = (data) => {
   const { children } = data;
   const time = RelativeTime(children.updatedAt);
   const { user } = children;
-  console.log( user);
 
   return (
     <>

@@ -5,6 +5,7 @@ import CommentEditor from '../../issue-form/components/CommentEditor';
 import UserProfileContainer from '../../user-profile/UserProfileContainer';
 import ChangeStatusButton from './ChangeStatusButton';
 import CommentButton from './CommentButton';
+import imageUploadHandler from '../../../lib/imageUploadHandler';
 
 const CreateCommentContainer = styled.div`
   width: 100%;
@@ -26,11 +27,6 @@ const Input = styled.div`
   background-color: white;
 `;
 
-const uploadFile = (e) => {
-  const { files } = e.target;
-  // TODO : 파일 업로드 구현
-};
-
 const FlexRowBetween = styled.div`
   display: flex;
   justify-content: space-between;
@@ -41,9 +37,31 @@ const FlexRowBetween = styled.div`
 const CreateComment = ({ data, callback, user }) => {
   const [issue, setIssue] = useState({ description: '', });
   const { description } = issue;
-  const profile_url = user === null ? null : user.profile_url;
-  const nickname = user === null ? null : user.nickname;
   
+  const renderImageTag = async (file) => {
+    const { name: imageAlt } = file;
+    // const uploadingImageText = `\n\n![Uploading ${imageAlt}...]()\n\n`;
+    // const uploadingDescription = issue.description + uploadingImageText;
+    // setIssue({ ...issue, description: uploadingDescription });
+      
+    try {
+      const imageUrl = await imageUploadHandler(file);
+      console.log(imageUrl);
+      const imageTag = `\n\n<img alt="${imageAlt}" src="${imageUrl}">\n\n`;
+      
+      const newDescription = issue.description + imageTag;
+      setIssue({ ...issue, description: newDescription });
+      
+    } catch (error) {
+      alert('failed to upload image');
+    }
+  };
+  const uploadFile = (e) => {
+    const { files } = e.target;
+    files.forEach((file) => renderImageTag(file));
+  };
+  
+
   const setIssueDesc = (e) => {
     setIssue({ ...issue, description: e.target.value });
   };

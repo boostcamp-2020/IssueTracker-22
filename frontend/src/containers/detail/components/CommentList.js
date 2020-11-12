@@ -67,7 +67,6 @@ const Description = styled.div`
 const Comment = (comments) => comments.map((comment) => {
   const time = RelativeTime(comment.createdAt);
   const { user } = comment;
-  console.log(user);
 
   return (
     <>

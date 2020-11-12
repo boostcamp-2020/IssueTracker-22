@@ -17,9 +17,9 @@ const FlexContainer = styled.div`
 const SideInfo = () => (
   <>
     <FlexContainer>
-      <SidebarFormContainer mode={selectMenuMode.Assignees} />
-      <SidebarFormContainer mode={selectMenuMode.Labels} />
-      <SidebarFormContainer mode={selectMenuMode.Milestone} />
+      {/*<SidebarFormContainer mode={selectMenuMode.Assignees} />*/}
+      {/*<SidebarFormContainer mode={selectMenuMode.Labels} />*/}
+      {/*<SidebarFormContainer mode={selectMenuMode.Milestone} />*/}
     </FlexContainer>
   </>
 );

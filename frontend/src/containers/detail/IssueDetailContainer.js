@@ -1,4 +1,4 @@
-import React, {useState, useEffect }from 'react';
+import React, {useState, useEffect, useContext }from 'react';
 import styled from 'styled-components';
 import Header from '../../components/Header';
 import Title from './components/Title';
@@ -74,7 +74,7 @@ const IssueDetailContainer = () => {
           <List>
             <IssueDetail>{ data }</IssueDetail>
             {CommentList(data.comments)}
-            <CreateComment data={data} callback={addComment}/>
+            <CreateComment data={data} callback={addComment} user={user}/>
           </List>
           <Side />
         </IssueContent>
