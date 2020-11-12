@@ -42,37 +42,44 @@ const EditButton = styled.button`
 
 const SaveButton = styled.button`
   float: left;
-  margin: 0;
-  padding: 3px 12px;
+  margin-right: 8px;
+  color: #24292e;
+  background-color: #fafbfc;
+  padding: 5px 16px;
   font-size: 16px;
+  font-weight: 500;
   line-height: 20px;
-  color: #fff;
-  background-color: #2ea44f;
   border: 1px solid;
   border-radius: 6px;
   cursor: pointer;
-  margin-left: auto;
-  height: 40px;
-  width: 70px
 `;
 
 const CancelButton = styled.button`
-  float: left;
-  margin: 0;
-  padding: 3px 12px;
-  font-size: 16px;
-  line-height: 20px;
-  color: #fff;
-  background-color: #2ea44f;
-  border: 1px solid;
-  border-radius: 6px;
+  display: inline-block;
+  padding: 0;
+  color: #0366d6;
+  background-color: initial;
+  border: 0;
   cursor: pointer;
-  margin-left: auto;
-  height: 40px;
-  width: 70px
+  font-size: 16px;
 `;
-
-
+const Input = styled.input`
+  width: 100%;
+  margin-right: 16px;
+  font-size: 20px;
+  background-color: #fafbfc;
+  padding: 5px 12px;
+  line-height: 20px;
+  color: #24292e;
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  outline: none;
+  font: inherit
+`;
+const Buttons = styled.div`
+  display: flex;
+  margin-left:auto;
+`;
 const Title = (data) => {
   const { children } = data;
   const [title, setTitle] = useState(children.title);
@@ -116,9 +123,11 @@ const Title = (data) => {
     return (
       <>
       <TitleBox>
-        <input value={title} onChange={onChange} />
-        <CancelButton onClick={ cancelEditTitle }>cancel</CancelButton>
-        <SaveButton onClick={ saveEditTitle }>save</SaveButton>
+        <Input value={title} onChange={onChange} />
+        <Buttons>
+          <SaveButton onClick={ saveEditTitle }>save</SaveButton>
+          <CancelButton onClick={ cancelEditTitle }>cancel</CancelButton>
+        </Buttons>
       </TitleBox>
       </>
     );
