@@ -34,12 +34,12 @@ const SvgWrapper = styled.svg`
 `;
 
 const SearchBar = ({ history }) => {
-  const [value, setValue] = useState(0);
+  // const [value, setValue] = useState(0);
   const onChangeHandler = (e) => {
-    setValue(e.target.value);
+    // setValue(e.target.value);
   };
-  const parsingValue = () => {
-    const query = value.split(' ').reduce((pre, v, i) => {
+  const parsingValue = (data) => {
+    const query = data.split(' ').reduce((pre, v, i) => {
       const type = v.split(':')[0];
       const option = v.split(':')[1];
       if (v === 'is:open') {
@@ -60,9 +60,8 @@ const SearchBar = ({ history }) => {
   };
 
   const keyPressHandler = (e) => {
-    const link = parsingValue();
+    const link = parsingValue(e.target.value);
     if (e.key == 'Enter') {
-      console.log(link);
       history.push(link);
     }
   };
