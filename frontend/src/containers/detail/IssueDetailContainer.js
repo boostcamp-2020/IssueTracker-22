@@ -1,4 +1,5 @@
-import React, {useState, useEffect }from 'react';
+import React, {useState, useEffect, useContext }from 'react';
+import styled from 'styled-components';
 import Header from '../../components/Header';
 import Title from './components/Title';
 import TitleBox from './components/TitleBox';
@@ -11,10 +12,17 @@ import CommentList from './components/CommentList';
 import Side from './components/Side';
 import CreateComment from './components/CreateComment';
 import apiUri from '../../constants/api';
+import userContext from '../../lib/userContext';
+
+const Detail = styled.div`
+  padding-left : 100px;
+  padding-right : 100px;
+`;
 
 const IssueDetailContainer = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const user = useContext(userContext);
 
   const getData = () => {
     const url = apiUri.detail + document.location.href.split("/")[5];
@@ -35,39 +43,42 @@ const IssueDetailContainer = () => {
   }
 
   const addComment = (description) => {
-    const comment = {
-      id:7,
-      author_id: 4,
-      createdAt: new Date(),
-      description: description,
-      user:{
-        id:4,
-        nickname:"rlaqudrnr810",
-        profile_url:"https://avatars2.githubusercontent.com/u/39620410?v=4",
-      }
-    };
-    const comments = data.comments.concat(comment);
-    setData({ ...data, comments: comments });
+    if(user !== null) {
+      const comment = {
+        id: data.comments.length+1,
+        author_id: user.id,
+        createdAt: new Date(),
+        description: description,
+        user:{
+          id: user.id,
+          nickname: user.nickname,
+          profile_url: user.profile_url,
+        }
+      };
+      const comments = data.comments.concat(comment);
+      setData({ ...data, comments: comments });
+    }
   }
   
   getData();
-
   if(!loading) {
     return <>
       <Header />
-      <TitleBox>
-        <Title>{ data }</Title>
-        <TitleEditButton />
-      </TitleBox>
-      <TitleDetail>{ data }</TitleDetail>
-      <IssueContent>
-        <List>
-          <IssueDetail>{ data }</IssueDetail>
-          {CommentList(data.comments)}
-          <CreateComment data={data} callback={addComment}/>
-        </List>
-        <Side />
-      </IssueContent>
+      <Detail>
+        <TitleBox>
+          <Title>{ data }</Title>
+          <TitleEditButton />
+        </TitleBox>
+        <TitleDetail>{ data }</TitleDetail>
+        <IssueContent>
+          <List>
+            <IssueDetail>{ data }</IssueDetail>
+            {CommentList(data.comments)}
+            <CreateComment data={data} callback={addComment} user={user}/>
+          </List>
+          <Side />
+        </IssueContent>
+      </Detail>
     </>;
   }
   return <>loading...</>;

@@ -10,6 +10,10 @@ const SelectMenu = styled.div`
   color: black;
   overflow: hidden; 
   z-index: 10;
+  display: ${(props) => (props.open ? 'block' : 'none')};
+  position: absolute;
+  top: 140%;
+  right: 0;
 `;
 
 const SelectMenuHeader = styled.div`
@@ -20,29 +24,35 @@ const SelectMenuHeader = styled.div`
   padding: 10px;
 `;
 
-const SelectMenuContainer = ({ open, url, label, header }) => {
-  const style = {
-    display: open ? 'block' : 'none',
-    position: 'absolute',
-    top: '140%',
-    right: '0',
-  };
+const Overlay = styled.div`
+  box-sizing: border-box;
+  display: ${(props) => (props.open ? 'block' : 'none')};
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+`;
 
-  if (open) {
-    const [items, setItems] = useState({});
-    const loading = useFetch(setItems, url);
+const SelectMenuContainer = ({ open, url, label, header, onOverlayClick, onItemClick }) => {
+  const [items, setItems] = useState({});
+  const loading = useFetch(setItems, url);
 
-    return (
-      <SelectMenu style={style}>
+  return (
+    <>
+      <Overlay open={open} onClick={onOverlayClick}/>
+      <SelectMenu open={open}>
         <SelectMenuHeader>
           {header}
         </SelectMenuHeader>
-        <SelectMenuList items={items} loading={loading} label={label} />
+        <SelectMenuList
+          items={items}
+          loading={loading}
+          label={label}
+          onItemClick={onItemClick}
+        />
       </SelectMenu>
-    );
-  }
-  return (
-    <div style={style} />
+    </>
   );
 };
 

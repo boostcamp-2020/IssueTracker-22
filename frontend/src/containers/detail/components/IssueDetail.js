@@ -81,11 +81,12 @@ const EditButton = styled.button`
 const IssueDetail = (data) => {
   const { children } = data;
   const time = RelativeTime(children.updatedAt);
+  const { user } = children;
 
   return (
     <>
       <IssueDetailContainer>
-        <UserProfileContainer url={children.user.profile_url} name={children.user.nickname} />
+        <UserProfileContainer user={user} />
         <IssueDetailStyle>
           <CommentTitle>
             <Author>{ children.user.nickname}</Author>

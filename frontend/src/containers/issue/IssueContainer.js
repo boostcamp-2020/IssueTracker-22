@@ -88,11 +88,13 @@ const Issue = (props) => {
   const milestones = useMilestones();
 
   return (
-    <IssueContainer>
-      <ToolButtons labels={labels} milestones={milestones}/>
-      <IssueToolbar data={dummy}/>
-      <IssueList data={dummy}/>
-    </IssueContainer>
+    <>
+      <IssueContainer>
+        <ToolButtons labels={labels} milestones={milestones}/>
+        <IssueToolbar data={dummy}/>
+        <IssueList data={dummy}/>
+      </IssueContainer>
+    </>
   );
 };
 export default Issue;
