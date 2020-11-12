@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import IssueLabel from '@components/IssueLabel';
-import Issue from '../../issue/IssueContainer';
 
 const ItemBox = styled.div`
     display: flex;
@@ -39,8 +38,8 @@ const LabelItem = ({
       {description}
     </DescriptionField>
     <ButtonsField>
-      <ButtonWrapper>edit</ButtonWrapper>
-      <ButtonWrapper>delete</ButtonWrapper>
+      <ButtonWrapper>Edit</ButtonWrapper>
+      <ButtonWrapper>Delete</ButtonWrapper>
     </ButtonsField>
   </ItemBox>
 );

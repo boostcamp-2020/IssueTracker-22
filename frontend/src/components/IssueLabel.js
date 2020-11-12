@@ -6,8 +6,8 @@ const Label = styled.div`
     background-color: ${(props) => props.color};
     color: ${(props) => contrastColor(props.color)};
     display: inline-block;
-    padding: 0 7px;
-    font-size: 15px;
+    padding: 2px 10px;
+    font-size: 14px;
     font-weight: 500;
     border: 1px solid transparent;
     border-radius: 2em; 

@@ -17,4 +17,15 @@ function contrastColor(hex) {
   return `#${d.repeat(6)}`;
 }
 
-export { contrastColor };
+function getRandomHex() {
+  return Math.floor(Math.random() * 255).toString(16);
+}
+
+function getRandomColor() {
+  const r = getRandomHex();
+  const g = getRandomHex();
+  const b = getRandomHex();
+  return `#${r}${g}${b}`;
+}
+
+export { contrastColor, getRandomColor };
