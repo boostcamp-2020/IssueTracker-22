@@ -57,6 +57,7 @@ const IssueDetailContainer = () => {
       };
       const comments = data.comments.concat(comment);
       setData({ ...data, comments: comments });
+      console.log(data);
     }
   }
   
@@ -76,7 +77,7 @@ const IssueDetailContainer = () => {
             {CommentList(data.comments)}
             <CreateComment data={data} callback={addComment} user={user}/>
           </List>
-          <Side />
+          <Side data={ data }/>
         </IssueContent>
       </Detail>
     </>;
