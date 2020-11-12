@@ -15,7 +15,7 @@ const FlexContainer = styled.div`
     align-items: flex-end;
 `;
 
-const LabelForm = ({ onSubmit }) => {
+const LabelForm = ({ handleSubmit }) => {
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -58,7 +58,7 @@ const LabelForm = ({ onSubmit }) => {
         </Label>
         <ColorPicker color={color} changeRandomColor={changeRandomColor}/>
         <ButtonWrapper>
-          <NewButton onClick={onSubmit}>Create label</NewButton>
+          <NewButton onClick={() => handleSubmit({ ...formData, color })}>Create label</NewButton>
         </ButtonWrapper>
       </FlexContainer>
     </InputForm>

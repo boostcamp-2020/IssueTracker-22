@@ -15,8 +15,8 @@ const Button = styled.button`
 `;
 
 // eslint-disable-next-line arrow-body-style
-const NewButton = ({ handleClick, children }) => {
-  return <Button type="button" onClick={handleClick}>{children}</Button>;
+const NewButton = ({ onClick, children }) => {
+  return <Button type="button" onClick={onClick}>{children}</Button>;
 };
 
 export default NewButton;

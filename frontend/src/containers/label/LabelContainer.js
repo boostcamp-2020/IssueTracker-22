@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import NavBar from '@components/NavBar';
 import NewButton from '@components/NewButton';
 import useLabels from '@lib/useLabels';
+import api from '@lib/api';
+import apiUri from '@constants/api';
 import LabelList from './components/LabelList';
 import LabelForm from './components/LabelForm';
 
@@ -19,10 +21,23 @@ const ContentBox = styled.div`
 
 const LabelContainer = () => {
   const [labels, setLabels] = useLabels();
-  const handleSubmit = (formData) => {
-    console.log(formData);
+
+  const addNewLabel = (newLabel) => {
+    setLabels([...labels, newLabel]);
   };
-  const addNewLabel = () => {};
+
+  const handleSubmit = async (formData) => {
+    const { name, description, color } = formData;
+    const res = await api.post(apiUri.labels, {
+      name, description, color,
+    });
+    if (res.success) {
+      const { id } = res.content;
+      addNewLabel({
+        id, name, description, color_code: color,
+      });
+    }
+  };
 
   return (
     <ContentBox>
