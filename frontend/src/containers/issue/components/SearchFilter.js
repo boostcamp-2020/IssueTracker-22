@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import React, { useState } from 'react';
 import dropdownCaret from '../../../assets/styles/caret';
 import { svgX } from '../../../assets/svgPath';
+import Modal from '../../../components/Modal';
 
 const SearchFilterWrapper = styled.div`
     position: relative;
@@ -10,6 +11,7 @@ const SearchFilterWrapper = styled.div`
     line-height: 20px;
     white-space: nowrap;
     max-width: 75px;
+    width: auto;
     background-color : #fafbfc;
     border: 1px solid #c5c8cc;
     border-radius: 6px 0px 0px 6px;
@@ -21,20 +23,6 @@ const SearchFilterWrapper = styled.div`
     *:focus{
       outline:none;
     }
-`;
-
-const FilterItemList = styled.div`
-width: 300px;
-height: auto;
-position: absolute;
-max-height: 480px;
-margin: 8px 0 16px;
-font-size: 12px;
-top: 78%;
-left: 0%;
-border-color: #eaecef;
-border-radius: 6px;
-border: 1px solid #eaecef;
 `;
 
 const FirstEl = styled.div`
@@ -65,7 +53,7 @@ const closeButton = {
 
 };
 
-const filterItems = (closeFunc, items) => (
+const filterItems = (closeFunc, items, refs) => (
   <>
     <FirstEl>
       <FilterItem>Filter Issues</FilterItem>
@@ -75,31 +63,14 @@ const filterItems = (closeFunc, items) => (
         </svg>
       </button>
     </FirstEl>
-    {items.map((item) => (<FilterItem>{item}</FilterItem>))}
+    {items.map((item, i) => (<FilterItem>{item}</FilterItem>))}
   </>
 );
-
-const Modal = ({
-  className, onClose, visible, children,
-}) => {
-  const onMaskClick = (e) => {
-    if (e.target === e.currentTarget) {
-      onClose(e);
-    }
-  };
-  return (
-    <>
-      <FilterItemList className={className} onClick={onMaskClick} tabIndex="-1" visible={visible}>
-        {children}
-      </FilterItemList>
-    </>
-  );
-};
 
 const SearchFilter = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const items = ['Open issues and pull requests', 'Your issues', 'Your pull issues', 'Everything assinged to you', 'Everything mentioning you'];
-  const hrefs = ['/issues?isopen=true', '/issues'];
+  const refs = ['/issues?isopen=1', '/issues?isopen=1', '/issues?isopen=1', '/issues?isopen=1', '/issues?isopen=1'];
   const onModal = () => { setModalVisible(true); };
   const offModal = () => { setModalVisible(false); };
 
@@ -111,7 +82,7 @@ const SearchFilter = () => {
           <span style={dropdownCaret}/>
         </summary>
         {
-          modalVisible && <Modal children={filterItems(offModal, items)} />
+          modalVisible && <Modal children={filterItems(offModal, items, refs)} />
         }
       </details>
     </SearchFilterWrapper>

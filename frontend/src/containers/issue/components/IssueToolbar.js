@@ -1,6 +1,11 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { svgOpen, svgCheck } from '../../../assets/svgPath';
+import pathUri from '../../../constants/path';
+import { parse, construct, changeIsopen } from '../../../lib/query';
+import ToolbarModal from '../../../components/ToolbarModal';
+import FilterAuthor from '../../../components/FilterAuthor';
 
 const Toolbar = styled.div`
     display: flex;
@@ -12,6 +17,14 @@ const Toolbar = styled.div`
 `;
 
 const ToolbarState = styled.div`
+    color : ${(props) => (props.isClicked > 0 ? '#24292e' : '#586069')};
+    fill : ${(props) => (props.isClicked > 0 ? '#24292e' : '#586069')};
+    font-weight : ${(props) => (props.isClicked > 0 ? '900' : 'normal')};
+    margin : 0px 4px 0px 4px;
+    font-size : 14px;
+`;
+
+const ToolbarStateWrapper = styled.div`
     display: flex;
     flex-direction: row;
 `;
@@ -24,7 +37,8 @@ const ToolbarFilter = styled.div`
 `;
 
 const FilterEL = styled.div`
-    padding: 0px 16px
+    padding: 0px 16px;
+    position : relative;
 `;
 
 const dropdownCaret = {
@@ -41,52 +55,81 @@ const dropdownCaret = {
   borderLeft: '4px solid transparent',
 };
 
-class IssueToolbar extends Component {
-  render() {
+const IssueToolbar = ({ issues }) => {
+  const history = useHistory();
+  const query = parse(useLocation().search);
+  const countOpenIssue = () => {
+    if (issues.length > 0) {
+      let open = 0;
+      let close = 0;
+      issues.forEach((issue) => {
+        if (issue.is_open > 0) open++;
+        else close++;
+      });
+      return [open, close];
+    } return [0, 0];
+  };
+  const FilterELList = (items) => items.map((item) => {
+    const [modalVisible, setModalVisible] = useState(false);
+    const onModal = () => { setModalVisible(true); console.log(modalVisible); };
+    const offModal = () => { setModalVisible(false); };
     return (
-      <Toolbar>
-        <div style={{ padding: '0px 16px 0px 0px' }}>
-          <input type="checkbox" name="issue-checkbox"/>
-        </div>
-        <ToolbarState>
-          <svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true" style={{ paddingRight: '8px' }}>
+      <FilterEL onClick={onModal}>
+        {item}
+        <span style={dropdownCaret}/>
+        {
+          modalVisible && <ToolbarModal onClose={offModa1l} children={<a>hi</a>}/>
+        }
+      </FilterEL>
+    );
+  });
+  const clickHandler = (type) => {
+    const queryString = construct(query);
+    history.push({
+      pathname: pathUri.issue,
+      search: changeIsopen(queryString, type),
+    });
+  };
+  const filterItems = ['Author', 'Label', 'Projects', 'MileStones', 'Assignees', 'Sort'];
+  const [opened, closed] = countOpenIssue();
+  const [state, setState] = useState(1);
+  useEffect(() => {
+    setState(query.isopen === '1' ? 1 : -1);
+  });
+  return (
+    <Toolbar>
+      <div style={{ padding: '0px 16px 0px 0px' }}>
+        <input type="checkbox" name="issue-checkbox"/>
+      </div>
+      <ToolbarStateWrapper>
+        <ToolbarState isClicked={state} onClick={() => clickHandler('open')}>
+          <svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true" style={{ margin: '2px 0px 2px 4px' }}>
             {svgOpen}
           </svg>
-          <a> 2 Open</a>
-          <svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true" style={{ paddingRight: '8px', paddingLeft: '8px' }}>
+          <a>
+            {' '}
+            {opened}
+            {' '}
+            Open
+          </a>
+        </ToolbarState>
+        <ToolbarState isClicked={state * -1} onClick={() => clickHandler('close')}>
+          <svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true" style={{ margin: '2px 0px 2px 4px' }}>
             {svgCheck}
           </svg>
-          <a> 0 Close</a>
+          <a>
+            {' '}
+            {closed}
+            {' '}
+            Close
+          </a>
         </ToolbarState>
-        <ToolbarFilter>
-          <FilterEL>
-            Author
-            <span style={dropdownCaret}/>
-          </FilterEL>
-          <FilterEL>
-            Label
-            <span style={dropdownCaret}/>
-          </FilterEL>
-          <FilterEL>
-            Projects
-            <span style={dropdownCaret}/>
-          </FilterEL>
-          <FilterEL>
-            MileStones
-            <span style={dropdownCaret}/>
-          </FilterEL>
-          <FilterEL>
-            Assignees
-            <span style={dropdownCaret}/>
-          </FilterEL>
-          <FilterEL>
-            Sort
-            <span style={dropdownCaret}/>
-          </FilterEL>
-        </ToolbarFilter>
-      </Toolbar>
-    );
-  }
-}
+      </ToolbarStateWrapper>
+      <ToolbarFilter>
+        {FilterELList(filterItems)}
+      </ToolbarFilter>
+    </Toolbar>
+  );
+};
 
 export default IssueToolbar;

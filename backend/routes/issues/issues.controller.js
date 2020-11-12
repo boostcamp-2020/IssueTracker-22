@@ -11,26 +11,28 @@ const {
 
 exports.list = asyncHandler(async (req, res, next) => {
   const {
-    user,
+    author,
     label,
     milestone,
     isopen,
     assignee,
     mention,
+    title,
   } = req.query;
-  const filterUser = (user === undefined) ? {} : { nickname: user };
+  const filterUser = (user === undefined) ? {} : { nickname: author };
   const filterLabel = (label === undefined) ? {} : { name: label };
   const filterMilestone = (milestone === undefined) ? {} : { title: milestone };
   const filterIsopen = (isopen === undefined) ? {} : { is_open: isopen };
   const filterAssignee = (assignee === undefined) ? {} : { nickname: assignee };
   const filterMention = (mention === undefined) ? {} : { author_id: mention };
+  const filterTitle = (title === undefined) ? {} : { title };
   const issues = await Issue.findAll({
-    attributes: ['id', 'title', 'description', 'createdAt', 'updatedAt'],
-    where: filterIsopen,
+    attributes: ['id', 'title', 'description', 'createdAt', 'updatedAt', 'is_open'],
+    where: filterTitle,
     include: [
       {
         model: User,
-        attributes: ['id', 'nickname'],
+        attributes: ['id', 'nickname', 'profile_url'],
         where: filterUser,
       },
       {
@@ -59,7 +61,6 @@ exports.list = asyncHandler(async (req, res, next) => {
         model: Milestone,
         attributes: ['id', 'title'],
         where: filterMilestone,
-        required: false,
       },
       {
         model: Comment,
