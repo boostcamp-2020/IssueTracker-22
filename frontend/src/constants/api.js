@@ -6,6 +6,7 @@ const apiUri = {
   milestones: '/milestones',
   detail: '/issues/',
   comments: '/comments',
+  issueUpdate: '/issues/update',
 };
 
 export default apiUri;

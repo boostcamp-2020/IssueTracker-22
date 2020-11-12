@@ -37,5 +37,13 @@ module.exports = {
       '/': 'http://127.0.0.1:3000',
     },
   },
-
+  resolve: {
+    alias: {
+      '@components': path.resolve(__dirname, 'src/components/'),
+      '@containers': path.resolve(__dirname, 'src/containers/'),
+      '@lib': path.resolve(__dirname, 'src/lib/'),
+      '@constants': path.resolve(__dirname, 'src/constants/'),
+      '@assets': path.resolve(__dirname, 'src/assets/'),
+    },
+  },
 };

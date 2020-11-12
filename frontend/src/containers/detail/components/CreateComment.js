@@ -5,6 +5,7 @@ import CommentEditor from '../../issue-form/components/CommentEditor';
 import UserProfileContainer from '../../user-profile/UserProfileContainer';
 import ChangeStatusButton from './ChangeStatusButton';
 import CommentButton from './CommentButton';
+import imageUploadHandler from '../../../lib/imageUploadHandler';
 
 const CreateCommentContainer = styled.div`
   width: 100%;
@@ -26,11 +27,6 @@ const Input = styled.div`
   background-color: white;
 `;
 
-const uploadFile = (e) => {
-  const { files } = e.target;
-  // TODO : 파일 업로드 구현
-};
-
 const FlexRowBetween = styled.div`
   display: flex;
   justify-content: space-between;
@@ -38,49 +34,71 @@ const FlexRowBetween = styled.div`
   flex-wrap: wrap;
 `;
 
-const CreateComment = ({ data, callback }) => {
-  // url: 현재 로그인한 유저의 이미지 url
-  const url = "https://avatars2.githubusercontent.com/u/39620410?v=4"
-  const name = "rlaqudrnr810"
+const CreateComment = ({ data, callback, user }) => {
   const [issue, setIssue] = useState({ description: '', });
   const { description } = issue;
+  
+  const renderImageTag = async (file) => {
+    const { name: imageAlt } = file;
+    try {
+      const imageUrl = await imageUploadHandler(file);
+      const imageTag = `\n\n<img alt="${imageAlt}" src="${imageUrl}">\n\n`;
+      
+      const newDescription = issue.description + imageTag;
+      setIssue({ ...issue, description: newDescription });
+      
+    } catch (error) {
+      alert('failed to upload image');
+    }
+  };
+  const uploadFile = (e) => {
+    const { files } = e.target;
+    files.forEach((file) => renderImageTag(file));
+  };
+  
 
   const setIssueDesc = (e) => {
     setIssue({ ...issue, description: e.target.value });
   };
 
   const submitHandler = async (e) => {
-      e.preventDefault();
-    
-    await fetch(apiUri.comments, {
-      mode: 'cors',
-      credentials: 'include',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        issue_id: data.id,
-        description: issue.description,
-      }),
-    }).then(res => {
-      callback(issue.description);
-      setIssue({description: '' });
-    });
-    
+    e.preventDefault();
+
+    if(user !== null) {
+      await fetch(apiUri.comments, {
+        mode: 'cors',
+        credentials: 'include',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          issue_id: data.id,
+          description: issue.description,
+        }),
+      }).then(res => {
+        callback(issue.description);
+        setIssue({description: '' });
+      });
+    } else {
+      alert('로그인 후 이용 가능합니다.');
+    }
   };
-  return <>
-    <CreateCommentContainer>
-      <Image><UserProfileContainer url={url} name={name} /></Image>
-      <Input>
-        <CommentEditor onChange={setIssueDesc} value={description} onFileUpload={uploadFile}/>
-        <FlexRowBetween>
-          <ChangeStatusButton issue={data} />
-          <CommentButton onClick={submitHandler} target={issue} />
-        </FlexRowBetween>
-      </Input>
-    </CreateCommentContainer>
-  </>;
+  
+  return (
+    <>
+      <CreateCommentContainer>
+        <Image><UserProfileContainer user={user} /></Image>
+        <Input>
+          <CommentEditor onChange={setIssueDesc} value={description} onFileUpload={uploadFile}/>
+          <FlexRowBetween>
+            <ChangeStatusButton issue={data} />
+            <CommentButton onClick={submitHandler} target={issue} />
+          </FlexRowBetween>
+        </Input>
+      </CreateCommentContainer>
+    </>
+  );
 };
 
 export default CreateComment;

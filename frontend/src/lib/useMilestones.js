@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import apiUri from '../constants/api';
+import apiUri from '@constants/api';
 
 function useMilestones() {
   const [milestones, setMilestones] = useState([]);

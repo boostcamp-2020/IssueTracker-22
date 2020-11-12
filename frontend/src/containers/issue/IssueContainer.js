@@ -17,7 +17,6 @@ const IssueContainer = styled.div`
     border: 1px solid #eaecef;
     border-radius: 6px;
 `;
-
 const Issue = ({ location }) => {
   const lables = useLabels();
   const milestones = useMilestones();

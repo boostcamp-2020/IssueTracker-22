@@ -141,3 +141,26 @@ exports.create = asyncHandler(async (req, res, next) => {
     content: { id: newIssues.id },
   });
 });
+
+exports.update = asyncHandler(async (req, res, next) => {
+  const {
+    issue_id, title, description,
+  } = req.body;
+
+  await Issue.update(
+    {
+      title: title,
+      description: description
+    },
+    {
+      where: {
+        id: issue_id,
+      }
+    }
+  );
+
+  return res.json({
+    success: true,
+    content: { id: issue_id },
+  });
+});

@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import selectMenuMode from '../../../constants/selectMenuMode';
+import UserItem from './UserItem';
 import LabelItem from './LabelItem';
 import MilestoneItem from './MilestoneItem';
-import UserItem from './UserItem';
 
 const List = styled.ul`
   all: unset;
@@ -14,20 +14,59 @@ const List = styled.ul`
   overflow-y: auto;
 `;
 
-const SelectMenuList = ({ items, loading, label }) => {
+const SelectMenuList = ({ items, loading, label, onItemClick, selectedItems }) => {
   let list = <div>loading...</div>;
-
   const { success, content } = items;
+
   if (!loading && success) {
-    if (label === selectMenuMode.Assignees[0]) {
-      const { users } = content;
-      list = users.map((item) => <UserItem user={item} />);
-    } else if (label === selectMenuMode.Labels[0]) {
-      const { labels } = content;
-      list = labels.map((item) => <LabelItem label={item} />);
-    } else if (label === selectMenuMode.Milestone[0]) {
-      const { milestones } = content;
-      list = milestones.map((item) => <MilestoneItem milestone={item} />);
+    switch (label) {
+      case selectMenuMode.Assignees[0]:
+        const { users } = content;
+        
+        list = users.map((item) => {
+          const index = selectedItems.findIndex((val) => val.id === item.id);
+          const selected = index === -1 ? false : true;
+          return (
+            <UserItem
+              key={item.id}
+              user={item}
+              onItemClick={onItemClick}
+              selected={selected}
+            />
+          )
+        });
+        break;
+      case selectMenuMode.Labels[0]:
+        const { labels } = content;
+        
+        list = labels.map((item) => {
+          const index = selectedItems.findIndex((val) => val.id === item.id);
+          const selected = index === -1 ? false : true;
+          return (
+          <LabelItem
+            key={item.id}
+            label={item}
+            onItemClick={onItemClick}
+            selected={selected}
+          />)
+        });
+        break;
+      case selectMenuMode.Milestone[0]:
+        const { milestones } = content;
+        
+        list = milestones.map((item) => {
+          const index = selectedItems.findIndex((val) => val.id === item.id);
+          const selected = index === -1 ? false : true;
+          return (
+          <MilestoneItem
+            key={item.id}
+            milestone={item}
+            onItemClick={onItemClick}
+            selected={selected}
+          />);
+        });
+        break;
+      default: break;
     }
   }
 
