@@ -29,7 +29,13 @@ const SelectedItem = styled.div`
 const SidebarFormContainer = ({ mode }) => {
   const [label, statusText, selectMenuHeader, url] = mode;
   const [open, setOpen] = useState(false);
-
+  console.log('-------');
+  console.log(label);
+  console.log(statusText);
+  console.log(selectMenuHeader);
+  console.log(url);
+  console.log('-------');
+  
   const showSelectMenu = () => {
     setOpen(!open);
   };

@@ -1,4 +1,5 @@
-import React, {useState, useEffect, useContext }from 'react';
+import React, {useState, useEffect }from 'react';
+import styled from 'styled-components';
 import Header from '../../components/Header';
 import Title from './components/Title';
 import TitleBox from './components/TitleBox';
@@ -12,6 +13,11 @@ import Side from './components/Side';
 import CreateComment from './components/CreateComment';
 import apiUri from '../../constants/api';
 import userContext from '../../lib/userContext';
+
+const Detail = styled.div`
+  padding-left : 100px;
+  padding-right : 100px;
+`;
 
 const IssueDetailContainer = () => {
   const [data, setData] = useState([]);
@@ -58,19 +64,21 @@ const IssueDetailContainer = () => {
   if(!loading) {
     return <>
       <Header />
-      <TitleBox>
-        <Title>{ data }</Title>
-        <TitleEditButton />
-      </TitleBox>
-      <TitleDetail>{ data }</TitleDetail>
-      <IssueContent>
-        <List>
-          <IssueDetail>{ data }</IssueDetail>
-          {CommentList(data.comments)}
-          <CreateComment data={data} callback={addComment} user={user}/>
-        </List>
-        <Side />
-      </IssueContent>
+      <Detail>
+        <TitleBox>
+          <Title>{ data }</Title>
+          <TitleEditButton />
+        </TitleBox>
+        <TitleDetail>{ data }</TitleDetail>
+        <IssueContent>
+          <List>
+            <IssueDetail>{ data }</IssueDetail>
+            {CommentList(data.comments)}
+            <CreateComment data={data} callback={addComment}/>
+          </List>
+          <Side />
+        </IssueContent>
+      </Detail>
     </>;
   }
   return <>loading...</>;
