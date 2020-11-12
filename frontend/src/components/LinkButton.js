@@ -3,17 +3,18 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const StyledLink = styled(Link)`
-    background-color: white;
+    background-color: ${(props) => (props.active ? '#0366d6' : 'white')};
+    color: ${(props) => (props.active ? 'white' : 'black')};
     padding: 8px 16px;
     border: 1px lightgrey solid;
     border-radius: 5px;
 
     &:visited  {
-        color: black;
+        color: ${(props) => (props.active ? 'white' : 'black')};
     }
 
     &:hover {
-        background-color: rgba(225, 228, 232, 0.5);
+        background-color: ${(props) => (props.active ? '#0366d6' : 'rgba(225, 228, 232, 0.5)')};
     }
 `;
 
@@ -36,12 +37,12 @@ const Counter = styled.div`
 `;
 
 const LinkButton = ({
-  text, path, Icon, count,
+  text, path, Icon, count, active,
 }) => (
-  <StyledLink to={path}>
+  <StyledLink to={path} active={active}>
     <ContentWrapper>
       <IconWrapper>
-        <Icon/>
+        <Icon active={active}/>
       </IconWrapper>
       {text}
       { (count || count === 0) && (

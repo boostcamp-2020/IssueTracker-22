@@ -38,10 +38,12 @@ const FlexRowBetween = styled.div`
   flex-wrap: wrap;
 `;
 
-const CreateComment = ({ data, callback }) => {
-  const [issue, setIssue] = useState({ description: '' });
+const CreateComment = ({ data, callback, user }) => {
+  const [issue, setIssue] = useState({ description: '', });
   const { description } = issue;
-
+  const profile_url = user === null ? null : user.profile_url;
+  const nickname = user === null ? null : user.nickname;
+  
   const setIssueDesc = (e) => {
     setIssue({ ...issue, description: e.target.value });
   };
@@ -49,27 +51,27 @@ const CreateComment = ({ data, callback }) => {
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    await fetch(apiUri.comments, {
-      mode: 'cors',
-      credentials: 'include',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        issue_id: data.id,
-        description: issue.description,
-      }),
-    }).then((res) => {
-      callback(issue.description);
-      setIssue({ description: '' });
-    });
+    if(user !== null) {
+      await fetch(apiUri.comments, {
+        mode: 'cors',
+        credentials: 'include',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          issue_id: data.id,
+          description: issue.description,
+        }),
+      }).then(res => {
+        callback(issue.description);
+        setIssue({description: '' });
+      });
+    } else {
+      alert('로그인 후 이용 가능합니다.');
+    }
   };
-
-  const url = 'https://avatars2.githubusercontent.com/u/39620410?v=4';
-  const name = 'rlaqudrnr810';
-  const user = { nickname: name, profile_url: url };
-
+  
   return (
     <>
       <CreateCommentContainer>
