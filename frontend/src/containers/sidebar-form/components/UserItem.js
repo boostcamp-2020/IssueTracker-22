@@ -7,6 +7,7 @@ const Item = styled.li`
   all: unset;
   padding: 10px 28px;
   font-size: 15px;
+  position: relative;
   :not(:first-child) {
     border-top: 1px solid lightgray;
   }

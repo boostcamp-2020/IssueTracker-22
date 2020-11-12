@@ -57,7 +57,6 @@ const IssueDetailContainer = () => {
       };
       const comments = data.comments.concat(comment);
       setData({ ...data, comments: comments });
-      console.log(data);
     }
   }
   
