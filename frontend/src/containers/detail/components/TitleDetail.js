@@ -47,7 +47,7 @@ const TitleDetail = (data) => {
   const { children } = data;
   const isOpen = children.is_open === 1 ? 'open' : 'close';
   const { length } = children.comments;
-  const time = RelativeTime(children.updatedAt);
+  const time = RelativeTime(children.createdAt);
 
   return (
     <>

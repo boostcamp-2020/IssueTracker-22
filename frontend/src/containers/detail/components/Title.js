@@ -89,7 +89,6 @@ const Title = (data) => {
     setMode(!mode);
   }
   const saveEditTitle = async () => {
-    //fetch로 update...
     const body = {
       issue_id: children.id,
       title: title
