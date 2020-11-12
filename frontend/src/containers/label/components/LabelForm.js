@@ -3,15 +3,18 @@ import styled from 'styled-components';
 import IssueLabel from '@components/IssueLabel';
 import NewButton from '@components/NewButton';
 import { getRandomColor } from '@lib/color';
+import Button from '@components/Button';
 import { Label, Input, InputForm } from './Form';
 import ColorPicker from './ColorPicker';
 
 const ButtonWrapper = styled.div`
+    display: inline-flex;
     margin: 16px 0px;
 `;
 
 const FlexContainer = styled.div`
     display: flex;
+    justify-content: space-between;
     align-items: flex-end;
 `;
 
@@ -58,7 +61,13 @@ const LabelForm = ({ handleSubmit }) => {
         </Label>
         <ColorPicker color={color} changeRandomColor={changeRandomColor}/>
         <ButtonWrapper>
-          <NewButton onClick={() => handleSubmit({ ...formData, color })}>Create label</NewButton>
+          <Button>Cancle</Button>
+          <NewButton
+            onClick={() => handleSubmit({ ...formData, color })}
+            disabled={formData.name === ''}
+          >
+            Create label
+          </NewButton>
         </ButtonWrapper>
       </FlexContainer>
     </InputForm>
