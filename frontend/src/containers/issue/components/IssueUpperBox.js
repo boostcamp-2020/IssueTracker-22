@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import renderLabels from './Label';
+import Labels from './Label';
 
-const IssueUpperBox = styled.div`
+const IssueUpperBoxWrapper = styled.div`
     a {
         text-decoration:none;
         color: black;
@@ -14,15 +14,15 @@ const IssueUpperBox = styled.div`
     }
 `;
 
-const renderIssueUpperBox = (data) => {
-  const href = `/issues/${data.issue.id}`;
+const IssueUpperBox = ({issue}) => {
+  const href = `/issues/${issue.id}`;
 
   return (
-    <IssueUpperBox>
-      <Link to={href}>{data.issue.title}</Link>
-      {renderLabels(data.issue.issue_labels)}
-    </IssueUpperBox>
+    <IssueUpperBoxWrapper>
+      <Link to={href}>{issue.title}</Link>
+      <Labels labels={(issue.issue_labels)}/>
+    </IssueUpperBoxWrapper>
   );
 };
 
-export default renderIssueUpperBox;
+export default IssueUpperBox;

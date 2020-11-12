@@ -3,13 +3,13 @@ import React from 'react';
 import getRelativeTime from '../../../lib/relativeTime';
 import { svgMilestone } from '../../../assets/svgPath';
 
-const IssueLowerBox = styled.div`
+const IssueLowerBoxWrapper = styled.div`
     font-size: 12px; 
     color: #586069;
     margin: 4px 0px 0px
 `;
 
-const renderIssueLowerBox = (issue) => {
+const IssueLowerBox = ({issue}) => {
   const content = `#${issue.id} opened ${getRelativeTime(issue.updatedAt)}`;
   const milestone = () => {
     if (!issue.milestone) {
@@ -26,13 +26,13 @@ const renderIssueLowerBox = (issue) => {
   };
 
   return (
-    <IssueLowerBox>
+    <IssueLowerBoxWrapper>
       <span className="opened-by">
         {content}
         {milestone()}
       </span>
-    </IssueLowerBox>
+    </IssueLowerBoxWrapper>
   );
 };
 
-export default renderIssueLowerBox;
+export default IssueLowerBox;
