@@ -18,7 +18,9 @@ const FlexContainer = styled.div`
     align-items: flex-end;
 `;
 
-const LabelForm = ({ data, handleSubmit, close }) => {
+const LabelForm = ({
+  editing, data, handleSubmit, close,
+}) => {
   const initialData = {
     name: data ? data.name : '',
     description: data ? data.description : '',
@@ -86,7 +88,7 @@ const LabelForm = ({ data, handleSubmit, close }) => {
             onClick={submitAndClear}
             disabled={formData.name === ''}
           >
-            Create label
+            {editing ? 'Save changes' : 'Create label'}
           </NewButton>
         </ButtonWrapper>
       </FlexContainer>

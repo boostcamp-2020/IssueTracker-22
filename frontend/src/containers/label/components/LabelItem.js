@@ -30,15 +30,20 @@ const ButtonWrapper = styled.div`
 `;
 
 const LabelItem = ({
-  id, name, description, color,
+  id, name, description, color, updateTargetLabel,
 }) => {
   const [editing, setEditing] = useState(false);
+  const handleEdit = updateTargetLabel(id);
 
   if (editing) {
     return (
       <LabelForm
-        data={{ name, description, color }}
+        editing
+        data={{
+          id, name, description, color,
+        }}
         close={() => setEditing(false)}
+        handleSubmit={handleEdit}
       />
     );
   }
