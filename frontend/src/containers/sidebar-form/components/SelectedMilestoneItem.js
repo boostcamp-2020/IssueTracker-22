@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import ProgressBar from '@components/ProgressBar';
 
 const Wrapper = styled.div`
   margin: 8px 0;
@@ -9,22 +10,6 @@ const MilestoneTitle = styled.div`
   font-weight: bolder;
 `;
 
-const ProgressBarBase = styled.span`
-  display: flex;
-  background-color: #E9E9E9;
-  border-radius: 2em;
-  height: 8px;
-  width: 100%;
-  margin-bottom: 7px;
-  overflow: hidden;
-`;
-
-const Progress = styled.span`
-  display: block;
-  background-color: #28a745;
-  width: ${(props) => props.percent}%;
-`;
-
 const SelectedMilestoneItem = ({ milestone }) => {
   const {
     id, title, description, due_date: dueDate, open_issues: openIssues, closed_issues: closedIssues, progress,
@@ -32,9 +17,7 @@ const SelectedMilestoneItem = ({ milestone }) => {
 
   return (
     <Wrapper>
-      <ProgressBarBase>
-        <Progress percent={progress * 100} />
-      </ProgressBarBase>
+      <ProgressBar percent={progress * 100} />
       <MilestoneTitle>{title}</MilestoneTitle>
     </Wrapper>
   );

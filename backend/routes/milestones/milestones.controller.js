@@ -4,7 +4,7 @@ const asyncHandler = require('../../lib/asyncHandler');
 exports.list = asyncHandler(async (req, res, next) => {
   const milestones = await Milestone.findAll({
     attributes: [
-      'id', 'title', 'description', 'due_date',
+      'id', 'title', 'description', 'due_date', 'is_open',
       [sequelize.literal('SUM(issues.is_open)'), 'open_issues'],
       [sequelize.literal('SUM(issues.is_open=0)'), 'closed_issues'],
       [sequelize.literal('SUM(issues.is_open=0)/COUNT(*)'), 'progress'],

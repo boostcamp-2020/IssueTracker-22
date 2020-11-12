@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import IssueLabel from '@components/IssueLabel';
+import LabelForm from './LabelForm';
 
 const ItemBox = styled.div`
     display: flex;
@@ -25,23 +26,41 @@ const ButtonsField = styled.div`
 
 const ButtonWrapper = styled.div`
     padding: 0px 10px;
+    cursor: pointer;
 `;
 
 const LabelItem = ({
-  id, name, description, color,
-}) => (
-  <ItemBox>
-    <LabelField>
-      <IssueLabel name={name} color={color}/>
-    </LabelField>
-    <DescriptionField>
-      {description}
-    </DescriptionField>
-    <ButtonsField>
-      <ButtonWrapper>Edit</ButtonWrapper>
-      <ButtonWrapper>Delete</ButtonWrapper>
-    </ButtonsField>
-  </ItemBox>
-);
+  id, name, description, color, updateTargetLabel,
+}) => {
+  const [editing, setEditing] = useState(false);
+  const handleEdit = updateTargetLabel(id);
+
+  if (editing) {
+    return (
+      <LabelForm
+        editing
+        data={{
+          id, name, description, color,
+        }}
+        close={() => setEditing(false)}
+        handleSubmit={handleEdit}
+      />
+    );
+  }
+  return (
+    <ItemBox>
+      <LabelField>
+        <IssueLabel name={name} color={color}/>
+      </LabelField>
+      <DescriptionField>
+        {description}
+      </DescriptionField>
+      <ButtonsField>
+        <ButtonWrapper onClick={() => setEditing(true)}>Edit</ButtonWrapper>
+        <ButtonWrapper>Delete</ButtonWrapper>
+      </ButtonsField>
+    </ItemBox>
+  );
+};
 
 export default LabelItem;
