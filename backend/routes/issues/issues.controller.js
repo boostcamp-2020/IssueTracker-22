@@ -19,7 +19,7 @@ exports.list = asyncHandler(async (req, res, next) => {
     mention,
     title,
   } = req.query;
-  const filterUser = (user === undefined) ? {} : { nickname: author };
+  const filterUser = (author === undefined) ? {} : { nickname: author };
   const filterLabel = (label === undefined) ? {} : { name: label };
   const filterMilestone = (milestone === undefined) ? {} : { title: milestone };
   const filterIsopen = (isopen === undefined) ? {} : { is_open: isopen };
@@ -147,31 +147,31 @@ exports.update = asyncHandler(async (req, res, next) => {
     issue_id, title, description, is_open, assignee_id, label_id, milestone_id, mode,
   } = req.body;
 
-  if(title || description || is_open) {
+  if (title || description || is_open) {
     await Issue.update(
       {
-        title: title,
-        description: description,
-        is_open: is_open,
+        title,
+        description,
+        is_open,
       },
       {
         where: {
           id: issue_id,
-        }
-      }
+        },
+      },
     );
   }
 
   if (assignee_id) {
     if (mode === 1) {
       await IssueAssignee.create({
-        issue_id, assignee_id
+        issue_id, assignee_id,
       });
     } else if (mode === 0) {
       await IssueAssignee.destroy({
-          where: {
-            issue_id, assignee_id
-          }
+        where: {
+          issue_id, assignee_id,
+        },
       });
     }
   }
@@ -179,31 +179,30 @@ exports.update = asyncHandler(async (req, res, next) => {
   if (label_id) {
     if (mode === 1) {
       await IssueLabel.create({
-        issue_id, label_id
+        issue_id, label_id,
       });
     } else if (mode === 0) {
       await IssueLabel.destroy({
-          where: {
-            issue_id, label_id
-          }
+        where: {
+          issue_id, label_id,
+        },
       });
     }
   }
 
   if (milestone_id) {
-    const value = (mode === 1) ? milestone_id : null
+    const value = (mode === 1) ? milestone_id : null;
     await Issue.update(
       {
-        milestone_id: value
+        milestone_id: value,
       },
       {
         where: {
           id: issue_id,
-        }
-      }
+        },
+      },
     );
   }
-
 
   return res.json({
     success: true,
