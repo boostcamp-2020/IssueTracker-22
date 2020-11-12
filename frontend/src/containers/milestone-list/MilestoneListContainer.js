@@ -28,7 +28,7 @@ const MilestoneListContainer = () => {
     <ContentBox>
       <NavBarBox>
         <NavBar/>
-        <NewButton handleClick={handleClick}>New milestone</NewButton>
+        <NewButton onClick={handleClick}>New milestone</NewButton>
       </NavBarBox>
       <MilestoneList milestones={milestones}/>
     </ContentBox>
