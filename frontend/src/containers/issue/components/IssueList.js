@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import IssueBox from './IssueBox';
 import renderIssueLowerBox from './IssueLowerBox';
 import renderIssueUpperBox from './IssueUpperBox';
@@ -47,11 +47,19 @@ class IssueInfo extends Component {
   }
 }
 
-const IssueList = ({issues}) => {
-  const Issues = (data) => data.map((issue) => (<IssueInfo issue={issue}/>));
+const IssueList = ({issues, query}) => {
+  const Issues = (data, openState) => data.map((issue) => {
+    if (issue.is_open === openState) {
+      return (<IssueInfo issue={issue}/>)
+    }
+  });
+  const [state, setState] = useState(1)
+  useEffect(() => {
+    setState(query.isopen === "1" ? 1 : 0)
+  })
   return (
       <div>
-        {Issues(issues)}
+        {Issues(issues, state)}
       </div>
   );
   

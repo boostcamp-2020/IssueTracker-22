@@ -7,6 +7,7 @@ import ToolButtons from './components/ToolButtons';
 import useLabels from '../../lib/useLabels';
 import useMilestones from '../../lib/useMilestones';
 import useIssues from '../../lib/useIssues';
+import {parse} from '../../lib/query';
 
 const IssueContainer = styled.div`
     display: flex;
@@ -18,14 +19,6 @@ const IssueContainer = styled.div`
 
 const Issue = ({location}) => {
 
-  const parse = ( str ) => {
-    let splited = str.replace("?", "").split("&")
-    let res = splited.reduce((total, cur, i) => {
-      let [key, value] = cur.split("=")
-      return total + `${i === 0 ? '' : ','}"${key}":"${value}"`
-    }, "")
-    return JSON.parse(`{${res}}`)
-  }
   const queryString = location.search
   const query = parse(queryString)
   const lables = useLabels();
@@ -37,7 +30,7 @@ const Issue = ({location}) => {
       <ToolButtons labels={lables} milestones={milestones}/>
       <IssueContainer>
         <IssueToolbar issues={issues} query={query}/>
-        <IssueList issues={issues}/>
+        <IssueList issues={issues} query={query}/>
       </IssueContainer>
     </>
   );
