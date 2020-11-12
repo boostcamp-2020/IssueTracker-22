@@ -7,6 +7,8 @@ import useLabels from '../../lib/useLabels';
 import useMilestones from '../../lib/useMilestones';
 
 const IssueContainer = styled.div`
+    display: flex;
+    flex-direction : column;
     max-width: 1280px;
     border: 1px solid #eaecef;
     border-radius: 6px;
@@ -86,12 +88,13 @@ const Issue = (props) => {
   const milestones = useMilestones();
 
   return (
+    <>
+    <ToolButtons labels={lables} milestones={milestones}/>
     <IssueContainer>
-      <ToolButtons labels={lables} milestones={milestones}/>
       <IssueToolbar data={dummy}/>
       <IssueList data={dummy}/>
     </IssueContainer>
+    </>
   );
 };
-
 export default Issue;
