@@ -5,6 +5,8 @@ import IssueUpperBox from './IssueUpperBox';
 import IssueAssignee from './IssueAssignee';
 // import IssueMilestone from './issueMilestone';
 import { svgOpen, svgClose } from '../../../assets/svgPath';
+import { parse } from '../../../lib/query'
+import { useLocation } from 'react-router-dom';
 
 const IssueInfo = ({issue}) => {
   const drawSVG = (issue) => {
@@ -44,7 +46,8 @@ const IssueInfo = ({issue}) => {
 }
 
 
-const IssueList = ({issues, query}) => {
+const IssueList = ({issues}) => {
+  const query = parse(useLocation().search)
   const Issues = (data, openState) => data.map((issue) => {
     if (issue.is_open === openState) {
       return (<IssueInfo issue={issue}/>)

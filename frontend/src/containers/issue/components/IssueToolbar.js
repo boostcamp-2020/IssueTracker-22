@@ -3,7 +3,7 @@ import {useHistory, useLocation} from 'react-router-dom';
 import styled from 'styled-components';
 import { svgOpen, svgCheck } from '../../../assets/svgPath';
 import pathUri from '../../../constants/path'
-import { construct, changeIsopen} from '../../../lib/query'
+import { parse, construct, changeIsopen} from '../../../lib/query'
 
 const Toolbar = styled.div`
     display: flex;
@@ -52,8 +52,9 @@ const dropdownCaret = {
   borderLeft: '4px solid transparent',
 };
 
-const IssueToolbar = ({issues, query}) => {
+const IssueToolbar = ({issues}) => {
   const history = useHistory()
+  const query = parse(useLocation().search)
   const countOpenIssue = () => {
     if(issues.length > 0) {
       let open = 0

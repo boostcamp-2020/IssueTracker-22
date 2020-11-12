@@ -19,18 +19,18 @@ const IssueContainer = styled.div`
 
 const Issue = ({location}) => {
 
-  const queryString = location.search
-  const query = parse(queryString)
+  const [queryString, setQueryString] = useState(location.search)
+  let query = parse(queryString)
   const lables = useLabels();
   const milestones = useMilestones();
-  const issues = useIssues(queryString)
+  const issues = useIssues(queryString);
   
   return (
     <>
       <ToolButtons labels={lables} milestones={milestones}/>
       <IssueContainer>
-        <IssueToolbar issues={issues} query={query}/>
-        <IssueList issues={issues} query={query}/>
+        <IssueToolbar issues={issues}/>
+        <IssueList issues={issues}/>
       </IssueContainer>
     </>
   );
