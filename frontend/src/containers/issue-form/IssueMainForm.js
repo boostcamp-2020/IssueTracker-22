@@ -45,6 +45,7 @@ const Wrapper = styled.div`
 
 const IssueMainForm = ({ user, onChange, onFileUpload, onSubmit, issue }) => {
   const { title, description } = issue;
+
   return (
     <Wrapper>
       <UserProfileContainer user={user} />
@@ -54,7 +55,7 @@ const IssueMainForm = ({ user, onChange, onFileUpload, onSubmit, issue }) => {
         <CommentEditor name="description" onChange={onChange} onFileUpload={onFileUpload} value={description} />
         <FlexRowBetween>
           <CancelButton path="/#/issues" />
-          <SubmitButton onClick={onSubmit} target={issue} />
+          <SubmitButton onClick={onSubmit} target={title} text="Submit new Issue" />
         </FlexRowBetween>
       </IssueFormBox>
     </Wrapper>

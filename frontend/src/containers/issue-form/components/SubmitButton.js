@@ -15,8 +15,8 @@ const Button = styled.button`
 `;
 
 // eslint-disable-next-line arrow-body-style
-const SubmitButton = ({ onClick, target }) => {
-  return <Button type="submit" value="Submit" onClick={onClick} disabled={target.title === '' || target.description === ''}>Submit new Issue</Button>;
+const SubmitButton = ({ onClick, target, text }) => {
+  return <Button type="submit" value="Submit" onClick={onClick} disabled={target === ''}>{text}</Button>;
 };
 
 export default SubmitButton;
