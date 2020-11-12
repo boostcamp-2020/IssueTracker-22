@@ -11,7 +11,7 @@ const {
 
 exports.list = asyncHandler(async (req, res, next) => {
   const {
-    user,
+    author,
     label,
     milestone,
     isopen,
@@ -19,7 +19,7 @@ exports.list = asyncHandler(async (req, res, next) => {
     mention,
     title
   } = req.query;
-  const filterUser = (user === undefined) ? {} : { nickname: user };
+  const filterUser = (user === undefined) ? {} : { nickname: author };
   const filterLabel = (label === undefined) ? {} : { name: label };
   const filterMilestone = (milestone === undefined) ? {} : { title: milestone };
   const filterIsopen = (isopen === undefined) ? {} : { is_open: isopen };
@@ -28,7 +28,6 @@ exports.list = asyncHandler(async (req, res, next) => {
   const filterTitle = (title === undefined) ? {} : {title: title}
   const issues = await Issue.findAll({
     attributes: ['id', 'title', 'description', 'createdAt', 'updatedAt', 'is_open'],
-    // where: filterIsopen,
     where: filterTitle,
     include: [
       {
