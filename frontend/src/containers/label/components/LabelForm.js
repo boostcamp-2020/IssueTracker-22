@@ -18,12 +18,17 @@ const FlexContainer = styled.div`
     align-items: flex-end;
 `;
 
-const LabelForm = ({ handleSubmit, close }) => {
-  const [formData, setFormData] = useState({
-    name: '',
-    description: '',
-  });
-  const [color, setColor] = useState(getRandomColor());
+const LabelForm = ({
+  editing, data, handleSubmit, close,
+}) => {
+  const initialData = {
+    name: data ? data.name : '',
+    description: data ? data.description : '',
+  };
+  const initialColor = data ? data.color : getRandomColor();
+
+  const [formData, setFormData] = useState(initialData);
+  const [color, setColor] = useState(initialColor);
 
   const changeRandomColor = () => {
     const randomColor = getRandomColor();
@@ -34,12 +39,21 @@ const LabelForm = ({ handleSubmit, close }) => {
     setFormData({ ...formData, [target.name]: target.value });
   };
 
-  const clearFormDataAndClose = () => {
+  const clearFormData = () => {
     setFormData({
       name: '',
       description: '',
     });
+  };
+
+  const clearFormDataAndClose = () => {
+    clearFormData();
     close();
+  };
+
+  const submitAndClear = () => {
+    handleSubmit({ ...formData, color });
+    clearFormDataAndClose();
   };
 
   return (
@@ -71,10 +85,10 @@ const LabelForm = ({ handleSubmit, close }) => {
         <ButtonWrapper>
           <Button type="button" onClick={clearFormDataAndClose}>Cancle</Button>
           <NewButton
-            onClick={() => handleSubmit({ ...formData, color })}
+            onClick={submitAndClear}
             disabled={formData.name === ''}
           >
-            Create label
+            {editing ? 'Save changes' : 'Create label'}
           </NewButton>
         </ButtonWrapper>
       </FlexContainer>

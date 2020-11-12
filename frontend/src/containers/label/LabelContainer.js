@@ -32,6 +32,21 @@ const LabelContainer = () => {
     setLabels([...labels, newLabel]);
   };
 
+  const updateTargetLabel = (id) => async ({ name, description, color }) => {
+    const newLabels = labels.map((label) => {
+      if (label.id !== id) return label;
+      return {
+        name, description, color_code: color, id,
+      };
+    });
+    const res = await api.put(`${apiUri.labels}/${id}`, {
+      name, description, color,
+    });
+    if (res.success) {
+      setLabels(newLabels);
+    }
+  };
+
   const handleSubmit = async (formData) => {
     const { name, description, color } = formData;
     const res = await api.post(apiUri.labels, {
@@ -57,7 +72,7 @@ const LabelContainer = () => {
       <FormWrapper visible={formVisible}>
         <LabelForm handleSubmit={handleSubmit} close={closeForm}/>
       </FormWrapper>
-      <LabelList labels={labels}/>
+      <LabelList labels={labels} updateTargetLabel={updateTargetLabel}/>
     </ContentBox>
   );
 };
