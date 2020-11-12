@@ -17,7 +17,7 @@ border: 1px solid #eaecef;
 z-index: 999;
 `;
 
-const Modal = ({
+const ToolbarModal = ({
     className, onClose, visible, children,
   }) => {
     const onMaskClick = (e) => {
@@ -27,11 +27,11 @@ const Modal = ({
     };
     return (
       <>
-        <ModalItemList className={className} onClick={onMaskClick} tabIndex="-1" visible={visible}>
+        <ModalItemList onClick={onMaskClick} tabIndex="-1" visible={visible}>
           {children}
         </ModalItemList>
       </>
     );
 };
 
-export default Modal;
+export default ToolbarModal;
