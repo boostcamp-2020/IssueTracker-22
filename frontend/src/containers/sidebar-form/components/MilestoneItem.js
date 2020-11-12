@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import CheckIcon from '../../../assets/icon/CheckIcon';
+import formalizeDateString from '@lib/formalizeDateString';
 
 const Item = styled.li`
   all: unset;
@@ -30,11 +31,6 @@ const CheckIconWrapper = styled.div`
   right: 92%;
   visibility: ${(props) => (props.visible ? 'visible' : 'hidden')};
 `;
-
-const formalizeDateString = (dueDate) => {
-  const options = { year: 'numeric', month: 'long', day: 'numeric' };
-  return dueDate ? new Date(dueDate).toLocaleString('en-US', options) : 'No due date';
-};
 
 const MilestoneItem = ({ milestone, onItemClick, selected }) => {
   const {
