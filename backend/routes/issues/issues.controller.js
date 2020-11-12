@@ -11,26 +11,28 @@ const {
 
 exports.list = asyncHandler(async (req, res, next) => {
   const {
-    user,
+    author,
     label,
     milestone,
     isopen,
     assignee,
     mention,
+    title,
   } = req.query;
-  const filterUser = (user === undefined) ? {} : { nickname: user };
+  const filterUser = (user === undefined) ? {} : { nickname: author };
   const filterLabel = (label === undefined) ? {} : { name: label };
   const filterMilestone = (milestone === undefined) ? {} : { title: milestone };
   const filterIsopen = (isopen === undefined) ? {} : { is_open: isopen };
   const filterAssignee = (assignee === undefined) ? {} : { nickname: assignee };
   const filterMention = (mention === undefined) ? {} : { author_id: mention };
+  const filterTitle = (title === undefined) ? {} : { title };
   const issues = await Issue.findAll({
-    attributes: ['id', 'title', 'description', 'createdAt', 'updatedAt'],
-    where: filterIsopen,
+    attributes: ['id', 'title', 'description', 'createdAt', 'updatedAt', 'is_open'],
+    where: filterTitle,
     include: [
       {
         model: User,
-        attributes: ['id', 'nickname'],
+        attributes: ['id', 'nickname', 'profile_url'],
         where: filterUser,
       },
       {
@@ -59,7 +61,6 @@ exports.list = asyncHandler(async (req, res, next) => {
         model: Milestone,
         attributes: ['id', 'title'],
         where: filterMilestone,
-        required: false,
       },
       {
         model: Comment,
@@ -143,23 +144,68 @@ exports.create = asyncHandler(async (req, res, next) => {
 
 exports.update = asyncHandler(async (req, res, next) => {
   const {
-    issue_id, title, description,
+    issue_id, title, description, is_open, assignee_id, label_id, milestone_id, mode,
   } = req.body;
 
-  await Issue.update(
-    {
-      title: title,
-      description: description
-    },
-    {
-      where: {
-        id: issue_id,
+  if(title || description || is_open) {
+    await Issue.update(
+      {
+        title: title,
+        description: description,
+        is_open: is_open,
+      },
+      {
+        where: {
+          id: issue_id,
+        }
       }
+    );
+  }
+
+  if (assignee_id) {
+    if (mode === 1) {
+      await IssueAssignee.create({
+        issue_id, assignee_id
+      });
+    } else if (mode === 0) {
+      await IssueAssignee.destroy({
+          where: {
+            issue_id, assignee_id
+          }
+      });
     }
-  );
+  }
+
+  if (label_id) {
+    if (mode === 1) {
+      await IssueLabel.create({
+        issue_id, label_id
+      });
+    } else if (mode === 0) {
+      await IssueLabel.destroy({
+          where: {
+            issue_id, label_id
+          }
+      });
+    }
+  }
+
+  if (milestone_id) {
+    const value = (mode === 1) ? milestone_id : null
+    await Issue.update(
+      {
+        milestone_id: value
+      },
+      {
+        where: {
+          id: issue_id,
+        }
+      }
+    );
+  }
+
 
   return res.json({
     success: true,
-    content: { id: issue_id },
   });
 });

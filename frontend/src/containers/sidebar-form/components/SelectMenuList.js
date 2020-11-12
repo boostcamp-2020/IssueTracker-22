@@ -14,10 +14,10 @@ const List = styled.ul`
   overflow-y: auto;
 `;
 
-const SelectMenuList = ({ items, loading, label, onItemClick, selectedItems }) => {
+const SelectMenuList = ({ items, loading, label, onItemClick, selectedItems, id }) => {
   let list = <div>loading...</div>;
   const { success, content } = items;
-
+  const issueId = id ? id : null;
   if (!loading && success) {
     switch (label) {
       case selectMenuMode.Assignees[0]:
@@ -32,6 +32,7 @@ const SelectMenuList = ({ items, loading, label, onItemClick, selectedItems }) =
               user={item}
               onItemClick={onItemClick}
               selected={selected}
+              issueId={issueId}
             />
           )
         });
@@ -48,6 +49,7 @@ const SelectMenuList = ({ items, loading, label, onItemClick, selectedItems }) =
             label={item}
             onItemClick={onItemClick}
             selected={selected}
+            issueId={issueId}
           />)
         });
         break;
@@ -63,6 +65,7 @@ const SelectMenuList = ({ items, loading, label, onItemClick, selectedItems }) =
             milestone={item}
             onItemClick={onItemClick}
             selected={selected}
+            issueId={issueId}
           />);
         });
         break;

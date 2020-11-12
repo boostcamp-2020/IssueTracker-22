@@ -1,53 +1,66 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import IssueBox from './IssueBox';
-import renderIssueLowerBox from './IssueLowerBox';
-import renderIssueUpperBox from './IssueUpperBox';
+import IssueLowerBox from './IssueLowerBox';
+import IssueUpperBox from './IssueUpperBox';
 import IssueAssignee from './IssueAssignee';
 // import IssueMilestone from './issueMilestone';
-import { svgOpen } from '../../../assets/svgPath';
+import { svgOpen, svgClose } from '../../../assets/svgPath';
+import { parse } from '../../../lib/query';
 
-class IssueInfo extends Component {
-  render() {
-    const { id } = this.props.issue;
+const IssueInfo = ({ issue }) => {
+  const drawSVG = (issue) => {
+    if (issue.is_open > 0) {
+      return (
+        <svg style={{ fill: '#22863A' }} viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+          {svgOpen}
+        </svg>
+      );
+    }
     return (
-      <IssueBox id={id}>
-        <div style={{ padding: '8px 0px 8px 16px' }}>
-          <input type="checkbox" name="issue-checkbox"/>
-        </div>
-        <div style={{ padding: '8px 0px 0px 16px' }}>
-          <svg style={{ fill: '#22863A' }} viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-            {svgOpen}
-          </svg>
-        </div>
-        <div className="Issue-ContentBox" style={{ padding: '8px' }}>
-          {renderIssueUpperBox(this.props)}
-          {renderIssueLowerBox(this.props.issue)}
-        </div>
-        <IssueAssignee>
-          <img
-            src="https://user-images.githubusercontent.com/48170519/90837801-0cede580-e38e-11ea-9b72-77c621e0f0fc.PNG"
-            style={{ width: '20px', height: '20px', borderRadius: '70%' }}
-          />
-        </IssueAssignee>
-      </IssueBox>
+      <svg style={{ fill: 'red' }} viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+        {svgClose}
+      </svg>
     );
-  }
-}
-
-class IssueList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = this.props.data;
-  }
-
-  render() {
-    const Issues = (data) => data.map((issue) => (<IssueInfo issue={issue}/>));
-    return (
-      <div>
-        {Issues(this.state.content.issues)}
+  };
+  return (
+    <IssueBox id={issue.id}>
+      <div style={{ padding: '8px 0px 8px 16px' }}>
+        <input type="checkbox" name="issue-checkbox"/>
       </div>
-    );
-  }
-}
+      <div style={{ padding: '8px 0px 0px 16px' }}>
+        {drawSVG(issue)}
+      </div>
+      <div className="Issue-ContentBox" style={{ padding: '8px' }}>
+        <IssueUpperBox issue={issue}/>
+        <IssueLowerBox issue={issue}/>
+      </div>
+      <IssueAssignee>
+        <img
+          src={issue.user.profile_url}
+          style={{ width: '20px', height: '20px', borderRadius: '70%' }}
+        />
+      </IssueAssignee>
+    </IssueBox>
+  );
+};
+
+const IssueList = ({ issues }) => {
+  const query = parse(useLocation().search);
+  const Issues = (data, openState) => data.map((issue) => {
+    if (issue.is_open === openState) {
+      return (<IssueInfo issue={issue}/>);
+    }
+  });
+  const [state, setState] = useState(1);
+  useEffect(() => {
+    setState(query.isopen === '1' ? 1 : 0);
+  });
+  return (
+    <div>
+      {Issues(issues, state)}
+    </div>
+  );
+};
 
 export default IssueList;

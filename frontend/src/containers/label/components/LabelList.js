@@ -14,7 +14,7 @@ const ListHeader = styled.div`
     border-top-right-radius: 6px;
 `;
 
-const LabelList = ({ labels }) => (
+const LabelList = ({ labels, updateTargetLabel }) => (
   <ListWrapper>
     <ListHeader>
       {labels.length}
@@ -23,7 +23,16 @@ const LabelList = ({ labels }) => (
     </ListHeader>
     {labels.map(({
       id, name, description, color_code: color,
-    }) => <LabelItem key={id} id={id} name={name} description={description} color={color}/>) }
+    }) => (
+      <LabelItem
+        key={id}
+        id={id}
+        name={name}
+        description={description}
+        color={color}
+        updateTargetLabel={updateTargetLabel}
+      />
+    )) }
   </ListWrapper>
 );
 

@@ -34,35 +34,38 @@ const SvgWrapper = styled.svg`
 `;
 
 const SearchBar = ({ history }) => {
-  const [value, setValue] = useState(0);
+  // const [value, setValue] = useState(0);
   const onChangeHandler = (e) => {
-    setValue(e.target.value);
+    // setValue(e.target.value);
   };
-  const parsingValue = () => {
-    const query = value.split(' ').reduce((pre, v, i) => {
-      const type = v.split(':')[0];
-      const option = v.split(':')[1];
-      if (v === 'is:open') {
-        return `${pre}${i === 0 ? '' : '&'}isopen=true`;
-      } if (v === 'is:close') {
-        return `${pre}${i === 0 ? '' : '&'}isopen=false`;
-      } if (type === 'user') {
-        return `${pre}${i === 0 ? '' : '&'}user=${option}`;
-      } if (type === 'label') {
-        return `${pre}${i === 0 ? '' : '&'}label=${option}`;
-      } if (type === 'milestone') {
-        return `${pre}${i === 0 ? '' : '&'}milestone=${option}`;
-      } if (type === 'assignee') {
-        return `${pre}${i === 0 ? '' : '&'}assignee=${option}`;
+  const parsingValue = (data) => {
+    const query = data.split(' ').reduce((pre, v, i) => {
+      if (v.includes(':')) {
+        const type = v.split(':')[0];
+        const option = v.split(':')[1];
+        if (v === 'is:open') {
+          return `${pre}${i === 0 ? '' : '&'}isopen=1`;
+        } if (v === 'is:close') {
+          return `${pre}${i === 0 ? '' : '&'}isopen=0`;
+        } if (type === 'author') {
+          return `${pre}${i === 0 ? '' : '&'}author=${option}`;
+        } if (type === 'label') {
+          return `${pre}${i === 0 ? '' : '&'}label=${option}`;
+        } if (type === 'milestone') {
+          return `${pre}${i === 0 ? '' : '&'}milestone=${option}`;
+        } if (type === 'assignee') {
+          return `${pre}${i === 0 ? '' : '&'}assignee=${option}`;
+        }
+      } else {
+        return `${pre}${i === 0 ? '' : '&'}title=${v}`;
       }
     }, `${pathUri.issue}?`);
     return query;
   };
 
   const keyPressHandler = (e) => {
-    const link = parsingValue();
+    const link = parsingValue(e.target.value);
     if (e.key == 'Enter') {
-      console.log(link);
       history.push(link);
     }
   };
