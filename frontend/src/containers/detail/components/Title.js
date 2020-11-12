@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import TitleBox from './TitleBox';
 
 const TitleStyle = styled.div`
   box-sizing: border-box;
@@ -22,13 +23,31 @@ const IdStyle = styled.div`
   margin-left: 10px;
   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
 `;
+const Button = styled.button`
+  float: left;
+  margin: 0;
+  padding: 3px 12px;
+  font-size: 16px;
+  line-height: 20px;
+  color: #fff;
+  background-color: #2ea44f;
+  border: 1px solid;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: auto;
+  height: 40px;
+  width: 70px
+`;
 
 const Title = (data) => {
-  const { children } = data;
+
   return (
     <>
-      <TitleStyle>{ children.title }</TitleStyle>
+    <TitleBox>
+      <TitleStyle>{ title }</TitleStyle>
       <IdStyle>#{ children.id }</IdStyle>
+      <Button>Edit</Button>
+    </TitleBox>
     </>
   );
 };

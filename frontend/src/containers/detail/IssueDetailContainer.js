@@ -2,8 +2,6 @@ import React, {useState, useEffect, useContext }from 'react';
 import styled from 'styled-components';
 import Header from '../../components/Header';
 import Title from './components/Title';
-import TitleBox from './components/TitleBox';
-import TitleEditButton from './components/TitleEditButton';
 import TitleDetail from './components/TitleDetail';
 import IssueContent from './components/IssueContent';
 import List from './components/List';
@@ -65,10 +63,7 @@ const IssueDetailContainer = () => {
     return <>
       <Header />
       <Detail>
-        <TitleBox>
-          <Title>{ data }</Title>
-          <TitleEditButton />
-        </TitleBox>
+        <Title>{ data }</Title>
         <TitleDetail>{ data }</TitleDetail>
         <IssueContent>
           <List>
