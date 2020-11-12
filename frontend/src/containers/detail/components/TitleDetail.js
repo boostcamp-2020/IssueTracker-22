@@ -58,7 +58,7 @@ const Close = styled.div`
 `;
 const TitleDetail = (data) => {
   const { children } = data;
-  const isOpen = children.is_open === 1 ? <Open>open</Open> : <Close>close</Close>;
+  const isOpen = children.is_open === 1 ? <Open>open</Open> : <Close>closed</Close>;
   const status = children.is_open === 1 ? 'open' : 'close';
   const { length } = children.comments;
   const time = RelativeTime(children.createdAt);
