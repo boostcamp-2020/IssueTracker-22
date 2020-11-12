@@ -40,25 +40,25 @@ const SearchBar = ({ history }) => {
   };
   const parsingValue = (data) => {
     const query = data.split(' ').reduce((pre, v, i) => {
-      if(v.includes(":")) {
-      const type = v.split(':')[0];
-      const option = v.split(':')[1];
-      if (v === 'is:open') {
-        return `${pre}${i === 0 ? '' : '&'}isopen=1`;
-      } if (v === 'is:close') {
-        return `${pre}${i === 0 ? '' : '&'}isopen=0`;
-      } if (type === 'author') {
-        return `${pre}${i === 0 ? '' : '&'}author=${option}`;
-      } if (type === 'label') {
-        return `${pre}${i === 0 ? '' : '&'}label=${option}`;
-      } if (type === 'milestone') {
-        return `${pre}${i === 0 ? '' : '&'}milestone=${option}`;
-      } if (type === 'assignee') {
-        return `${pre}${i === 0 ? '' : '&'}assignee=${option}`;
+      if (v.includes(':')) {
+        const type = v.split(':')[0];
+        const option = v.split(':')[1];
+        if (v === 'is:open') {
+          return `${pre}${i === 0 ? '' : '&'}isopen=1`;
+        } if (v === 'is:close') {
+          return `${pre}${i === 0 ? '' : '&'}isopen=0`;
+        } if (type === 'author') {
+          return `${pre}${i === 0 ? '' : '&'}author=${option}`;
+        } if (type === 'label') {
+          return `${pre}${i === 0 ? '' : '&'}label=${option}`;
+        } if (type === 'milestone') {
+          return `${pre}${i === 0 ? '' : '&'}milestone=${option}`;
+        } if (type === 'assignee') {
+          return `${pre}${i === 0 ? '' : '&'}assignee=${option}`;
+        }
+      } else {
+        return `${pre}${i === 0 ? '' : '&'}title=${v}`;
       }
-    } else {
-      return `${pre}${i === 0 ? '' : '&'}title=${v}`;
-    }
     }, `${pathUri.issue}?`);
     return query;
   };

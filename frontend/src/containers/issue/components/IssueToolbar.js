@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import {useHistory, useLocation} from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { svgOpen, svgCheck } from '../../../assets/svgPath';
-import pathUri from '../../../constants/path'
-import { parse, construct, changeIsopen} from '../../../lib/query'
-import ToolbarModal from '../../../components/ToolbarModal'
-import FilterAuthor from '../../../components/FilterAuthor'
+import pathUri from '../../../constants/path';
+import { parse, construct, changeIsopen } from '../../../lib/query';
+import ToolbarModal from '../../../components/ToolbarModal';
+import FilterAuthor from '../../../components/FilterAuthor';
 
 const Toolbar = styled.div`
     display: flex;
@@ -17,9 +17,9 @@ const Toolbar = styled.div`
 `;
 
 const ToolbarState = styled.div`
-    color : ${(props) => props.isClicked > 0 ? "#24292e" : "#586069"};
-    fill : ${(props) => props.isClicked > 0 ? "#24292e" : "#586069"};
-    font-weight : ${(props) => props.isClicked > 0 ? "900" : "normal"};
+    color : ${(props) => (props.isClicked > 0 ? '#24292e' : '#586069')};
+    fill : ${(props) => (props.isClicked > 0 ? '#24292e' : '#586069')};
+    font-weight : ${(props) => (props.isClicked > 0 ? '900' : 'normal')};
     margin : 0px 4px 0px 4px;
     font-size : 14px;
 `;
@@ -55,23 +55,23 @@ const dropdownCaret = {
   borderLeft: '4px solid transparent',
 };
 
-const IssueToolbar = ({issues}) => {
-  const history = useHistory()
-  const query = parse(useLocation().search)
+const IssueToolbar = ({ issues }) => {
+  const history = useHistory();
+  const query = parse(useLocation().search);
   const countOpenIssue = () => {
-    if(issues.length > 0) {
-      let open = 0
-      let close = 0
-      issues.forEach( issue => {
-        if(issue.is_open > 0) open++;
+    if (issues.length > 0) {
+      let open = 0;
+      let close = 0;
+      issues.forEach((issue) => {
+        if (issue.is_open > 0) open++;
         else close++;
-      })
-      return [open, close]
-    } else return [0, 0]
-  }
-  const FilterELList = (items) => { return items.map(item => {
-    const [modalVisible, setModalVisible] = useState(false)
-    const onModal = () => {setModalVisible(true);console.log(modalVisible)};
+      });
+      return [open, close];
+    } return [0, 0];
+  };
+  const FilterELList = (items) => items.map((item) => {
+    const [modalVisible, setModalVisible] = useState(false);
+    const onModal = () => { setModalVisible(true); console.log(modalVisible); };
     const offModal = () => { setModalVisible(false); };
     return (
       <FilterEL onClick={onModal}>
@@ -81,39 +81,48 @@ const IssueToolbar = ({issues}) => {
           modalVisible && <ToolbarModal onClose={offModa1l} children={<a>hi</a>}/>
         }
       </FilterEL>
-    )
-  })
-  }
+    );
+  });
   const clickHandler = (type) => {
-    let queryString = construct(query)
+    const queryString = construct(query);
     history.push({
       pathname: pathUri.issue,
-      search: changeIsopen(queryString, type)
-    })
-  }
-  const filterItems = ['Author', 'Label', 'Projects', 'MileStones', 'Assignees', 'Sort']
-  const [opened, closed] = countOpenIssue()
-  const [state, setState] = useState(1)
+      search: changeIsopen(queryString, type),
+    });
+  };
+  const filterItems = ['Author', 'Label', 'Projects', 'MileStones', 'Assignees', 'Sort'];
+  const [opened, closed] = countOpenIssue();
+  const [state, setState] = useState(1);
   useEffect(() => {
-    setState(query.isopen === "1" ? 1 : -1)
-  })
+    setState(query.isopen === '1' ? 1 : -1);
+  });
   return (
     <Toolbar>
       <div style={{ padding: '0px 16px 0px 0px' }}>
         <input type="checkbox" name="issue-checkbox"/>
       </div>
       <ToolbarStateWrapper>
-        <ToolbarState isClicked={state} onClick={() => clickHandler("open")}>
-          <svg  viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true" style={{ margin: '2px 0px 2px 4px' }}>
+        <ToolbarState isClicked={state} onClick={() => clickHandler('open')}>
+          <svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true" style={{ margin: '2px 0px 2px 4px' }}>
             {svgOpen}
           </svg>
-          <a> {opened} Open</a>
+          <a>
+            {' '}
+            {opened}
+            {' '}
+            Open
+          </a>
         </ToolbarState>
-        <ToolbarState isClicked={state * -1} onClick={() => clickHandler("close")}>
-          <svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true" style={{ margin : '2px 0px 2px 4px' }}>
+        <ToolbarState isClicked={state * -1} onClick={() => clickHandler('close')}>
+          <svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true" style={{ margin: '2px 0px 2px 4px' }}>
             {svgCheck}
           </svg>
-          <a> {closed} Close</a>
+          <a>
+            {' '}
+            {closed}
+            {' '}
+            Close
+          </a>
         </ToolbarState>
       </ToolbarStateWrapper>
       <ToolbarFilter>
@@ -121,7 +130,6 @@ const IssueToolbar = ({issues}) => {
       </ToolbarFilter>
     </Toolbar>
   );
-
-}
+};
 
 export default IssueToolbar;

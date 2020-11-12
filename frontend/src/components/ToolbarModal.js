@@ -18,20 +18,20 @@ z-index: 999;
 `;
 
 const ToolbarModal = ({
-    className, onClose, visible, children,
-  }) => {
-    const onMaskClick = (e) => {
-      if (e.target === e.currentTarget) {
-        onClose(e);
-      }
-    };
-    return (
-      <>
-        <ModalItemList onClick={onMaskClick} tabIndex="-1" visible={visible}>
-          {children}
-        </ModalItemList>
-      </>
-    );
+  className, onClose, visible, children,
+}) => {
+  const onMaskClick = (e) => {
+    if (e.target === e.currentTarget) {
+      onClose(e);
+    }
+  };
+  return (
+    <>
+      <ModalItemList onClick={onMaskClick} tabIndex="-1" visible={visible}>
+        {children}
+      </ModalItemList>
+    </>
+  );
 };
 
 export default ToolbarModal;

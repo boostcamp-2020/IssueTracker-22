@@ -4,7 +4,7 @@ import apiUri from '../constants/api';
 
 const useIssues = () => {
   const [issues, setIssues] = useState([]);
-  const URL = apiUri.issues + useLocation().search
+  const URL = apiUri.issues + useLocation().search;
   useEffect(() => {
     fetch(URL, {
       method: 'GET',
@@ -18,6 +18,6 @@ const useIssues = () => {
       });
   }, []);
   return issues;
-}
+};
 
 export default useIssues;

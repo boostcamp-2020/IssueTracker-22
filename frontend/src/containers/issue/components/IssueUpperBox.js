@@ -14,7 +14,7 @@ const IssueUpperBoxWrapper = styled.div`
     }
 `;
 
-const IssueUpperBox = ({issue}) => {
+const IssueUpperBox = ({ issue }) => {
   const href = `/issues/${issue.id}`;
 
   return (

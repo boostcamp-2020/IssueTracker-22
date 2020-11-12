@@ -9,7 +9,7 @@ const IssueLowerBoxWrapper = styled.div`
     margin: 4px 0px 0px
 `;
 
-const IssueLowerBox = ({issue}) => {
+const IssueLowerBox = ({ issue }) => {
   const content = `#${issue.id} opened ${getRelativeTime(issue.updatedAt)}`;
   const milestone = () => {
     if (!issue.milestone) {

@@ -13,6 +13,6 @@ const Label = styled.div`
     margin: 2px;
 `;
 
-const Labels = ({labels}) => labels.map((label, i) => (<Label style={{ backgroundColor: 'lightblue' }}>{label.label.name}</Label>));
+const Labels = ({ labels }) => labels.map((label, i) => (<Label style={{ backgroundColor: 'lightblue' }}>{label.label.name}</Label>));
 
 export default Labels;

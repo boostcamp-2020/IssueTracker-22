@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import React, { useState } from 'react';
 import dropdownCaret from '../../../assets/styles/caret';
 import { svgX } from '../../../assets/svgPath';
-import Modal from '../../../components/Modal'
+import Modal from '../../../components/Modal';
 
 const SearchFilterWrapper = styled.div`
     position: relative;
