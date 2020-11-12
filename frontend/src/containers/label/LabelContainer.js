@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import NavBar from '@components/NavBar';
 import NewButton from '@components/NewButton';
@@ -16,11 +16,17 @@ const NavBarBox = styled.div`
 `;
 
 const ContentBox = styled.div`
-    padding: 10px 50px;
+    padding: 10px 5%;
+`;
+
+const FormWrapper = styled.div`
+    display: ${(props) => (props.visible ? 'block' : 'none')};
+    margin-bottom: 20px;
 `;
 
 const LabelContainer = () => {
   const [labels, setLabels] = useLabels();
+  const [formVisible, setFormVisible] = useState(false);
 
   const addNewLabel = (newLabel) => {
     setLabels([...labels, newLabel]);
@@ -39,13 +45,18 @@ const LabelContainer = () => {
     }
   };
 
+  const closeForm = () => setFormVisible(false);
+  const openForm = () => setFormVisible(true);
+
   return (
     <ContentBox>
       <NavBarBox>
         <NavBar/>
-        <NewButton>New label</NewButton>
+        <NewButton onClick={openForm}>New label</NewButton>
       </NavBarBox>
-      <LabelForm handleSubmit={handleSubmit}/>
+      <FormWrapper visible={formVisible}>
+        <LabelForm handleSubmit={handleSubmit} close={closeForm}/>
+      </FormWrapper>
       <LabelList labels={labels}/>
     </ContentBox>
   );

@@ -18,7 +18,7 @@ const FlexContainer = styled.div`
     align-items: flex-end;
 `;
 
-const LabelForm = ({ handleSubmit }) => {
+const LabelForm = ({ handleSubmit, close }) => {
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -32,6 +32,14 @@ const LabelForm = ({ handleSubmit }) => {
 
   const handleChange = ({ target }) => {
     setFormData({ ...formData, [target.name]: target.value });
+  };
+
+  const clearFormDataAndClose = () => {
+    setFormData({
+      name: '',
+      description: '',
+    });
+    close();
   };
 
   return (
@@ -61,7 +69,7 @@ const LabelForm = ({ handleSubmit }) => {
         </Label>
         <ColorPicker color={color} changeRandomColor={changeRandomColor}/>
         <ButtonWrapper>
-          <Button>Cancle</Button>
+          <Button type="button" onClick={clearFormDataAndClose}>Cancle</Button>
           <NewButton
             onClick={() => handleSubmit({ ...formData, color })}
             disabled={formData.name === ''}
