@@ -17,17 +17,19 @@ exports.list = asyncHandler(async (req, res, next) => {
     isopen,
     assignee,
     mention,
+    title
   } = req.query;
-  console.log(req.query)
   const filterUser = (user === undefined) ? {} : { nickname: user };
   const filterLabel = (label === undefined) ? {} : { name: label };
   const filterMilestone = (milestone === undefined) ? {} : { title: milestone };
   const filterIsopen = (isopen === undefined) ? {} : { is_open: isopen };
   const filterAssignee = (assignee === undefined) ? {} : { nickname: assignee };
   const filterMention = (mention === undefined) ? {} : { author_id: mention };
+  const filterTitle = (title === undefined) ? {} : {title: title}
   const issues = await Issue.findAll({
     attributes: ['id', 'title', 'description', 'createdAt', 'updatedAt', 'is_open'],
     // where: filterIsopen,
+    where: filterTitle,
     include: [
       {
         model: User,
