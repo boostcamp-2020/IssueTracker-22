@@ -34,12 +34,21 @@ const LabelForm = ({ handleSubmit, close }) => {
     setFormData({ ...formData, [target.name]: target.value });
   };
 
-  const clearFormDataAndClose = () => {
+  const clearFormData = () => {
     setFormData({
       name: '',
       description: '',
     });
+  };
+
+  const clearFormDataAndClose = () => {
+    clearFormData();
     close();
+  };
+
+  const submitAndClear = () => {
+    handleSubmit({ ...formData, color });
+    clearFormDataAndClose();
   };
 
   return (
@@ -71,7 +80,7 @@ const LabelForm = ({ handleSubmit, close }) => {
         <ButtonWrapper>
           <Button type="button" onClick={clearFormDataAndClose}>Cancle</Button>
           <NewButton
-            onClick={() => handleSubmit({ ...formData, color })}
+            onClick={submitAndClear}
             disabled={formData.name === ''}
           >
             Create label
