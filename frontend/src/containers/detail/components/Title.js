@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import TitleBox from './TitleBox';
+import apiUri from '../../../constants/api';
 
 const TitleStyle = styled.div`
   box-sizing: border-box;
@@ -80,8 +81,27 @@ const Title = (data) => {
   const changeMode = () => {
     setMode(!mode);
   }
-  const saveEditTitle = () => {
+  const saveEditTitle = async () => {
     //fetch로 update...
+    const body = {
+      issue_id: children.id,
+      title: title
+    }
+    const response = await fetch(apiUri.issueUpdate, {
+      mode: 'cors',
+      credentials: 'include',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    });
+    const { success, message } = await response.json();
+
+    if (!success) {
+      alert(message);
+      return;
+    }
     setBasicTitle(title);
     setMode(!mode);
   }
