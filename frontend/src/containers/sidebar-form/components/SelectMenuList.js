@@ -14,44 +14,57 @@ const List = styled.ul`
   overflow-y: auto;
 `;
 
-const SelectMenuList = ({ items, loading, label, onItemClick }) => {
+const SelectMenuList = ({ items, loading, label, onItemClick, selectedItems }) => {
   let list = <div>loading...</div>;
-
   const { success, content } = items;
+
   if (!loading && success) {
     switch (label) {
       case selectMenuMode.Assignees[0]:
         const { users } = content;
-        list = users.map((item) => (
-          <UserItem
-            key={item.id}
-            user={item}
-            onItemClick={onItemClick}
-            selected={false}
-          />
-        ));
+        
+        list = users.map((item) => {
+          const index = selectedItems.findIndex((val) => val.id === item.id);
+          const selected = index === -1 ? false : true;
+          return (
+            <UserItem
+              key={item.id}
+              user={item}
+              onItemClick={onItemClick}
+              selected={selected}
+            />
+          )
+        });
         break;
       case selectMenuMode.Labels[0]:
         const { labels } = content;
-        list = labels.map((item) => (
+        
+        list = labels.map((item) => {
+          const index = selectedItems.findIndex((val) => val.id === item.id);
+          const selected = index === -1 ? false : true;
+          return (
           <LabelItem
             key={item.id}
             label={item}
             onItemClick={onItemClick}
-            selected={false}
-          />
-        ));
+            selected={selected}
+          />)
+        });
         break;
       case selectMenuMode.Milestone[0]:
         const { milestones } = content;
-        list = milestones.map((item) => (
+        
+        list = milestones.map((item) => {
+          const index = selectedItems.findIndex((val) => val.id === item.id);
+          const selected = index === -1 ? false : true;
+          return (
           <MilestoneItem
             key={item.id}
             milestone={item}
             onItemClick={onItemClick}
-            selected={false}
-          />
-        ));
+            selected={selected}
+          />);
+        });
         break;
       default: break;
     }

@@ -76,7 +76,7 @@ const IssueDetailContainer = () => {
             {CommentList(data.comments)}
             <CreateComment data={data} callback={addComment} user={user}/>
           </List>
-          <Side />
+          <Side data={ data }/>
         </IssueContent>
       </Detail>
     </>;

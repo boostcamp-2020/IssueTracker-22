@@ -34,10 +34,9 @@ const Overlay = styled.div`
   right: 0;
 `;
 
-const SelectMenuContainer = ({ open, url, label, header, onOverlayClick, onItemClick }) => {
+const SelectMenuContainer = ({ open, url, label, header, onOverlayClick, onItemClick, selectedItems }) => {
   const [items, setItems] = useState({});
   const loading = useFetch(setItems, url);
-
   return (
     <>
       <Overlay open={open} onClick={onOverlayClick}/>
@@ -50,6 +49,7 @@ const SelectMenuContainer = ({ open, url, label, header, onOverlayClick, onItemC
           loading={loading}
           label={label}
           onItemClick={onItemClick}
+          selectedItems={selectedItems}
         />
       </SelectMenu>
     </>

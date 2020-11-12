@@ -40,13 +40,8 @@ const CreateComment = ({ data, callback, user }) => {
   
   const renderImageTag = async (file) => {
     const { name: imageAlt } = file;
-    // const uploadingImageText = `\n\n![Uploading ${imageAlt}...]()\n\n`;
-    // const uploadingDescription = issue.description + uploadingImageText;
-    // setIssue({ ...issue, description: uploadingDescription });
-      
     try {
       const imageUrl = await imageUploadHandler(file);
-      console.log(imageUrl);
       const imageTag = `\n\n<img alt="${imageAlt}" src="${imageUrl}">\n\n`;
       
       const newDescription = issue.description + imageTag;

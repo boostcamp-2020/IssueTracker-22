@@ -88,6 +88,7 @@ const SidebarFormContainer = ({ mode, selectedItems, setSelectedItems }) => {
           header={selectMenuHeader}
           onOverlayClick={toggleSelectMenu}
           onItemClick={onItemClick}
+          selectedItems={selectedItems}
         />
       </SidebarHeader>
 
