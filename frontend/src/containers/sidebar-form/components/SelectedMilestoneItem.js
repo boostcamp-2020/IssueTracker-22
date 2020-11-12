@@ -30,12 +30,10 @@ const SelectedMilestoneItem = ({ milestone }) => {
     id, title, description, due_date: dueDate, open_issues: openIssues, closed_issues: closedIssues, progress,
   } = milestone;
 
-  const progressPercent = (closedIssues / (+openIssues + +closedIssues)) * 100;
-
   return (
     <Wrapper>
       <ProgressBarBase>
-        <Progress percent={progressPercent} />
+        <Progress percent={progress * 100} />
       </ProgressBarBase>
       <MilestoneTitle>{title}</MilestoneTitle>
     </Wrapper>
