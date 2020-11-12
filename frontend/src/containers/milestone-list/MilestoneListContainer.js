@@ -13,10 +13,6 @@ const NavBarBox = styled.div`
     margin-bottom: 30px;
 `;
 
-const ContentBox = styled.div`
-    padding: 10px 50px;
-`;
-
 const MilestoneListContainer = () => {
   const milestones = useMilestones();
 
@@ -25,13 +21,13 @@ const MilestoneListContainer = () => {
   };
 
   return (
-    <ContentBox>
+    <>
       <NavBarBox>
         <NavBar/>
         <NewButton onClick={handleClick}>New milestone</NewButton>
       </NavBarBox>
       <MilestoneList milestones={milestones}/>
-    </ContentBox>
+    </>
   );
 };
 

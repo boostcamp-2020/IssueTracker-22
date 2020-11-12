@@ -15,10 +15,6 @@ const NavBarBox = styled.div`
     margin-bottom: 30px;
 `;
 
-const ContentBox = styled.div`
-    padding: 10px 5%;
-`;
-
 const FormWrapper = styled.div`
     display: ${(props) => (props.visible ? 'block' : 'none')};
     margin-bottom: 20px;
@@ -64,7 +60,7 @@ const LabelContainer = () => {
   const openForm = () => setFormVisible(true);
 
   return (
-    <ContentBox>
+    <>
       <NavBarBox>
         <NavBar/>
         <NewButton onClick={openForm}>New label</NewButton>
@@ -73,7 +69,7 @@ const LabelContainer = () => {
         <LabelForm handleSubmit={handleSubmit} close={closeForm}/>
       </FormWrapper>
       <LabelList labels={labels} updateTargetLabel={updateTargetLabel}/>
-    </ContentBox>
+    </>
   );
 };
 
