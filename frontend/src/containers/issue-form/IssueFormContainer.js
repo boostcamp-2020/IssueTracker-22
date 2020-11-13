@@ -20,8 +20,6 @@ const Sidebar = styled.div`
   align-items: stretch;
   min-width: 200px;
   padding: 0 10px;
-  font-size: 14px;
-  color: #636363;
 `;
 
 const IssueForm = ({ user }) => {
@@ -95,6 +93,7 @@ const IssueForm = ({ user }) => {
           onSubmit={onSubmit}
           issue={issue}
         />
+
         <Sidebar>
           <SidebarFormContainer
             mode={selectMenuMode.Assignees}

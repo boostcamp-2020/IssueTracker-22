@@ -17,7 +17,8 @@ const Input = styled.div`
 const IssueDetailContainer = styled.div`
   width: 100%;
   display: flex;
-  margin: 10px;
+  padding: 0 10px;
+  margin: 15px 0;
   font-size: 14px;
   color: #24292;
   line-height: 1.5;
@@ -26,8 +27,6 @@ const IssueDetailContainer = styled.div`
 
 const IssueDetailStyle = styled.div`
   width: 100%;
-  margin-bottom: 10px;
-  margin-left : 10px;
   border: 1px solid rgba(3, 102, 214, 0.2);
   border-radius: 6px;
   min-width : 100px;

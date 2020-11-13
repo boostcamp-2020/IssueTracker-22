@@ -4,8 +4,7 @@ const TitleContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 10px;
-  padding-right: 30px;
+  padding: 10px 0;
   background-color: white;
 `;
 

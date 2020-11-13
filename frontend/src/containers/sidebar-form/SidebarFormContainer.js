@@ -6,6 +6,13 @@ import SelectedUserItem from './components/SelectedUserItem';
 import SelectedMilestoneItem from './components/SelectedMilestoneItem';
 import SelectMenuContainer from './SelectMenuContainer';
 
+const Wrapper = styled.div`
+  font-size: 14px;
+  color: #636363;
+  padding: 10px 0;
+  border-bottom: 1px solid lightgray;
+`;
+
 const SidebarHeader = styled.div`
   display: flex;
   justify-content: space-between;
@@ -77,7 +84,7 @@ const SidebarFormContainer = ({ mode, selectedItems, setSelectedItems, issueId }
   };
 
   return (
-    <div style={{ padding: '10px 0', borderBottom: '1px solid lightgray' }}>
+    <Wrapper>
       <SidebarHeader>
         <SidebarTitle>{label}</SidebarTitle>
         <GearButton type="button" onClick={toggleSelectMenu}>@</GearButton>
@@ -96,8 +103,7 @@ const SidebarFormContainer = ({ mode, selectedItems, setSelectedItems, issueId }
       <SelectedItemList>
         {selectedItemList()}
       </SelectedItemList>
-
-    </div>
+    </Wrapper>
   );
 };
 

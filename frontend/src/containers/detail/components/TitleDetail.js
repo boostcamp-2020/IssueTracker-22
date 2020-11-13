@@ -9,7 +9,7 @@ const TitleDetailContainer = styled.div`
   color: #586069;
   border-bottom: 1px solid rgb(225, 228, 232);
   flex-wrap: wrap;
-  margin: 10px 20px;
+  margin: 10px 0;
 `;
 
 const Open = styled.div`

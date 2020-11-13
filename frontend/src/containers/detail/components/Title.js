@@ -8,10 +8,7 @@ const TitleStyle = styled.div`
   font-weight: 400;
   line-height: 1.25;
   font-size: 32px;
-  margin: .67em 0;  
-  margin-left: 20px;
   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
-
 `;
 
 const IdStyle = styled.div`
@@ -24,6 +21,7 @@ const IdStyle = styled.div`
   margin-left: 10px;
   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
 `;
+
 const EditButton = styled.button`
   float: left;
   margin: 0;

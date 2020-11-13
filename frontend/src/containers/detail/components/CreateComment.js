@@ -10,7 +10,8 @@ import imageUploadHandler from '../../../lib/imageUploadHandler';
 const CreateCommentContainer = styled.div`
   width: 100%;
   display: flex;
-  margin: 10px;
+  padding: 0 10px;
+  margin: 15px 0;
   font-size: 14px;
   color: #24292;
   line-height: 1.5;
@@ -34,19 +35,20 @@ const FlexRowBetween = styled.div`
   flex-wrap: wrap;
 `;
 
-const CreateComment = ({ data, callback, user, changeStatus }) => {
-  const [issue, setIssue] = useState({ description: '', });
+const CreateComment = ({
+  data, callback, user, changeStatus,
+}) => {
+  const [issue, setIssue] = useState({ description: '' });
   const { description } = issue;
-  
+
   const renderImageTag = async (file) => {
     const { name: imageAlt } = file;
     try {
       const imageUrl = await imageUploadHandler(file);
       const imageTag = `\n\n<img alt="${imageAlt}" src="${imageUrl}">\n\n`;
-      
+
       const newDescription = issue.description + imageTag;
       setIssue({ ...issue, description: newDescription });
-      
     } catch (error) {
       alert('failed to upload image');
     }
@@ -55,7 +57,6 @@ const CreateComment = ({ data, callback, user, changeStatus }) => {
     const { files } = e.target;
     files.forEach((file) => renderImageTag(file));
   };
-  
 
   const setIssueDesc = (e) => {
     setIssue({ ...issue, description: e.target.value });
@@ -64,27 +65,27 @@ const CreateComment = ({ data, callback, user, changeStatus }) => {
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    if(user !== null) {
+    if (user !== null) {
       await fetch(apiUri.comments, {
         mode: 'cors',
         credentials: 'include',
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           issue_id: data.id,
           description: issue.description,
         }),
-      }).then(res => {
+      }).then((res) => {
         callback(issue.description);
-        setIssue({description: '' });
+        setIssue({ description: '' });
       });
     } else {
       alert('로그인 후 이용 가능합니다.');
     }
   };
-  
+
   return (
     <>
       <CreateCommentContainer>

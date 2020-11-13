@@ -6,17 +6,16 @@ import UserProfileContainer from '../../user-profile/UserProfileContainer';
 const CommentDetailContainer = styled.div`
   width: 100%;
   display: flex;
-  margin: 10px;
+  padding: 0 10px;
+  margin: 15px 0;
   font-size: 14px;
-  color: #24292;
+  color: lightgray;
   line-height: 1.5;
   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
 `;
 
 const CommentDetailStyle = styled.div`
   width: 100%;
-  margin-bottom: 10px;
-  margin-left : 10px;
   border: 1px solid;
   border-radius: 6px;
   min-width : 100px;
@@ -29,7 +28,7 @@ const CommentTitle = styled.div`
   min-height: 50px;
   padding-right: 16px;
   padding-left: 16px;
-  border-bottom: 1px solid;
+  border-bottom: 1px solid lightgray;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
   font-size: 14px;
@@ -40,7 +39,6 @@ const CommentDescription = styled.div`
   min-height: 200px;
   padding: 10px;
 `;
-
 
 const Author = styled.div`
   margin: auto 0;
@@ -61,6 +59,7 @@ const Info = styled.div`
 `;
 
 const Description = styled.div`
+  color: black;
   margin: auto 0;
 `;
 

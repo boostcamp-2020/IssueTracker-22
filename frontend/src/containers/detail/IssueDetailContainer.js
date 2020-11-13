@@ -3,13 +3,17 @@ import styled from 'styled-components';
 import Title from './components/Title';
 import TitleDetail from './components/TitleDetail';
 import IssueContent from './components/IssueContent';
-import List from './components/List';
+// import List from './components/List';
 import IssueDetail from './components/IssueDetail';
 import CommentList from './components/CommentList';
 import Side from './components/Side';
 import CreateComment from './components/CreateComment';
 import apiUri from '../../constants/api';
 import userContext from '../../lib/userContext';
+
+const IssueMain = styled.div`
+  flex: 3 3 0;
+`;
 
 const IssueDetailContainer = () => {
   const [data, setData] = useState([]);
@@ -50,13 +54,13 @@ const IssueDetailContainer = () => {
       const comments = data.comments.concat(comment);
       setData({ ...data, comments });
     }
-  }
+  };
 
   const changeStatus = () => {
     const status = data.is_open ? 0 : 1;
     setData({ ...data, is_open: status });
-  }
-  
+  };
+
   getData();
   if (!loading) {
     return (
@@ -64,11 +68,13 @@ const IssueDetailContainer = () => {
         <Title>{ data }</Title>
         <TitleDetail>{ data }</TitleDetail>
         <IssueContent>
-          <List>
+
+          <IssueMain>
             <IssueDetail>{ data }</IssueDetail>
             {CommentList(data.comments)}
             <CreateComment data={data} callback={addComment} user={user} changeStatus={changeStatus}/>
-          </List>
+          </IssueMain>
+
           <Side data={data}/>
         </IssueContent>
       </>
