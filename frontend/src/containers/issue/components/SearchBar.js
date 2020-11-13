@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import { svg돋보기 } from '../../../assets/svgPath';
 import pathUri from '../../../constants/path';
+import {pushQuery} from '../../../lib/query'
 
 const SearchBarWrapper = styled.div`
     display : flex;
@@ -37,9 +38,7 @@ const SvgWrapper = styled.svg`
 `;
 
 const SearchBar = ({ history }) => {
-  // const [value, setValue] = useState(0);
   const onChangeHandler = (e) => {
-    // setValue(e.target.value);
   };
   const parsingValue = (data) => {
     const query = data.split(' ').reduce((pre, v, i) => {
@@ -58,18 +57,25 @@ const SearchBar = ({ history }) => {
           return `${pre}${i === 0 ? '' : '&'}milestone=${option}`;
         } if (type === 'assignee') {
           return `${pre}${i === 0 ? '' : '&'}assignee=${option}`;
-        }
+        } if (type === 'mention') {
+          return `${pre}${i === 0 ? '' : '&'}mention=${option}`;
+        } 
       } else {
-        return `${pre}${i === 0 ? '' : '&'}title=${v}`;
+        if(v) return `${pre}${i === 0 ? '' : '&'}title=${v}`;
       }
-    }, `${pathUri.issue}?`);
+    }, `?`);
     return query;
   };
 
   const keyPressHandler = (e) => {
-    const link = parsingValue(e.target.value);
+    const link = parsingValue(e.target.value)
+    console.log(link)
+    let v = pushQuery(link, "isopen", "1")
     if (e.key == 'Enter') {
-      history.push(link);
+      history.push({
+        pathname:pathUri.issue,
+        search: v
+      });
     }
   };
   return (
