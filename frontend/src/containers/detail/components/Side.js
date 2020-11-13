@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import selectMenuMode from '../../../constants/selectMenuMode';
-import SidebarFormContainer from '../../sidebar-form/SidebarFormContainer';
+import SidebarFormContainer from '@containers/sidebar-form/SidebarFormContainer';
 
 const FlexContainer = styled.div`
     display: flex;
