@@ -5,16 +5,23 @@ import { Link } from 'react-router-dom';
 const StyledLink = styled(Link)`
     background-color: ${(props) => (props.active ? '#0366d6' : 'white')};
     color: ${(props) => (props.active ? 'white' : 'black')};
-    padding: 8px 16px;
-    border: 1px lightgrey solid;
+    padding: 8px 15px;
+    border: 1px lightgray solid;
     border-radius: 5px;
-
     &:visited  {
         color: ${(props) => (props.active ? 'white' : 'black')};
     }
-
     &:hover {
         background-color: ${(props) => (props.active ? '#0366d6' : 'rgba(225, 228, 232, 0.5)')};
+    }
+    :first-child {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-right: none;
+    }
+    :last-child {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
     }
 `;
 

@@ -8,9 +8,12 @@ const SearchBarWrapper = styled.div`
     display : flex;
     flex-direction : row;
     vertical-align: middle;
+    align-items: center;
     text-align: middle;
     border: 1px solid #e1e4e8;
+    border-radius: 0px 6px 6px 0px;
     width: auto;
+    overflow: hidden;
 `;
 
 const SearchBarInput = styled.input`
@@ -30,7 +33,7 @@ const SearchBarInput = styled.input`
 
 const SvgWrapper = styled.svg`
     alignment-baseline: middle;
-    margin: 4px;
+    margin: 0 5px 0 15px;
 `;
 
 const SearchBar = ({ history }) => {
@@ -71,9 +74,11 @@ const SearchBar = ({ history }) => {
   };
   return (
     <SearchBarWrapper>
+
       <SvgWrapper viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
         {svg돋보기}
       </SvgWrapper>
+
       <SearchBarInput type="search" onKeyPress={keyPressHandler} placeholder="Search all issues" onChange={onChangeHandler}/>
     </SearchBarWrapper>
   );

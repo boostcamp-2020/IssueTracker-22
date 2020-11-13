@@ -4,11 +4,9 @@ import styled from 'styled-components';
 import IssueToolbar from './components/IssueToolbar';
 import IssueList from './components/IssueList';
 import ToolButtons from './components/ToolButtons';
-import useLabels from '../../lib/useLabels';
-import useMilestones from '../../lib/useMilestones';
-import useIssues from '../../lib/useIssues';
-import { parse } from '../../lib/query';
-import apiUri from '../../constants/api';
+import useLabels from '@lib/useLabels';
+import useMilestones from '@lib/useMilestones';
+import apiUri from '@constants/api';
 
 const IssueContainer = styled.div`
     display: flex;
@@ -24,13 +22,11 @@ const Issue = ({ location }) => {
 
   useEffect(() => {
     const URL = apiUri.issues + location.search;
-    console.log(URL);
     fetch(URL, {
       method: 'GET',
       mode: 'cors',
     }).then((res) => res.json())
       .then((res) => {
-        console.log(res);
         if (res.success) {
           const newIssues = [...res.content.issues];
           setIssues(newIssues);
