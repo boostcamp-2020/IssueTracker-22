@@ -39,7 +39,7 @@ const getValue = (str, key) => {
 const pushQuery = (str, key, value) => {
   const queryObject = parse(str);
   for (const i in queryObject) {
-    if(i === key) return
+    if(i === key) return construct(queryObject)
   }
   queryObject[key] = value
   return construct(queryObject);
