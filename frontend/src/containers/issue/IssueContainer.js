@@ -18,7 +18,7 @@ const IssueContainer = styled.div`
     border-radius: 6px;
 `;
 const Issue = ({ location }) => {
-  const lables = useLabels();
+  const [lables] = useLabels();
   const milestones = useMilestones();
   const [issues, setIssues] = useState([]);
 
