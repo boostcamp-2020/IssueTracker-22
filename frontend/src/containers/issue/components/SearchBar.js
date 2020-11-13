@@ -22,7 +22,7 @@ const SearchBarInput = styled.input`
     background-color: white;
     background-repeat: no-repeat;
     background-position: right 8px center;
-    width: 100%!important;
+    width: 500px;
     outline: none;
     box-shadow: #e1e4e8;
     border: 0px;

@@ -7,7 +7,7 @@ const TitleDetailContainer = styled.div`
   padding-bottom: 8px;
   font-size: 14px;
   color: #586069;
-  border-bottom: 1px solid;
+  border-bottom: 1px solid rgb(225, 228, 232);
   flex-wrap: wrap;
   margin: 10px 20px;
 `;

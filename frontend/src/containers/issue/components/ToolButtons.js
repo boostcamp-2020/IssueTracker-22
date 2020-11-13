@@ -8,15 +8,32 @@ import NewIssueButton from './NewIssueButton';
 const ToolButtonWrapper = styled.div`
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+`;
+
+const NavBarWrapper = styled.div`
+    margin: 0px 15px;
+`;
+
+const SearchBox = styled.div`
+    display: inline-flex;
     align-items: center;
 `;
 
 const ToolButtons = ({ labels, milestones }) => (
   <ToolButtonWrapper>
-    <SearchFilter/>
-    <SearchBar/>
-    <NavBar labelCount={labels.length} milestoneCount={milestones.length}/>
-    <NewIssueButton />
+    <SearchBox>
+      <SearchFilter/>
+      <SearchBar/>
+    </SearchBox>
+    <SearchBox>
+      <NavBarWrapper>
+        <NavBar labelCount={labels.length} milestoneCount={milestones.length}/>
+      </NavBarWrapper>
+      <NewIssueButton />
+    </SearchBox>
   </ToolButtonWrapper>
 );
 

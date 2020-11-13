@@ -1,11 +1,16 @@
 import React from 'react';
-import GlobalStyle from '../assets/styles/GlobalStyle';
-import IssueDetailContainer from '../containers/detail/IssueDetailContainer';
+import Header from '@components/Header';
+import ContentBox from '@components/ContentBox';
+import GlobalStyle from '@assets/styles/GlobalStyle';
+import IssueDetailContainer from '@containers/detail/IssueDetailContainer';
 
 const Issue = () => (
   <>
     <GlobalStyle/>
-    <IssueDetailContainer/>
+    <Header />
+    <ContentBox>
+      <IssueDetailContainer/>
+    </ContentBox>
   </>
 );
 

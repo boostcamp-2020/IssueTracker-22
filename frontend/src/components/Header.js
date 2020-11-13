@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import GitHubIcon from '../assets/icon/GitHubIcon';
+import GitHubIcon from '@assets/icon/GitHubIcon';
+import pathUri from '@constants/path';
 
 const HeaderWrapper = styled.header`
   color: white;
@@ -20,13 +22,21 @@ const IconWrapper = styled.div`
   margin: 5px;
 `;
 
+const StyledLink = styled(Link)`
+  &:visited  {
+    color: white;
+  }
+`;
+
 const Header = () => (
   <HeaderWrapper>
     <Title>
       <IconWrapper>
         <GitHubIcon/>
       </IconWrapper>
-      <h2>ISSUES</h2>
+      <StyledLink to={pathUri.issue}>
+        <h2>ISSUES</h2>
+      </StyledLink>
     </Title>
   </HeaderWrapper>
 );
