@@ -50,8 +50,13 @@ const IssueDetailContainer = () => {
       const comments = data.comments.concat(comment);
       setData({ ...data, comments });
     }
-  };
+  }
 
+  const changeStatus = () => {
+    const status = data.is_open ? 0 : 1;
+    setData({ ...data, is_open: status });
+  }
+  
   getData();
   if (!loading) {
     return (
@@ -62,7 +67,7 @@ const IssueDetailContainer = () => {
           <List>
             <IssueDetail>{ data }</IssueDetail>
             {CommentList(data.comments)}
-            <CreateComment data={data} callback={addComment} user={user}/>
+            <CreateComment data={data} callback={addComment} user={user} changeStatus={changeStatus}/>
           </List>
           <Side data={data}/>
         </IssueContent>

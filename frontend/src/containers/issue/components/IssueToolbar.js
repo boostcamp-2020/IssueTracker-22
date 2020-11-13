@@ -57,7 +57,14 @@ const dropdownCaret = {
 
 const IssueToolbar = ({ issues }) => {
   const history = useHistory();
-  const query = parse(useLocation().search);
+  const location = useLocation();
+  if (location.search.length === 0) {
+    history.push({
+      pathname: pathUri.issue,
+      search: "?isopen=1",
+    })
+  }
+  const query = parse(location.search);
   const countOpenIssue = () => {
     if (issues.length > 0) {
       let open = 0;

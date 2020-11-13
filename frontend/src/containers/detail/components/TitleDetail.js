@@ -42,31 +42,34 @@ const Info = styled.div`
   text-decoration: none;
   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
 `;
-
+const Close = styled.div`
+  margin-right: 8px;
+  color: #fff;
+  background-color: #D73A49;
+  border-color: #fff;
+  border: 1px solid;
+  display: inline-block;
+  padding: 5px 12px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: center;
+  white-space: nowrap;
+  border-radius: 0.7em;
+`;
 const TitleDetail = (data) => {
   const { children } = data;
-  const isOpen = children.is_open === 1 ? 'open' : 'close';
+  const isOpen = children.is_open === 1 ? <Open>open</Open> : <Close>closed</Close>;
+  const status = children.is_open === 1 ? 'open' : 'close';
   const { length } = children.comments;
   const time = RelativeTime(children.createdAt);
 
   return (
     <>
       <TitleDetailContainer>
-        <Open>{isOpen}</Open>
+        {isOpen}
         <Info>
           <UserName>{children.user.nickname}</UserName>
-          <div>
-            {isOpen}
-            ed this issue
-            {' '}
-            {time}
-            {' '}
-            ·
-            {' '}
-            {length}
-            {' '}
-            comment
-          </div>
+          <div>{status}ed this issue {time} · {length} comment</div>
         </Info>
       </TitleDetailContainer>
     </>
