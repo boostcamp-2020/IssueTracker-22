@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import selectMenuMode from '../../constants/selectMenuMode';
+import selectMenuMode from '@constants/selectMenuMode';
+import GearIcon from '@assets/icon/GearIcon';
 import SelectedLabelItem from './components/SelectedLabelItem';
 import SelectedUserItem from './components/SelectedUserItem';
 import SelectedMilestoneItem from './components/SelectedMilestoneItem';
@@ -87,7 +88,9 @@ const SidebarFormContainer = ({ mode, selectedItems, setSelectedItems, issueId }
     <Wrapper>
       <SidebarHeader>
         <SidebarTitle>{label}</SidebarTitle>
-        <GearButton type="button" onClick={toggleSelectMenu}>@</GearButton>
+        <GearButton type="button" onClick={toggleSelectMenu}>
+          <GearIcon/>
+        </GearButton>
         <SelectMenuContainer
           open={open}
           url={url}
