@@ -34,7 +34,7 @@ const FlexRowBetween = styled.div`
   flex-wrap: wrap;
 `;
 
-const CreateComment = ({ data, callback, user }) => {
+const CreateComment = ({ data, callback, user, changeStatus }) => {
   const [issue, setIssue] = useState({ description: '', });
   const { description } = issue;
   
@@ -92,7 +92,7 @@ const CreateComment = ({ data, callback, user }) => {
         <Input>
           <CommentEditor onChange={setIssueDesc} value={description} onFileUpload={uploadFile}/>
           <FlexRowBetween>
-            <ChangeStatusButton issue={data} />
+            <ChangeStatusButton issue={data} user={user} callback={changeStatus} />
             <CommentButton onClick={submitHandler} target={issue} />
           </FlexRowBetween>
         </Input>

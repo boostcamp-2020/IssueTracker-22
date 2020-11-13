@@ -147,7 +147,7 @@ exports.update = asyncHandler(async (req, res, next) => {
     issue_id, title, description, is_open, assignee_id, label_id, milestone_id, mode,
   } = req.body;
 
-  if (title || description || is_open) {
+  if (title || description || is_open === 0 || is_open === 1) {
     await Issue.update(
       {
         title,
