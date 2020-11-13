@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import GlobalStyle from '@assets/styles/GlobalStyle';
 import Header from '@components/Header';
+import ContentBox from '@components/ContentBox';
 import userContext from '@lib/userContext';
 import pathUri from '@constants/path';
 import MilestoneFormContainer from '@containers/milestone-form/MilestoneFormContainer';
@@ -15,9 +16,9 @@ const CreateMilestone = () => {
     <>
       <GlobalStyle/>
       <Header/>
-      <div style={{ padding: '0 3%', backgroundColor: 'white' }}>
+      <ContentBox>
         <MilestoneFormContainer />
-      </div>
+      </ContentBox>
     </>
   );
 };

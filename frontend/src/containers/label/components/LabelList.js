@@ -12,6 +12,7 @@ const ListHeader = styled.div`
     border: 1px solid #e1e4e8;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
+    font-weight: 600;
 `;
 
 const LabelList = ({ labels, updateTargetLabel }) => (
