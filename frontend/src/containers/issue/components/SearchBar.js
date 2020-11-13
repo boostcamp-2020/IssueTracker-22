@@ -54,7 +54,9 @@ const SearchBar = ({ history }) => {
           return `${pre}${i === 0 ? '' : '&'}milestone=${option}`;
         } if (type === 'assignee') {
           return `${pre}${i === 0 ? '' : '&'}assignee=${option}`;
-        }
+        } if (type === 'mention') {
+          return `${pre}${i === 0 ? '' : '&'}mention=${option}`;
+        } 
       } else {
         if(v) return `${pre}${i === 0 ? '' : '&'}title=${v}`;
       }

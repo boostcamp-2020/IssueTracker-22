@@ -40,22 +40,26 @@ exports.list = asyncHandler(async (req, res, next) => {
       {
         model: IssueLabel,
         attributes: ['id'],
+        required: true,
         include: [
           {
             model: Label,
             where: filterLabel,
             attributes: ['id', 'name', 'color_code'],
+            required: true,
           },
         ],
       },
       {
         model: IssueAssignee,
         attributes: ['id'],
+        required: true,
         include: [
           {
             model: User,
             attributes: ['profile_url'],
             where: filterAssignee,
+            required: true,
           },
         ],
       },
@@ -67,11 +71,13 @@ exports.list = asyncHandler(async (req, res, next) => {
       {
         model: Comment,
         attritbutes: ['id', 'issue_id'],
+        required: true,
         include: [
           {
             model: User,
             where: filterMention,
             attributes: ['id'],
+            required: true,
           },
         ],
       },
