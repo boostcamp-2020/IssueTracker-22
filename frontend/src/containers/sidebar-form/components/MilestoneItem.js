@@ -75,7 +75,7 @@ const MilestoneItem = ({
 
   return (
     <Item onClick={onClick}>
-      <CheckIconWrapper visible={visible}>
+      <CheckIconWrapper visible={selected}>
         <CheckIcon />
       </CheckIconWrapper>
       <div>
