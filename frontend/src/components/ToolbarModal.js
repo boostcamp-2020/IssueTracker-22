@@ -1,36 +1,41 @@
 import styled from 'styled-components';
-import React from 'react';
+import React, { useState } from 'react';
+import ToolbarModalItemContainer from './ToolbarModalItemContainer';
 
-const ModalItemList = styled.div`
-width: 300px;
-height: auto;
-position: absolute;
-max-height: 480px;
-margin: 8px 0 16px;
-font-size: 12px;
-top: 78%;
-left: 0%;
-background-color: white;
-border-color: #eaecef;
-border-radius: 6px;
-border: 1px solid #eaecef;
-z-index: 999;
+const ToolbarModalHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  :hover {
+    color: skyblue;
+  }
+`;
+
+const ToolbarModalTitle = styled.span`
+  font-weight: 600;
+`;
+
+const GearButton = styled.button`
+  all: unset; 
+`;
+
+const SelectedItemList = styled.div`
+  font-size: 13px;
 `;
 
 const ToolbarModal = ({
-  className, onClose, visible, children,
+  mode, switchModal,
 }) => {
-  const onMaskClick = (e) => {
-    if (e.target === e.currentTarget) {
-      onClose(e);
-    }
+  const [label, identifier, selectMenuHeader, url] = mode;
+  const [open, setOpen] = useState(true);
+  const toggleSelectMenu = () => {
+    setOpen(!open);
   };
   return (
-    <>
-      <ModalItemList onClick={onMaskClick} tabIndex="-1" visible={visible}>
-        {children}
-      </ModalItemList>
-    </>
+    <ToolbarModalHeader>
+      <ToolbarModalItemContainer open={open} identifier={identifier} url={url} label={label} header={selectMenuHeader} onOverlayClick={toggleSelectMenu} switchModal={switchModal}/>
+    </ToolbarModalHeader>
+
   );
 };
 

@@ -5,7 +5,7 @@ import { svgOpen, svgCheck } from '../../../assets/svgPath';
 import pathUri from '../../../constants/path';
 import { parse, construct, changeIsopen } from '../../../lib/query';
 import ToolbarModal from '../../../components/ToolbarModal';
-import FilterAuthor from '../../../components/FilterAuthor';
+import modalMode from '../../../constants/toolbarModalMode';
 
 const Toolbar = styled.div`
     display: flex;
@@ -61,8 +61,8 @@ const IssueToolbar = ({ issues }) => {
   if (location.search.length === 0) {
     history.push({
       pathname: pathUri.issue,
-      search: "?isopen=1",
-    })
+      search: '?isopen=1',
+    });
   }
   const query = parse(location.search);
   const countOpenIssue = () => {
@@ -76,16 +76,21 @@ const IssueToolbar = ({ issues }) => {
       return [open, close];
     } return [0, 0];
   };
-  const FilterELList = (items) => items.map((item) => {
+  const FilterELList = (items) => items.map((item, index) => {
     const [modalVisible, setModalVisible] = useState(false);
-    const onModal = () => { setModalVisible(true); console.log(modalVisible); };
-    const offModal = () => { setModalVisible(false); };
+    const switchModal = () => { setModalVisible(!modalVisible); };
+
     return (
-      <FilterEL onClick={onModal}>
+      <FilterEL onClick={switchModal}>
         {item}
         <span style={dropdownCaret}/>
         {
-          modalVisible && <ToolbarModal onClose={offModa1l} children={<a>hi</a>}/>
+          modalVisible && (
+          <ToolbarModal
+            mode={modalMode[item]}
+            switchModal={switchModal}
+          />
+          )
         }
       </FilterEL>
     );
