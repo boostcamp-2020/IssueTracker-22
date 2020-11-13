@@ -2,11 +2,10 @@ import styled from 'styled-components';
 
 const IssueDetailContainer = styled.div`
   display: flex;
+  justify-content: space-between;
   flex-direction: row;
-  align-items: center;
-  padding: 10px;
-  padding-right: 30px;
-  background-color: white;
+  align-items: stretch;
+  flex-wrap: wrap;
 `;
 
 export default IssueDetailContainer;

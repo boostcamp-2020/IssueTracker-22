@@ -1,18 +1,11 @@
 import styled from 'styled-components';
 import React from 'react';
+import IssueLabel from '@components/IssueLabel';
 
-const Label = styled.div`
-    display: inline-block;
-    padding: 0 7px;
-    font-size: 12px;
-    font-weight: 500;
-    line-height: 18px;
-    border: 1px solid transparent;
-    border-radius: 2em; 
-    width:fit-content;
-    margin: 2px;
+const LabelWrapper = styled.span`
+   margin: 0px 3px;
 `;
 
-const renderLabels = (labels) => labels.map((label, i) => (<Label style={{ backgroundColor: 'lightblue' }}>{label.label.name}</Label>));
+const Labels = ({ labels }) => labels.map(({ label }) => (<LabelWrapper><IssueLabel name={label.name} color={label.color_code}/></LabelWrapper>));
 
-export default renderLabels;
+export default Labels;

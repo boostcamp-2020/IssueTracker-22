@@ -1,34 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import apiUri from '../../constants/api';
-import CommentEditor from './components/CommentEditor';
-import SubmitButton from './components/SubmitButton';
-import CancelButton from './components/CancelButton';
-import UserProfileContainer from '../user-profile/UserProfileContainer';
-
-const IssueFormBox = styled.div`
-  border: 1px solid lightgray;
-  border-radius: 5px;
-  padding: 10px;
-  background-color: white;
-  flex: 1 1 0;
-`;
-
-const Input = styled.input`
-  display: block;
-  width: 100%;
-  padding: 7px 10px;
-  background-color: #FAFAFA;
-  border: 1px solid lightgray;
-  border-radius: 5px;
-  font-size: 18px;
-  :focus {
-    background-color: white;
-    border-color: blue;
-    outline: none;
-    box-shadow: 0 0 0 3px #B9D9E8;
-  }
-`;
+import IssueMainForm from './IssueMainForm';
+import SidebarFormContainer from '../sidebar-form/SidebarFormContainer';
+import selectMenuMode from '../../constants/selectMenuMode';
+import imageUploadHandler from '../../lib/imageUploadHandler';
 
 const FlexRowBetween = styled.div`
   display: flex;
@@ -37,81 +13,107 @@ const FlexRowBetween = styled.div`
   flex-wrap: wrap;
 `;
 
-const CommentFormWrapper = styled.div`
-  flex: 3 3 0;
-  min-width: 500px;
-  display: flex;
-  padding: 0 10px;
-`;
-
-const IssueOptionalFormWrapper = styled.div`
+const Sidebar = styled.div`
   flex: 1 1 0;
   display: flex;
   flex-direction: column;
   align-items: stretch;
   min-width: 200px;
   padding: 0 10px;
-  border: 1px solid red;
 `;
 
-const IssueForm = () => {
+const IssueForm = ({ user }) => {
   const [issue, setIssue] = useState({ title: '', description: '' });
+  const [assignees, setAssignees] = useState([]);
+  const [labels, setLabels] = useState([]);
+  const [milestone, setMilestone] = useState([]);
 
-  const submitHandler = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
+    const [milestoneId] = milestone.map((val) => val.id);
+    const newIssue = {
+      ...issue,
+      assignees: assignees.map((val) => val.id),
+      labels: labels.map((val) => val.id),
+      milestone_id: milestoneId,
+    };
 
-    // TODO 1 : validation 체크 후 -> POST apiUri.issues fetch 요청
-    alert(`Handle Submit => POST ${apiUri.issues} :: ${JSON.stringify(issue)}`);
-    // TODO 2 : submit 완료 후 issue 상세 화면으로 이동
+    const response = await fetch(apiUri.issues, {
+      mode: 'cors',
+      credentials: 'include',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newIssue),
+    });
+
+    const { success, content, message } = await response.json();
+    if (!success) {
+      alert(message);
+      return;
+    }
+    window.location.href = `/#${apiUri.issues}/${content.id}`;
   };
 
-  const setIssueTitle = (e) => {
-    // setIssue(Object.assign(issue, { title: e.target.value }));
-    setIssue({ ...issue, title: e.target.value });
+  const onChange = (e) => {
+    setIssue({ ...issue, [e.target.name]: e.target.value });
   };
 
-  const setIssueDesc = (e) => {
-    setIssue({ ...issue, description: e.target.value });
+  const renderImageTag = async (file) => {
+    const { name: imageAlt } = file;
+    // const uploadingImageText = `\n\n![Uploading ${imageAlt}...]()\n\n`;
+    // const uploadingDescription = issue.description + uploadingImageText;
+    // setIssue({ ...issue, description: uploadingDescription });
+
+    try {
+      const imageUrl = await imageUploadHandler(file);
+      const imageTag = `\n\n<img alt="${imageAlt}" src="${imageUrl}">\n\n`;
+
+      const newDescription = issue.description + imageTag;
+      setIssue({ ...issue, description: newDescription });
+    } catch (error) {
+      alert('failed to upload image');
+    }
   };
 
-  const uploadFile = (e) => {
+  const onFileUpload = (e) => {
     const { files } = e.target;
-    console.log(files);
-    // TODO : 파일 업로드 구현
+    files.forEach((file) => renderImageTag(file));
   };
 
   return (
-    <div style={{ padding: '0 3%', backgroundColor: 'white' }}>
-      <form onSubmit={submitHandler}>
+    <form onSubmit={onSubmit}>
+      <FlexRowBetween>
 
-        <FlexRowBetween>
+        <IssueMainForm
+          user={user}
+          onChange={onChange}
+          onFileUpload={onFileUpload}
+          onSubmit={onSubmit}
+          issue={issue}
+        />
 
-          <CommentFormWrapper>
-            <UserProfileContainer/>
+        <Sidebar>
+          <SidebarFormContainer
+            mode={selectMenuMode.Assignees}
+            selectedItems={assignees}
+            setSelectedItems={setAssignees}
+          />
+          <SidebarFormContainer
+            mode={selectMenuMode.Labels}
+            selectedItems={labels}
+            setSelectedItems={setLabels}
+          />
+          <SidebarFormContainer
+            mode={selectMenuMode.Milestone}
+            selectedItems={milestone}
+            setSelectedItems={setMilestone}
+          />
+        </Sidebar>
 
-            <IssueFormBox>
-              <Input type="text" placeholder="Title" onChange={setIssueTitle} />
-
-              <CommentEditor onChange={setIssueDesc} onFileUpload={uploadFile} />
-
-              <FlexRowBetween>
-                <CancelButton path="/#/issues" />
-                <SubmitButton onClick={submitHandler} target={issue} />
-              </FlexRowBetween>
-            </IssueFormBox>
-          </CommentFormWrapper>
-
-          <IssueOptionalFormWrapper>
-
-            <div>Assignees</div>
-            <div>Labels</div>
-            <div>Milestone</div>
-
-          </IssueOptionalFormWrapper>
-
-        </FlexRowBetween>
-      </form>
-    </div>
+      </FlexRowBetween>
+    </form>
   );
 };
 

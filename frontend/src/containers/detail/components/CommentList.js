@@ -1,27 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
 import RelativeTime from '../../../lib/relativeTime';
+import UserProfileContainer from '../../user-profile/UserProfileContainer';
 
 const CommentDetailContainer = styled.div`
   width: 100%;
   display: flex;
-  margin: 10px;
+  padding: 0 10px;
+  margin: 15px 0;
   font-size: 14px;
-  color: #24292;
+  color: lightgray;
   line-height: 1.5;
   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
 `;
 
 const CommentDetailStyle = styled.div`
   width: 100%;
-  margin-bottom: 10px;
-  margin-left : 10px;
   border: 1px solid;
   border-radius: 6px;
   min-width : 100px;
-`;
-
-const UserProfile = styled.div`
 `;
 
 const CommentTitle = styled.div`
@@ -31,7 +28,7 @@ const CommentTitle = styled.div`
   min-height: 50px;
   padding-right: 16px;
   padding-left: 16px;
-  border-bottom: 1px solid;
+  border-bottom: 1px solid lightgray;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
   font-size: 14px;
@@ -55,27 +52,29 @@ const Author = styled.div`
   background-color: initial;
   font-weight: 600;
 `;
+
 const Info = styled.div`
   margin: auto 0;
   margin-left: 10px;
 `;
+
 const Description = styled.div`
+  color: black;
   margin: auto 0;
 `;
 
 const Comment = (comments) => comments.map((comment) => {
-  const time = RelativeTime(comment.updatedAt);
+  const time = RelativeTime(comment.createdAt);
+  const { user } = comment;
+
   return (
     <>
       <CommentDetailContainer>
-        <UserProfile><img src={comment.user.profile_url} width="40" height="40" alt="new" /></UserProfile>
+        <UserProfileContainer user={user} />
         <CommentDetailStyle>
           <CommentTitle>
-            <Author>{ comment.user.nickname}</Author>
-            <Info>
-              commented
-              { time }
-            </Info>
+            <Author>{ user.nickname }</Author>
+            <Info> commented { time }</Info>
           </CommentTitle>
           <CommentDescription>
             <Description>{ comment.description }</Description>

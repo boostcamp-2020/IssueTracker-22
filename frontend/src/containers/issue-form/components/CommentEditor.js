@@ -78,7 +78,7 @@ const WriteBox = styled.div`
 `;
 
 // eslint-disable-next-line arrow-body-style
-const CommentEditor = ({ onChange, onFileUpload }) => {
+const CommentEditor = ({ onChange, onFileUpload, value }) => {
   return (
     <CommentEditorWrapper>
       <Tabs>
@@ -87,9 +87,9 @@ const CommentEditor = ({ onChange, onFileUpload }) => {
       </Tabs>
 
       <WriteBox>
-        <Textarea placeholder="Leave a comment" onChange={onChange} />
+        <Textarea placeholder="Leave a comment" name="description" onChange={onChange} value={value} />
         <FileChooserBox>
-          <FileChooser accept=".gif,.jpeg,.jpg,.png,.docx,.gz,.log,.pdf,.pptx,.txt,.xlsx,.zip" type="file" multiple="" onChange={onFileUpload} />
+          <FileChooser accept="image/gif,image/jpeg,image/png" type="file" multiple onChange={onFileUpload} />
           <FileChooserLabel>Attach files by selecting here</FileChooserLabel>
         </FileChooserBox>
       </WriteBox>

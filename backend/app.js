@@ -7,6 +7,7 @@ require('dotenv').config();
 
 const indexRouter = require('./routes/index');
 const { sequelize } = require('./models');
+const errorHandler = require('./middlewares/errorHandler');
 
 const app = express();
 sequelize.sync();
@@ -20,5 +21,7 @@ app.use(passport.initialize());
 require('./lib/passport');
 
 app.use('/', indexRouter);
+
+app.use(errorHandler);
 
 module.exports = app;
