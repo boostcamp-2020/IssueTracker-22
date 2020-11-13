@@ -1,4 +1,5 @@
 const parse = (str) => {
+  if(!str) return Object
   const splited = str.replace('?', '').split('&');
   const res = splited.reduce((total, cur, i) => {
     const [key, value] = cur.split('=');
@@ -35,7 +36,14 @@ const getValue = (str, key) => {
   }
   return -1;
 };
-
+const pushQuery = (str, key, value) => {
+  const queryObject = parse(str);
+  for (const i in queryObject) {
+    if(i === key) return
+  }
+  queryObject[key] = value
+  return construct(queryObject);
+}
 const removeQuery = (str, key, value) => {
   const queryObject = parse(str);
   for (const i in queryObject) {
@@ -50,5 +58,5 @@ const changeIsopen = (str, state) => {
 };
 
 export {
-  parse, construct, updateValue, changeIsopen, getValue, removeQuery,
+  parse, construct, updateValue, changeIsopen, getValue, pushQuery, removeQuery,
 };

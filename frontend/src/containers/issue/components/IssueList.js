@@ -36,10 +36,7 @@ const IssueInfo = ({ issue }) => {
         <IssueLowerBox issue={issue}/>
       </div>
       <IssueAssignee>
-        <img
-          src={issue.user.profile_url}
-          style={{ width: '20px', height: '20px', borderRadius: '70%' }}
-        />
+        {issue.issue_assignees.map((assignee) => (<img src={assignee.user.profile_url} style={{ width: '20px', height: '20px', borderRadius: '70%' }}/>))}
       </IssueAssignee>
     </IssueBox>
   );
