@@ -28,7 +28,8 @@ exports.list = asyncHandler(async (req, res, next) => {
   const filterAssignee = (assignee === undefined) ? {} : { nickname: assignee };
   const filterMention = (mention === undefined) ? {} : { author_id: mention };
   const filterTitle = (title === undefined) ? {} : { title : {[Op.like] :  `%${title}%`}};
-  const issues = await Issue.findAll({
+  const issues = (milestone === undefined) ?
+  await Issue.findAll({
     attributes: ['id', 'title', 'description', 'createdAt', 'updatedAt', 'is_open'],
     where: filterTitle,
     include: [
@@ -40,26 +41,70 @@ exports.list = asyncHandler(async (req, res, next) => {
       {
         model: IssueLabel,
         attributes: ['id'],
-        required: true,
         include: [
           {
             model: Label,
             where: filterLabel,
             attributes: ['id', 'name', 'color_code'],
-            required: true,
           },
         ],
       },
       {
         model: IssueAssignee,
         attributes: ['id'],
-        required: true,
         include: [
           {
             model: User,
             attributes: ['profile_url'],
             where: filterAssignee,
-            required: true,
+          },
+        ],
+      },
+      {
+        model: Milestone,
+        attributes: ['id', 'title'],
+      },
+      {
+        model: Comment,
+        attritbutes: ['id', 'issue_id'],
+        include: [
+          {
+            model: User,
+            where: filterMention,
+            attributes: ['id'],
+          },
+        ],
+      },
+    ],
+  }) :
+  await Issue.findAll({
+    attributes: ['id', 'title', 'description', 'createdAt', 'updatedAt', 'is_open'],
+    where: filterTitle,
+    include: [
+      {
+        model: User,
+        attributes: ['id', 'nickname', 'profile_url'],
+        where: filterUser,
+      },
+      {
+        model: IssueLabel,
+        attributes: ['id'],
+        include: [
+          {
+            model: Label,
+            where: filterLabel,
+            attributes: ['id', 'name', 'color_code'],
+          },
+        ],
+      },
+      {
+        model: IssueAssignee,
+        attributes: ['id'],
+        include: [
+          {
+            model: User,
+            attributes: ['profile_url'],
+            where: filterAssignee,
           },
         ],
       },
@@ -71,18 +116,16 @@ exports.list = asyncHandler(async (req, res, next) => {
       {
         model: Comment,
         attritbutes: ['id', 'issue_id'],
-        required: true,
         include: [
           {
             model: User,
             where: filterMention,
             attributes: ['id'],
-            required: true,
           },
         ],
       },
     ],
-  });
+  })
   res.json({ success: true, content: { issues } });
 });
 
